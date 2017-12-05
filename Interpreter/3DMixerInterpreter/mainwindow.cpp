@@ -13,8 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    test();
     ui->setupUi(this);
+    test();
 }
 
 MainWindow::~MainWindow()
@@ -31,11 +31,13 @@ void MainWindow::test()
     }
 
     // Display webcam feed until any button is pressed
-    while (true) {
+    //while (true) {
         Mat cameraFrame;
         stream1.read(cameraFrame);
-        imshow("cam", cameraFrame);
-        if (waitKey(30) >= 0)
-        break;
-    }
+        cvtColor(cameraFrame, cameraFrame, CV_BGR2RGB);
+        ui->sourceVideo->setPixmap(QPixmap::fromImage(QImage(cameraFrame.data, cameraFrame.cols, cameraFrame.rows, cameraFrame.step, QImage::Format_RGB888)));
+        //imshow("cam", cameraFrame);
+        //if (waitKey(30) >= 0)
+        //break;
+    //}
 }

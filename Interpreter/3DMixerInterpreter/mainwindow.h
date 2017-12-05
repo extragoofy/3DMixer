@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QImage>
+#include "videoengine.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,8 +18,9 @@ public:
     ~MainWindow();
 
 private:
-    void test();
     Ui::MainWindow *ui;
+    VideoEngine *videoEngine;
+    void test();
 };
 
 #endif // MAINWINDOW_H
