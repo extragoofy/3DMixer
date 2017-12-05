@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -11,19 +14,26 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    videoEngine(new VideoEngine)
 {
     ui->setupUi(this);
+    connect(videoEngine, &VideoEngine::sendInputImage, ui->inputFrame, &VideoWidget::setImage);
+    connect(videoEngine, &VideoEngine::sendProcessedImage, ui->outputFrame, &VideoWidget::setImage);
     test();
 }
 
 MainWindow::~MainWindow()
 {
+    delete videoEngine;
     delete ui;
 }
 
 void MainWindow::test()
 {
+    videoEngine->openCamera(0);
+    videoEngine->start();
+    /*
     VideoCapture stream1(0);   // Get webcam stream
 
     if (!stream1.isOpened()) { // Check if video device has been initialised
@@ -40,4 +50,5 @@ void MainWindow::test()
         //if (waitKey(30) >= 0)
         //break;
     //}
+    */
 }

@@ -14,12 +14,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "videowidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -27,7 +27,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QLabel *sourceVideo;
+    VideoWidget *inputFrame;
+    VideoWidget *outputFrame;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -39,9 +40,12 @@ public:
         MainWindow->resize(1440, 900);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        sourceVideo = new QLabel(centralWidget);
-        sourceVideo->setObjectName(QStringLiteral("sourceVideo"));
-        sourceVideo->setGeometry(QRect(10, 10, 640, 480));
+        inputFrame = new VideoWidget(centralWidget);
+        inputFrame->setObjectName(QStringLiteral("inputFrame"));
+        inputFrame->setGeometry(QRect(10, 10, 640, 480));
+        outputFrame = new VideoWidget(centralWidget);
+        outputFrame->setObjectName(QStringLiteral("outputFrame"));
+        outputFrame->setGeometry(QRect(760, 10, 640, 480));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -62,7 +66,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        sourceVideo->setText(QString());
+        inputFrame->setText(QString());
+        outputFrame->setText(QString());
     } // retranslateUi
 
 };

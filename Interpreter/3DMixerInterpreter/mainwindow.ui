@@ -14,10 +14,23 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="sourceVideo">
+   <widget class="VideoWidget" name="inputFrame">
     <property name="geometry">
      <rect>
       <x>10</x>
+      <y>10</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="VideoWidget" name="outputFrame">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
       <y>10</y>
       <width>640</width>
       <height>480</height>
@@ -49,6 +62,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VideoWidget</class>
+   <extends>QLabel</extends>
+   <header>videowidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
