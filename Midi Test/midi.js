@@ -16,6 +16,7 @@ request.onload = function () {
             console.log(byteArray);
             // get ppq
             ppq = byteArray[13];
+            let firstNote = true;
             for(let i = 0; i < byteArray.length; i++) {
                 // get mpqn and calculate bpm
                 if(byteArray[i] === 255 && byteArray[i+1] === 81){
@@ -27,6 +28,10 @@ request.onload = function () {
                 }
                 // get midi notes
                 if(byteArray[i] === 144){
+                    if(firstNote){
+                        currentTime += (60 / (bpm * ppq)) * byteArray[i-1];
+                        firstNote = false;
+                    }
                     frequency = midiNoteToFrequency(byteArray[i+1]);
                     const duration = (60 / (bpm * ppq)) * byteArray[i+3];
                     frequencies.push({
@@ -35,6 +40,10 @@ request.onload = function () {
                         time: currentTime,
                     });
                     currentTime += duration;
+                    if(byteArray[i+4] === 128 && byteArray[i+1] === byteArray[i+5]){
+                        const pause = (60 / (bpm * ppq)) * byteArray[i+7];
+                        currentTime += pause;
+                    }
                 }
             }
             console.log(frequencies);
