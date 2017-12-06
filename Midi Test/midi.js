@@ -12,7 +12,7 @@ let oscillator;
 let currentNote = 0;
 
 let request = new XMLHttpRequest(); 
-request.open('GET', "song1_flute.mid", true); 
+request.open('GET', "song1_synth.mid", true); 
 request.responseType = 'arraybuffer';
 request.onload = function () {
     console.log(request.response);
@@ -39,15 +39,22 @@ request.onload = function () {
                         currentTime += (60 / (bpm * ppq)) * byteArray[i-1];
                         firstNote = false;
                     }
-                    
+                    let duration = 0;
                     frequency = midiNoteToFrequency(byteArray[i+1]);
-                    const duration = (60 / (bpm * ppq)) * byteArray[i+3];
+                    if(byteArray[i+4] === 144){
+                        duration = (60 / (bpm * ppq)) * byteArray[i+7];
+                    } else {
+                        duration = (60 / (bpm * ppq)) * byteArray[i+3];
+                    }
                     frequencies.push({
                         frequency: frequency,
                         duration: duration,
                         time: currentTime,
                     });
-                    currentTime += duration;
+                    
+                    if(!(byteArray[i+4] === 144)){
+                       currentTime += duration;
+                    }
                     
                     // track note pauses
                     if(byteArray[i+4] === 128 && byteArray[i+1] === byteArray[i+5]){
