@@ -68,6 +68,7 @@ function midiNoteToFrequency (note) {
 document.getElementById("play").addEventListener('click', function(){
     nextNotetime = context.currentTime;
     startTime = context.currentTime;
+    currentNote = 0;
     scheduler();
 });
 
@@ -75,6 +76,10 @@ function scheduler() {
     var secondsPerBeat = 60.0 / bpm;
 
     while(nextNotetime < context.currentTime + 0.1) {
+        if(currentNote === frequencies.length){
+            break;
+            clearTimeout(timerID);
+        }
         nextNotetime += 0.24 * secondsPerBeat;
         playSound(startTime + frequencies[currentNote].time);
        
@@ -84,10 +89,6 @@ function scheduler() {
 }
 
 function playSound(time){
-    if(currentNote === frequencies.length){
-        currentNote = 0;
-        clearTimeout(timerID);
-    }
     oscillator = context.createOscillator();
     oscillator.frequency.value = frequencies[currentNote].frequency;
     oscillator.connect(context.destination);
