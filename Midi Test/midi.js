@@ -2,6 +2,8 @@ let frequencies = [];
 let ppq;
 let mpqn = '';
 let bpm;
+let startTime = 0;
+let currentTime = 0;
 
 let request = new XMLHttpRequest(); 
 request.open('GET', "../instruments/moog bass.mid", true); 
@@ -26,9 +28,16 @@ request.onload = function () {
                 // get midi notes
                 if(byteArray[i] === 144){
                     frequency = midiNoteToFrequency(byteArray[i+1]);
-                    frequencies.push({frequency});
+                    const duration = (60 / (bpm * ppq)) * byteArray[i+3];
+                    frequencies.push({
+                        frequency: frequency,
+                        duration: duration,
+                        time: currentTime,
+                    });
+                    currentTime += duration;
                 }
             }
+            console.log(frequencies);
 		}
 };
 request.send();
