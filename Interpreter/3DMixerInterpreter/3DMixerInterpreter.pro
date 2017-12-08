@@ -28,7 +28,8 @@ SOURCES += \
         mainwindow.cpp \
     videoengine.cpp \
     videoformat.cpp \
-    videowidget.cpp
+    videowidget.cpp \
+    tracker.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -36,7 +37,8 @@ HEADERS += \
     videoformat.h \
     cvmattoqimage.h \
     videoprocessor.h \
-    videowidget.h
+    videowidget.h \
+    tracker.h
 
 FORMS += \
         mainwindow.ui
