@@ -11,8 +11,21 @@ let context = new AudioContext();
 let oscillator;
 let currentNote = 0;
 
+let flute = new Instrument('song1_flute.mid');
+flute.loadMidi();
+
+let synth = new Instrument('song1_synth.mid');
+synth.loadMidi();
+
+document.getElementById("playClass").addEventListener('click', function(){
+    let start = context.currentTime;
+    flute.playInstrument(start, context);
+    synth.playInstrument(start, context);
+});
+
+
 let request = new XMLHttpRequest(); 
-request.open('GET', "song1_synth.mid", true); 
+request.open('GET', "song1_flute.mid", true); 
 request.responseType = 'arraybuffer';
 request.onload = function () {
     console.log(request.response);
