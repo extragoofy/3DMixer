@@ -17,11 +17,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void setCoordinateLabels(ushort x, ushort y, ushort z);
 
 private:
     Ui::MainWindow *ui;
     VideoEngine *videoEngine;
-    Tracker* tracker;
+    Tracker *tracker;
     void test();
 };
 

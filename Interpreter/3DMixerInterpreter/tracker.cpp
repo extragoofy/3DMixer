@@ -2,11 +2,12 @@
 #include <QDebug>
 
 using namespace cv;
+using namespace std;
 
 Tracker::Tracker():
-    hueUpperThreshold(340/2),
-    hueLowerThreshold(360/2),
-    saturationThreshold(120),
+    hueUpperThreshold(90),
+    hueLowerThreshold(70),
+    saturationThreshold(220),
     alpha(0),
     useMedian(false),
     useOpening(false)
@@ -91,6 +92,7 @@ void Tracker::centerOfMass(Mat& image){
     }
     if (count > 0){
         center = (1 - alpha) * center + alpha * Point(sumx/count, sumy/count);
+
     }
 }
 

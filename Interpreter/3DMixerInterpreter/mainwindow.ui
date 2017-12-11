@@ -40,6 +40,45 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="xCoordsLabel">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>540</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="yCoordsLabel">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>540</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="zCoordsLabel">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>540</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -34,4 +34,9 @@ void MainWindow::test()
 {
     videoEngine->openCamera(0);
     videoEngine->start();
+    setCoordinateLabels(0,1,2);
+}
+
+void MainWindow::setCoordinateLabels(ushort x, ushort y, ushort z) {
+    ui->xCoordsLabel->setText("Hallo");
 }

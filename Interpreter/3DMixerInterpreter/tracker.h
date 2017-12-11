@@ -1,7 +1,9 @@
 #ifndef TRACKER_H
 #define TRACKER_H
 
+#include <QLabel>
 #include "videoprocessor.h"
+#include "mainwindow.h"
 
 class Tracker : public VideoProcessor
 {

@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -29,6 +30,9 @@ public:
     QWidget *centralWidget;
     VideoWidget *inputFrame;
     VideoWidget *outputFrame;
+    QLabel *xCoordsLabel;
+    QLabel *yCoordsLabel;
+    QLabel *zCoordsLabel;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -46,6 +50,15 @@ public:
         outputFrame = new VideoWidget(centralWidget);
         outputFrame->setObjectName(QStringLiteral("outputFrame"));
         outputFrame->setGeometry(QRect(760, 10, 640, 480));
+        xCoordsLabel = new QLabel(centralWidget);
+        xCoordsLabel->setObjectName(QStringLiteral("xCoordsLabel"));
+        xCoordsLabel->setGeometry(QRect(920, 540, 47, 13));
+        yCoordsLabel = new QLabel(centralWidget);
+        yCoordsLabel->setObjectName(QStringLiteral("yCoordsLabel"));
+        yCoordsLabel->setGeometry(QRect(1020, 540, 47, 13));
+        zCoordsLabel = new QLabel(centralWidget);
+        zCoordsLabel->setObjectName(QStringLiteral("zCoordsLabel"));
+        zCoordsLabel->setGeometry(QRect(1120, 540, 47, 13));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -68,6 +81,9 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         inputFrame->setText(QString());
         outputFrame->setText(QString());
+        xCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        yCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        zCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -357,6 +357,10 @@ debug\moc_mainwindow.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QMai
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QPixmap \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug \
 		..\3DMixerInterpreter\tracker.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
+		..\3DMixerInterpreter\mainwindow.h \
 		..\3DMixerInterpreter\mainwindow.h \
 		debug\moc_predefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe
@@ -905,6 +909,9 @@ debug\main.obj: ..\3DMixerInterpreter\main.cpp ../3DMixerInterpreter/mainwindow.
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QPixmap \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug \
 		../3DMixerInterpreter/tracker.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QApplication \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qapplication.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcoreapplication.h \
@@ -1078,6 +1085,9 @@ debug\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpreter
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QPixmap \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug \
 		../3DMixerInterpreter/tracker.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
 		ui_mainwindow.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVariant \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QAction \
@@ -1096,7 +1106,6 @@ debug\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpreter
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qheaderview.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractitemview.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qabstractitemmodel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qitemselectionmodel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
@@ -1118,8 +1127,6 @@ debug\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpreter
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtoolbar.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QWidget \
 		../3DMixerInterpreter/videowidget.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\core\core.hpp \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui\highgui.hpp \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\imgproc.hpp
@@ -1431,6 +1438,108 @@ debug\videowidget.obj: ..\3DMixerInterpreter\videowidget.cpp ../3DMixerInterpret
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QPalette
 
 debug\tracker.obj: ..\3DMixerInterpreter\tracker.cpp ../3DMixerInterpreter/tracker.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtguiglobal.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qglobal.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtcore-config.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsystemdetection.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qprocessordetection.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcompilerdetection.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtypeinfo.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsysinfo.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qlogging.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qflags.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasicatomic.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic_bootstrap.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qgenericatomic.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic_cxx11.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic_msvc.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qglobalstatic.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmutex.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnumeric.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qversiontagging.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtgui-config.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qwidget.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qwindowdefs.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnamespace.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qwindowdefs_win.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstring.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qchar.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbytearray.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qrefcount.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qarraydata.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstringbuilder.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qlist.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qalgorithms.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qiterator.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qhashfunctions.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qpair.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbytearraylist.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstringlist.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qregexp.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstringmatcher.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcoreevent.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qscopedpointer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmetatype.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvarlengtharray.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontainerfwd.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject_impl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmargins.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpaintdevice.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qrect.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsize.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qpoint.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpalette.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qcolor.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qrgb.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qrgba64.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qbrush.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvector.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qmatrix.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpolygon.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qregion.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qdatastream.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qiodevice.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qline.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtransform.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpainterpath.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qimage.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpixelformat.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpixmap.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsharedpointer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qshareddata.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qhash.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsharedpointer_impl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfont.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfontmetrics.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfontinfo.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qsizepolicy.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qcursor.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qkeysequence.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qevent.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvariant.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmap.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qdebug.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtextstream.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qlocale.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qset.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontiguouscache.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qurl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qurlquery.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfile.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfiledevice.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
 		../3DMixerInterpreter/videoprocessor.h \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\opencv.hpp \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\core.hpp \
@@ -1483,67 +1592,19 @@ debug\tracker.obj: ..\3DMixerInterpreter\tracker.cpp ../3DMixerInterpreter/track
 		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio\videoio_c.h \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\ml.hpp \
 		../3DMixerInterpreter/videoformat.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qdebug.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qalgorithms.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qglobal.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtcore-config.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsystemdetection.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qprocessordetection.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcompilerdetection.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtypeinfo.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsysinfo.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qlogging.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qflags.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasicatomic.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic_bootstrap.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qgenericatomic.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic_cxx11.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qatomic_msvc.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qglobalstatic.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmutex.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnumeric.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qversiontagging.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qhash.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qchar.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qiterator.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qlist.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qrefcount.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qarraydata.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qhashfunctions.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qpair.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbytearraylist.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbytearray.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnamespace.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstring.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstringbuilder.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstringlist.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qregexp.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstringmatcher.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmap.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtextstream.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qiodevice.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcoreevent.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qscopedpointer.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmetatype.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvarlengtharray.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontainerfwd.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject_impl.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qlocale.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvariant.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qshareddata.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvector.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qpoint.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qset.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontiguouscache.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsharedpointer.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qsharedpointer_impl.h
+		../3DMixerInterpreter/mainwindow.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QMainWindow \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qmainwindow.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtabwidget.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qicon.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QImage \
+		../3DMixerInterpreter/videoengine.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qthread.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QMutex \
+		../3DMixerInterpreter/cvmattoqimage.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QPixmap \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug
 
 debug\moc_mainwindow.obj: debug\moc_mainwindow.cpp 
 
