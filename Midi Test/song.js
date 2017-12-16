@@ -1,5 +1,3 @@
-let context = new AudioContext();
-
 let flute = new Instrument('song1_flute.mid');
 flute.loadMidi();
 flute.loadJSON('song1_flute.json');
@@ -26,8 +24,13 @@ bass.loadMidi();
 
 
 document.getElementById("playClass").addEventListener('click', function(){
+    let context = new AudioContext();
     let start = context.currentTime;
     flute.playInstrument(start, context);
 //    synth.playInstrument(start, context);
 //    bass.playInstrument(start, context);
+});
+
+document.getElementById("stopClass").addEventListener('click', function(){
+    flute.stop();
 });

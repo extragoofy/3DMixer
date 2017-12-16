@@ -183,5 +183,9 @@ class Instrument {
 //    get returnFilePath() {
 //        return this.filePath;
 //    }
+    
+    stop(){
+        this.context.close();
+    }
 
 }
