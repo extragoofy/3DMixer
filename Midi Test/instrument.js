@@ -17,6 +17,8 @@ class Instrument {
         this.biquadFilter;
         this.context;
         
+        this.instrumentConfigs;
+        
         this.timerID;
     }
     
@@ -101,6 +103,18 @@ class Instrument {
         });
     }
     
+    loadJSON(jsonFile){
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', jsonFile, true); // Replace 'my_data' with the path to your file
+        xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200") {
+                this.instrumentConfigs = JSON.parse(xobj.responseText);
+            }
+        }.bind(this);
+        xobj.send(null);  
+    }
+    
     playInstrument(startTime, context){
         this.nextNotetime = startTime;
         this.startTime = startTime;
@@ -136,47 +150,34 @@ class Instrument {
         
         this.gainNode.connect(this.context.destination);
         
-        this.gainNode.gain.linearRampToValueAtTime(0, time + this.frequencies[this.currentNote].duration);
+        this.gainNode.gain.linearRampToValueAtTime(0, time + this.frequencies[this.currentNote].duration); //decay
         
         
-        for(let i = 0; i < 3; i++){
+        for(let i = 0; i < this.instrumentConfigs.oscillatorA.voices; i++){
             this.oscillatorsA[i] = this.context.createOscillator();
 
             this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.frequencies[this.currentNote].midi);
-            this.oscillatorsA[i].type = 'square';
-            this.oscillatorsA[i].detune.value = 23 + (i * 2 * 23) / (3 - 1);
+            this.oscillatorsA[i].type = this.instrumentConfigs.oscillatorA.waveform;
+            this.oscillatorsA[i].detune.value = 23 + (i * 2 * 23) / (this.instrumentConfigs.oscillatorA.voices - 1);
 
             this.oscillatorsA[i].connect(this.biquadFilter);
-//            this.gainNodesA.gain.value = 0.2;
-//            this.gainNode.gain.setValueAtTime(0, context.currentTime);
-//            this.gainNode.gain.linearRampToValueAtTime(1, context.currentTime); //attack
             
             this.oscillatorsA[i].start(time);
-//            this.oscillatorsA[i].stop(time + this.frequencies[this.currentNote].duration);
             this.oscillatorsA[i].stop(time + this.frequencies[this.currentNote].duration);
         }
-        for(let i = 0; i < 3; i++){
+        
+        for(let i = 0; i < this.instrumentConfigs.oscillatorB.voices; i++){
             this.oscillatorsB[i] = this.context.createOscillator();
-//            this.gainNodesB[i] = this.context.createGain();
 
             this.oscillatorsB[i].frequency.value = this.midiNoteToFrequency(this.frequencies[this.currentNote].midi);
-            this.oscillatorsB[i].type = 'sawtooth';
-            this.oscillatorsB[i].detune.value = 30 + (i * 2 * 30) / (3 - 1);
+            this.oscillatorsB[i].type = this.instrumentConfigs.oscillatorB.waveform;
+            this.oscillatorsB[i].detune.value = 30 + (i * 2 * 30) / (this.instrumentConfigs.oscillatorB.voices - 1);
 
             this.oscillatorsB[i].connect(this.biquadFilter);
             this.oscillatorsB[i].start(time);
             this.oscillatorsB[i].stop(time + this.frequencies[this.currentNote].duration);
         }
         this.currentNote++;
-            
-//        console.log(this.filePath, time);
-//        this.oscillator = this.context.createOscillator();
-//        this.oscillator.type = 'square';
-//        this.oscillator.frequency.value = this.midiNoteToFrequency(this.frequencies[this.currentNote].midi);
-//        this.oscillator.connect(this.context.destination);
-//        this.oscillator.start(time);
-//        this.oscillator.stop(time + this.frequencies[this.currentNote].duration);
-//        this.currentNote++;
     }
     
 //    get returnFilePath() {
