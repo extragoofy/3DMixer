@@ -1,0 +1,9 @@
+{
+    "oscillatorA": {
+        "volumne": 1,
+        "voices": 3,
+        "waveform": "square",
+        "octave": 0,
+        "detune": 0.23
+    }
+}
