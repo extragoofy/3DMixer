@@ -108,7 +108,7 @@
       </size>
      </property>
      <property name="text">
-      <string>120</string>
+      <string>0</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="knobA_colorSaturation">
@@ -126,6 +126,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="text">
+      <string>100</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobA_colorValue">
      <property name="geometry">
@@ -141,6 +144,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="text">
+      <string>100</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobA_xCoordsLabel">
@@ -460,6 +466,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="text">
+      <string>120</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobB_colorSaturation">
      <property name="geometry">
@@ -476,6 +485,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="text">
+      <string>100</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobB_colorValue">
      <property name="geometry">
@@ -491,6 +503,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="text">
+      <string>100</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobB_xCoordsLabel">
@@ -634,6 +649,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="text">
+      <string>240</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobC_colorSaturation">
      <property name="geometry">
@@ -650,6 +668,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="text">
+      <string>100</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobC_colorValue">
      <property name="geometry">
@@ -665,6 +686,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="text">
+      <string>100</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobC_xCoordsLabel">
@@ -808,6 +832,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="text">
+      <string>60</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobD_colorSaturation">
      <property name="geometry">
@@ -824,6 +851,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="text">
+      <string>100</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobD_colorValue">
      <property name="geometry">
@@ -839,6 +869,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="text">
+      <string>100</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobD_xCoordsLabel">

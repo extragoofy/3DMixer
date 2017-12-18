@@ -5,7 +5,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
-#include <QDoubleValidator>
+#include <QIntValidator>
 #include "tracker.h"
 
 using namespace cv;
@@ -40,21 +40,21 @@ void MainWindow::setUpVideo() {
 
 void MainWindow::setUpValidators() {
 
-    ui->knobA_colorHue->setValidator(new QDoubleValidator(0, 359, 2, this));
-    ui->knobA_colorSaturation->setValidator(new QDoubleValidator(0, 99, 2, this));
-    ui->knobA_colorValue->setValidator(new QDoubleValidator(0, 99, 2, this));
+    ui->knobA_colorHue->setValidator(new QIntValidator(0, 359, this));
+    ui->knobA_colorSaturation->setValidator(new QIntValidator(0, 99, this));
+    ui->knobA_colorValue->setValidator(new QIntValidator(0, 99, this));
 
-    ui->knobB_colorHue->setValidator(new QDoubleValidator(0, 359, 2, this));
-    ui->knobB_colorSaturation->setValidator(new QDoubleValidator(0, 99, 2, this));
-    ui->knobB_colorValue->setValidator(new QDoubleValidator(0, 99, 2, this));
+    ui->knobB_colorHue->setValidator(new QIntValidator(0, 359, this));
+    ui->knobB_colorSaturation->setValidator(new QIntValidator(0, 99, this));
+    ui->knobB_colorValue->setValidator(new QIntValidator(0, 99, this));
 
-    ui->knobC_colorHue->setValidator(new QDoubleValidator(0, 359, 2, this));
-    ui->knobC_colorSaturation->setValidator(new QDoubleValidator(0, 99, 2, this));
-    ui->knobC_colorValue->setValidator(new QDoubleValidator(0, 99, 2, this));
+    ui->knobC_colorHue->setValidator(new QIntValidator(0, 359, this));
+    ui->knobC_colorSaturation->setValidator(new QIntValidator(0, 99, this));
+    ui->knobC_colorValue->setValidator(new QIntValidator(0, 99, this));
 
-    ui->knobD_colorHue->setValidator(new QDoubleValidator(0, 359, 2, this));
-    ui->knobD_colorSaturation->setValidator(new QDoubleValidator(0, 99, 2, this));
-    ui->knobD_colorValue->setValidator(new QDoubleValidator(0, 99, 2, this));
+    ui->knobD_colorHue->setValidator(new QIntValidator(0, 359, this));
+    ui->knobD_colorSaturation->setValidator(new QIntValidator(0, 99, this));
+    ui->knobD_colorValue->setValidator(new QIntValidator(0, 99, this));
 
 }
 
@@ -62,11 +62,35 @@ void MainWindow::updateParameters() {
     tracker->updateKnobParameters(
                 0,
                 ui->knobA_isActive->isChecked(),
-                ui->knobA_colorHue->text().toFloat(),
-                ui->knobA_colorSaturation->text().toFloat(),
-                ui->knobA_colorValue->text().toFloat()
+                ui->knobA_colorHue->text().toInt() / 2,
+                ui->knobA_colorSaturation->text().toFloat() * 2.55,
+                ui->knobA_colorValue->text().toFloat() * 2.55
                 );
+    tracker->updateKnobParameters(
+                1,
+                ui->knobB_isActive->isChecked(),
+                ui->knobB_colorHue->text().toInt() / 2,
+                ui->knobB_colorSaturation->text().toFloat() * 2.55,
+                ui->knobB_colorValue->text().toFloat() * 2.55
+                );
+    tracker->updateKnobParameters(
+                2,
+                ui->knobC_isActive->isChecked(),
+                ui->knobC_colorHue->text().toInt() / 2,
+                ui->knobC_colorSaturation->text().toFloat() * 2.55,
+                ui->knobC_colorValue->text().toFloat() * 2.55
+                );
+    tracker->updateKnobParameters(
+                3,
+                ui->knobD_isActive->isChecked(),
+                ui->knobD_colorHue->text().toInt() / 2,
+                ui->knobD_colorSaturation->text().toFloat() * 2.55,
+                ui->knobD_colorValue->text().toFloat() * 2.55
+                );
+    ui->knobA_colorLabel->setStyleSheet("QLabel { background-color : red; }");
 }
+
+// SIGNALS/SLOTS
 
 void MainWindow::on_knobA_colorHue_editingFinished()
 {

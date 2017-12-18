@@ -9,9 +9,9 @@ class Tracker : public VideoProcessor
 
     struct knob {
         bool active;
-        float color_hue;
-        float color_sat;
-        float color_val;
+        ushort color_hue;
+        ushort color_sat;
+        ushort color_val;
     };
 
 public:
