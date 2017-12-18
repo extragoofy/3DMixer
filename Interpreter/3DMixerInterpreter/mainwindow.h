@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void setCoordinateLabels(ushort x, ushort y, ushort z);
+    void updateCoordinateLabels();
 
 private:
     Ui::MainWindow *ui;
