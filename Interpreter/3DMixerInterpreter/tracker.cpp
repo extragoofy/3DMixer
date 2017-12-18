@@ -12,6 +12,14 @@ Tracker::Tracker():
     useMedian(false),
     useOpening(false)
 {
+    initializeKnobs();
+}
+
+void Tracker::updateKnobParameters(int knobIndex, bool active, float hue, float sat, float val) {
+    knobs[knobIndex].active = active;
+    knobs[knobIndex].color_hue = hue;
+    knobs[knobIndex].color_sat = sat;
+    knobs[knobIndex].color_val = val;
 }
 
 Mat Tracker::process(const Mat &input) {
@@ -51,7 +59,7 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
             Vec3b hsvPixel = hsvFrame.at<Vec3b>(y,x);
             int hue = hsvPixel[0];
             int saturation = hsvPixel[1];
-
+            /*
             // Maskierung und Schwerpunktsberechnung
             bool isWhite = false;
             if (saturation > saturationThreshold){
@@ -66,6 +74,15 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
                     }
                 }
             }
+            */
+
+            bool isWhite = false;
+            if (saturation > knobs[0].color_sat) {
+                if (hue >= knobs[0].color_hue - 10 && hue <= knobs[0].color_hue + 10) {
+                    isWhite = true;
+                }
+            }
+
             if (isWhite){
                 output.at<uchar>(y,x) = 255;
             }
@@ -75,6 +92,15 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
         }
     }
     return output;
+}
+
+void Tracker::initializeKnobs() {
+    for (int i = 0; i < 4; i++) {
+        knobs[i].active = false;
+        knobs[i].color_hue = 0.0;
+        knobs[i].color_sat = 0.0;
+        knobs[i].color_val = 0.0;
+    }
 }
 
 void Tracker::centerOfMass(Mat& image){

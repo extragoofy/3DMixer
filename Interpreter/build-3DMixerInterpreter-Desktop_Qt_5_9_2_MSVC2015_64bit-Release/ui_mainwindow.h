@@ -108,6 +108,7 @@ public:
         font1.setBold(false);
         font1.setWeight(50);
         knobA_isActive->setFont(font1);
+        knobA_isActive->setChecked(true);
         knobA_colorHue = new QLineEdit(knobABox);
         knobA_colorHue->setObjectName(QStringLiteral("knobA_colorHue"));
         knobA_colorHue->setGeometry(QRect(210, 20, 50, 20));
@@ -335,6 +336,7 @@ public:
         outputFrame->setText(QString());
         knobABox->setTitle(QApplication::translate("MainWindow", "Knob A", Q_NULLPTR));
         knobA_isActive->setText(QString());
+        knobA_colorHue->setText(QApplication::translate("MainWindow", "120", Q_NULLPTR));
         knobA_xCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobA_yCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobA_zCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));

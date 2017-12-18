@@ -76,6 +76,9 @@
      <property name="text">
       <string/>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="knobA_colorHue">
      <property name="geometry">
@@ -103,6 +106,9 @@
        <width>0</width>
        <height>0</height>
       </size>
+     </property>
+     <property name="text">
+      <string>120</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="knobA_colorSaturation">
