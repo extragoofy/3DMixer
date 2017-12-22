@@ -2,6 +2,7 @@
 #define TRACKER_H
 
 #include <QLabel>
+#include <QVector>
 #include "videoprocessor.h"
 
 class Tracker : public VideoProcessor
@@ -12,6 +13,9 @@ class Tracker : public VideoProcessor
         ushort color_hue;
         ushort color_sat;
         ushort color_val;
+        int xCoords;
+        int yCoords;
+        int zCoords;
     };
 
 public:
@@ -19,6 +23,7 @@ public:
     void startProcessing(const VideoFormat& format){}
     cv::Mat process(const cv::Mat&source);
     void updateKnobParameters(int knobIndex, bool active, float hue, float sat, float val);
+    void updateCoordData(QVector<int>& target);
 
 private:
     knob knobs[4];

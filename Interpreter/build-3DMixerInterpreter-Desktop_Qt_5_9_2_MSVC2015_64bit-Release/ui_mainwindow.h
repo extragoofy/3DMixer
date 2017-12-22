@@ -337,8 +337,8 @@ public:
         knobABox->setTitle(QApplication::translate("MainWindow", "Knob A", Q_NULLPTR));
         knobA_isActive->setText(QString());
         knobA_colorHue->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        knobA_colorSaturation->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
-        knobA_colorValue->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobA_colorSaturation->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
+        knobA_colorValue->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
         knobA_xCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobA_yCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobA_zCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
@@ -354,8 +354,8 @@ public:
         knobBBox->setTitle(QApplication::translate("MainWindow", "Knob B", Q_NULLPTR));
         knobB_isActive->setText(QString());
         knobB_colorHue->setText(QApplication::translate("MainWindow", "120", Q_NULLPTR));
-        knobB_colorSaturation->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
-        knobB_colorValue->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobB_colorSaturation->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
+        knobB_colorValue->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
         knobB_xCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobB_yCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobB_zCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
@@ -363,8 +363,8 @@ public:
         knobCBox->setTitle(QApplication::translate("MainWindow", "Knob C", Q_NULLPTR));
         knobC_isActive->setText(QString());
         knobC_colorHue->setText(QApplication::translate("MainWindow", "240", Q_NULLPTR));
-        knobC_colorSaturation->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
-        knobC_colorValue->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobC_colorSaturation->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
+        knobC_colorValue->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
         knobC_xCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobC_yCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobC_zCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
@@ -372,8 +372,8 @@ public:
         knobDBox->setTitle(QApplication::translate("MainWindow", "Knob D", Q_NULLPTR));
         knobD_isActive->setText(QString());
         knobD_colorHue->setText(QApplication::translate("MainWindow", "60", Q_NULLPTR));
-        knobD_colorSaturation->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
-        knobD_colorValue->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobD_colorSaturation->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
+        knobD_colorValue->setText(QApplication::translate("MainWindow", "99", Q_NULLPTR));
         knobD_xCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobD_yCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         knobD_zCoordsLabel->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));

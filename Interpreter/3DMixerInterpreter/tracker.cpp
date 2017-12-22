@@ -22,6 +22,14 @@ void Tracker::updateKnobParameters(int knobIndex, bool active, float hue, float 
     knobs[knobIndex].color_val = val;
 }
 
+void Tracker::updateCoordData(QVector<int> &data) {
+    for (int i = 0; i < 12; i++) {
+        data[i] = knobs[i/3].xCoords;
+        data[i] = knobs[i/3].yCoords;
+        data[i] = knobs[i/3].zCoords;
+    }
+}
+
 Mat Tracker::process(const Mat &input) {
     // convert BGR -> HSV
     Mat hsvFrame;
@@ -91,6 +99,11 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
             }
         }
     }
+    for (int i = 0; i < 12; i++) {
+        knobs[i/3].xCoords = qrand();
+        knobs[i/3].yCoords = qrand();
+        knobs[i/3].zCoords = qrand();
+    }
     return output;
 }
 
@@ -100,6 +113,9 @@ void Tracker::initializeKnobs() {
         knobs[i].color_hue = 0.0;
         knobs[i].color_sat = 0.0;
         knobs[i].color_val = 0.0;
+        knobs[i].xCoords = 0;
+        knobs[i].yCoords = 0;
+        knobs[i].zCoords = 0;
     }
 }
 

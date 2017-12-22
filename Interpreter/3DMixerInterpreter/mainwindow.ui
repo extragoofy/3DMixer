@@ -127,7 +127,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="knobA_colorValue">
@@ -146,7 +146,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobA_xCoordsLabel">
@@ -486,7 +486,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="knobB_colorValue">
@@ -505,7 +505,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobB_xCoordsLabel">
@@ -669,7 +669,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="knobC_colorValue">
@@ -688,7 +688,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobC_xCoordsLabel">
@@ -852,7 +852,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="knobD_colorValue">
@@ -871,7 +871,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>100</string>
+      <string>99</string>
      </property>
     </widget>
     <widget class="QLabel" name="knobD_xCoordsLabel">

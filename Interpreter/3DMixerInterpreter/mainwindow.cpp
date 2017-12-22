@@ -6,6 +6,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <QIntValidator>
+#include <QVector>
 #include "tracker.h"
 
 using namespace cv;
@@ -15,12 +16,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     videoEngine(new VideoEngine),
-    tracker(new Tracker)
+    tracker(new Tracker),
+    updateTimer(new QTimer(this))
 {
+    knobCoords = QVector<int>(12);
     ui->setupUi(this);
     setUpVideo();
     setUpValidators();
     updateParameters();
+    connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCoordLabels()));
+    updateTimer->start(500);
 }
 
 MainWindow::~MainWindow()
@@ -28,6 +33,7 @@ MainWindow::~MainWindow()
     delete videoEngine;
     delete tracker;
     delete ui;
+    delete updateTimer;
 }
 
 void MainWindow::setUpVideo() {
@@ -110,4 +116,21 @@ void MainWindow::on_knobA_colorValue_editingFinished()
 void MainWindow::on_knobA_isActive_clicked(bool checked)
 {
     updateParameters();
+}
+
+void MainWindow::updateCoordLabels() {
+    tracker->updateCoordData(knobCoords);
+    ui->knobA_xCoordsLabel->setText(QString::number(knobCoords[0]));
+    ui->knobA_yCoordsLabel->setText(QString::number(knobCoords[1]));
+    ui->knobA_zCoordsLabel->setText(QString::number(knobCoords[2]));
+    ui->knobB_xCoordsLabel->setText(QString::number(knobCoords[3]));
+    ui->knobB_yCoordsLabel->setText(QString::number(knobCoords[4]));
+    ui->knobB_zCoordsLabel->setText(QString::number(knobCoords[5]));
+    ui->knobC_xCoordsLabel->setText(QString::number(knobCoords[6]));
+    ui->knobC_yCoordsLabel->setText(QString::number(knobCoords[7]));
+    ui->knobC_zCoordsLabel->setText(QString::number(knobCoords[8]));
+    ui->knobD_xCoordsLabel->setText(QString::number(knobCoords[9]));
+    ui->knobD_yCoordsLabel->setText(QString::number(knobCoords[10]));
+    ui->knobD_zCoordsLabel->setText(QString::number(knobCoords[11]));
+    updateTimer->start(500);
 }
