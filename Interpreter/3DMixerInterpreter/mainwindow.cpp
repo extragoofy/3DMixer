@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tracker(new Tracker),
     updateTimer(new QTimer(this))
 {
+    knobParams = QVector<int>(28);
     knobCoords = QVector<int>(12);
     ui->setupUi(this);
     setUpVideo();
@@ -116,50 +117,45 @@ void MainWindow::setUpUiEvents() {
 // SIGNALS/SLOTS
 
 void MainWindow::updateParameters() {
-    tracker->updateKnobParameters(
-                0,
-                ui->knobA_isActive->isChecked(),
-                ui->knobA_colorHueMin->text().toInt() / 2,
-                ui->knobA_colorHueMax->text().toInt() / 2,
-                ui->knobA_colorSatMin->text().toFloat() * 2.55,
-                ui->knobA_colorSatMax->text().toFloat() * 2.55,
-                ui->knobA_colorValMin->text().toFloat() * 2.55,
-                ui->knobA_colorValMax->text().toFloat() * 2.55
-                );
-    tracker->updateKnobParameters(
-                1,
-                ui->knobB_isActive->isChecked(),
-                ui->knobB_colorHueMin->text().toInt() / 2,
-                ui->knobB_colorHueMax->text().toInt() / 2,
-                ui->knobB_colorSatMin->text().toShort() * 2.55,
-                ui->knobB_colorSatMax->text().toShort() * 2.55,
-                ui->knobB_colorValMin->text().toShort() * 2.55,
-                ui->knobB_colorValMax->text().toShort() * 2.55
-                );
-    tracker->updateKnobParameters(
-                2,
-                ui->knobC_isActive->isChecked(),
-                ui->knobC_colorHueMin->text().toInt() / 2,
-                ui->knobC_colorHueMax->text().toInt() / 2,
-                ui->knobC_colorSatMin->text().toShort() * 2.55,
-                ui->knobC_colorSatMax->text().toShort() * 2.55,
-                ui->knobC_colorValMin->text().toShort() * 2.55,
-                ui->knobC_colorValMax->text().toShort() * 2.55
-                );
-    tracker->updateKnobParameters(
-                3,
-                ui->knobD_isActive->isChecked(),
-                ui->knobD_colorHueMin->text().toInt() / 2,
-                ui->knobD_colorHueMax->text().toInt() / 2,
-                ui->knobD_colorSatMin->text().toShort() * 2.55,
-                ui->knobD_colorSatMax->text().toShort() * 2.55,
-                ui->knobD_colorValMin->text().toShort() * 2.55,
-                ui->knobD_colorValMax->text().toShort() * 2.55
-                );
 
-    ui->knobA_colorLabel->setStyleSheet(
-                "QLabel {background-color: hsv(224, 100, 100); }");
-    cout << (ui->knobA_colorSatMin->text().toInt() / 2);
+    // Update knobParams vector containing all parameter data
+    knobParams[0] = ui->knobA_isActive->isChecked();
+    knobParams[1] = ui->knobA_colorHueMin->text().toInt();
+    knobParams[2] = ui->knobA_colorHueMax->text().toInt();
+    knobParams[3] = ui->knobA_colorSatMin->text().toInt();
+    knobParams[4] = ui->knobA_colorSatMax->text().toInt();
+    knobParams[5] = ui->knobA_colorValMin->text().toInt();
+    knobParams[6] = ui->knobA_colorValMax->text().toInt();
+    knobParams[7] = ui->knobB_isActive->isChecked();
+    knobParams[8] = ui->knobB_colorHueMin->text().toInt();
+    knobParams[9] = ui->knobB_colorHueMax->text().toInt();
+    knobParams[10] = ui->knobB_colorSatMin->text().toInt();
+    knobParams[11] = ui->knobB_colorSatMax->text().toInt();
+    knobParams[12] = ui->knobB_colorValMin->text().toInt();
+    knobParams[13] = ui->knobB_colorValMax->text().toInt();
+    knobParams[14] = ui->knobC_isActive->isChecked();
+    knobParams[15] = ui->knobC_colorHueMin->text().toInt();
+    knobParams[16] = ui->knobC_colorHueMax->text().toInt();
+    knobParams[17] = ui->knobC_colorSatMin->text().toInt();
+    knobParams[18] = ui->knobC_colorSatMax->text().toInt();
+    knobParams[19] = ui->knobC_colorValMin->text().toInt();
+    knobParams[20] = ui->knobC_colorValMax->text().toInt();
+    knobParams[21] = ui->knobD_isActive->isChecked();
+    knobParams[22] = ui->knobD_colorHueMin->text().toInt();
+    knobParams[23] = ui->knobD_colorHueMax->text().toInt();
+    knobParams[24] = ui->knobD_colorSatMin->text().toInt();
+    knobParams[25] = ui->knobD_colorSatMax->text().toInt();
+    knobParams[26] = ui->knobD_colorValMin->text().toInt();
+    knobParams[27] = ui->knobD_colorValMax->text().toInt();
+
+    // Call tracker to update its parameters using this data
+    tracker->updateKnobParameters(knobParams);
+
+    // Update color labels
+    ui->knobA_colorLabel->setStyleSheet(createStylesheetColorString(0));
+    ui->knobB_colorLabel->setStyleSheet(createStylesheetColorString(1));
+    ui->knobC_colorLabel->setStyleSheet(createStylesheetColorString(2));
+    ui->knobD_colorLabel->setStyleSheet(createStylesheetColorString(3));
 }
 
 void MainWindow::updateCoordLabels() {
@@ -177,4 +173,21 @@ void MainWindow::updateCoordLabels() {
     ui->knobD_yCoordsLabel->setText(QString::number(knobCoords[10]));
     ui->knobD_zCoordsLabel->setText(QString::number(knobCoords[11]));
     updateTimer->start(500);
+}
+
+QString MainWindow::createStylesheetColorString(ushort knobIndex) {
+    // May god forgive me for this
+    if (knobParams[knobIndex*7+1] < knobParams[knobIndex*7+2]) {
+        return QString::fromStdString("QLabel {background-color: hsv(" +
+                                  to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2]) / 2) + "," +
+                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2 * 2.55) + "," +
+                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2 * 2.55) + "); }"
+                );
+    } else {
+        return QString::fromStdString("QLabel {background-color: hsv(" +
+                                  to_string(((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2] + 360) / 2) % 360) + "," +
+                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2 * 2.55) + "," +
+                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2 * 2.55) + "); }"
+                );
+    }
 }

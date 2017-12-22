@@ -297,6 +297,9 @@ release\moc_mainwindow.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QM
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qicon.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QImage \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		..\3DMixerInterpreter\videoengine.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \
@@ -849,6 +852,9 @@ release\main.obj: ..\3DMixerInterpreter\main.cpp ../3DMixerInterpreter/mainwindo
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qicon.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QImage \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		../3DMixerInterpreter/videoengine.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \
@@ -1026,6 +1032,9 @@ release\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpret
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qicon.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QImage \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		../3DMixerInterpreter/videoengine.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \

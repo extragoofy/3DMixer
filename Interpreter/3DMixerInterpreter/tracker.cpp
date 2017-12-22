@@ -15,14 +15,16 @@ Tracker::Tracker():
     initializeKnobs();
 }
 
-void Tracker::updateKnobParameters(int knobIndex, bool active, ushort minHue, ushort maxHue, ushort minSat, ushort maxSat, ushort minVal, ushort maxVal) {
-    knobs[knobIndex].active = active;
-    knobs[knobIndex].color_minHue = minHue;
-    knobs[knobIndex].color_maxHue = maxHue;
-    knobs[knobIndex].color_minSat = minSat;
-    knobs[knobIndex].color_maxSat = maxSat;
-    knobs[knobIndex].color_minVal = minVal;
-    knobs[knobIndex].color_maxVal = maxVal;
+void Tracker::updateKnobParameters(const QVector<int> &paramData) {
+    for (int i = 0; i < 4; i++) {
+        knobs[i].active = paramData[i*7];
+        knobs[i].color_minHue = paramData[i*7+1] / 2;
+        knobs[i].color_maxHue = paramData[i*7+2] / 2;
+        knobs[i].color_minSat = paramData[i*7+3] * 2.55;
+        knobs[i].color_maxSat = paramData[i*7+4] * 2.55;
+        knobs[i].color_minVal = paramData[i*7+5] * 2.55;
+        knobs[i].color_maxVal = paramData[i*7+6] * 2.55;
+    }
 }
 
 void Tracker::updateCoordData(QVector<int> &data) {

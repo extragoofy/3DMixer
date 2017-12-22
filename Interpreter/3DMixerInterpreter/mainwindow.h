@@ -29,10 +29,12 @@ private:
     VideoEngine *videoEngine;
     Tracker *tracker;
     QTimer *updateTimer;
+    QVector<int> knobParams;
     QVector<int> knobCoords;
     void setUpVideo();
     void setUpValidators();
     void setUpUiEvents();
+    QString createStylesheetColorString(ushort knobIndex);
 };
 
 #endif // MAINWINDOW_H
