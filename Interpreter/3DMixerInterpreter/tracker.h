@@ -10,9 +10,12 @@ class Tracker : public VideoProcessor
 
     struct knob {
         bool active;
-        ushort color_hue;
-        ushort color_sat;
-        ushort color_val;
+        ushort color_minHue;
+        ushort color_maxHue;
+        ushort color_minSat;
+        ushort color_maxSat;
+        ushort color_minVal;
+        ushort color_maxVal;
         int xCoords;
         int yCoords;
         int zCoords;
@@ -22,7 +25,7 @@ public:
     Tracker();
     void startProcessing(const VideoFormat& format){}
     cv::Mat process(const cv::Mat&source);
-    void updateKnobParameters(int knobIndex, bool active, float hue, float sat, float val);
+    void updateKnobParameters(int knobIndex, bool active, ushort minHue, ushort maxHue, ushort minSat, ushort maxSat, ushort minVal, ushort maxVal);
     void updateCoordData(QVector<int>& target);
 
 private:

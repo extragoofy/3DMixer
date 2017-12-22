@@ -15,11 +15,14 @@ Tracker::Tracker():
     initializeKnobs();
 }
 
-void Tracker::updateKnobParameters(int knobIndex, bool active, float hue, float sat, float val) {
+void Tracker::updateKnobParameters(int knobIndex, bool active, ushort minHue, ushort maxHue, ushort minSat, ushort maxSat, ushort minVal, ushort maxVal) {
     knobs[knobIndex].active = active;
-    knobs[knobIndex].color_hue = hue;
-    knobs[knobIndex].color_sat = sat;
-    knobs[knobIndex].color_val = val;
+    knobs[knobIndex].color_minHue = minHue;
+    knobs[knobIndex].color_maxHue = maxHue;
+    knobs[knobIndex].color_minSat = minSat;
+    knobs[knobIndex].color_maxSat = maxSat;
+    knobs[knobIndex].color_minVal = minVal;
+    knobs[knobIndex].color_maxVal = maxVal;
 }
 
 void Tracker::updateCoordData(QVector<int> &data) {
@@ -85,8 +88,8 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
             */
 
             bool isWhite = false;
-            if (saturation > knobs[0].color_sat) {
-                if (hue >= knobs[0].color_hue - 10 && hue <= knobs[0].color_hue + 10) {
+            if (saturation > knobs[0].color_minSat) {
+                if (hue >= knobs[0].color_minHue - 10 && hue <= knobs[0].color_minHue + 10) {
                     isWhite = true;
                 }
             }
@@ -110,9 +113,12 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
 void Tracker::initializeKnobs() {
     for (int i = 0; i < 4; i++) {
         knobs[i].active = false;
-        knobs[i].color_hue = 0.0;
-        knobs[i].color_sat = 0.0;
-        knobs[i].color_val = 0.0;
+        knobs[i].color_minHue = 0;
+        knobs[i].color_maxHue = 0;
+        knobs[i].color_minSat = 0;
+        knobs[i].color_maxSat = 0;
+        knobs[i].color_minVal = 0;
+        knobs[i].color_maxVal = 0;
         knobs[i].xCoords = 0;
         knobs[i].yCoords = 0;
         knobs[i].zCoords = 0;

@@ -17,7 +17,7 @@
    <widget class="VideoWidget" name="inputFrame">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>40</x>
       <y>10</y>
       <width>640</width>
       <height>480</height>
@@ -61,9 +61,9 @@
     <widget class="QCheckBox" name="knobA_isActive">
      <property name="geometry">
       <rect>
-       <x>99</x>
+       <x>100</x>
        <y>20</y>
-       <width>51</width>
+       <width>16</width>
        <height>20</height>
       </rect>
      </property>
@@ -80,12 +80,12 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobA_colorHue">
+    <widget class="QLineEdit" name="knobA_colorHueMin">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>180</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -108,15 +108,15 @@
       </size>
      </property>
      <property name="text">
-      <string>0</string>
+      <string>350</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobA_colorSaturation">
+    <widget class="QLineEdit" name="knobA_colorSatMin">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>320</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -130,12 +130,12 @@
       <string>99</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobA_colorValue">
+    <widget class="QLineEdit" name="knobA_colorValMin">
      <property name="geometry">
       <rect>
-       <x>510</x>
+       <x>460</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -209,7 +209,7 @@
     <widget class="QLabel" name="knobA_colorLabel">
      <property name="geometry">
       <rect>
-       <x>650</x>
+       <x>660</x>
        <y>20</y>
        <width>20</width>
        <height>20</height>
@@ -225,13 +225,82 @@
       <string/>
      </property>
     </widget>
+    <widget class="QLineEdit" name="knobA_colorHueMax">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>10</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobA_colorSatMax">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobA_colorValMax">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QLabel" name="label_hue">
+   <widget class="QLabel" name="label_hueMax">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>530</y>
-      <width>51</width>
+      <width>50</width>
       <height>16</height>
      </rect>
     </property>
@@ -242,18 +311,18 @@
      </font>
     </property>
     <property name="text">
-     <string>Hue</string>
+     <string>MinHue</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_saturation">
+   <widget class="QLabel" name="label_satMin">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>370</x>
       <y>530</y>
-      <width>71</width>
+      <width>50</width>
       <height>16</height>
      </rect>
     </property>
@@ -264,18 +333,18 @@
      </font>
     </property>
     <property name="text">
-     <string>Saturation</string>
+     <string>MinSat</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_value">
+   <widget class="QLabel" name="label_valMin">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>510</x>
       <y>530</y>
-      <width>71</width>
+      <width>50</width>
       <height>16</height>
      </rect>
     </property>
@@ -286,7 +355,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Value</string>
+     <string>MinVal</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -383,7 +452,7 @@
    <widget class="QLabel" name="label_color">
     <property name="geometry">
      <rect>
-      <x>685</x>
+      <x>695</x>
       <y>530</y>
       <width>51</width>
       <height>16</height>
@@ -400,6 +469,72 @@
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_hueMin">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>530</y>
+      <width>50</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>MaxHue</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_satMax">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>530</y>
+      <width>50</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>MaxSat</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_valMax">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>530</y>
+      <width>50</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>MaxVal</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QGroupBox" name="knobBBox">
@@ -423,9 +558,9 @@
     <widget class="QCheckBox" name="knobB_isActive">
      <property name="geometry">
       <rect>
-       <x>99</x>
+       <x>100</x>
        <y>20</y>
-       <width>51</width>
+       <width>16</width>
        <height>20</height>
       </rect>
      </property>
@@ -438,13 +573,16 @@
      <property name="text">
       <string/>
      </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="knobB_colorHue">
+    <widget class="QLineEdit" name="knobB_colorHueMin">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>180</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -467,15 +605,15 @@
       </size>
      </property>
      <property name="text">
-      <string>120</string>
+      <string>110</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobB_colorSaturation">
+    <widget class="QLineEdit" name="knobB_colorSatMin">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>320</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -489,12 +627,12 @@
       <string>99</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobB_colorValue">
+    <widget class="QLineEdit" name="knobB_colorValMin">
      <property name="geometry">
       <rect>
-       <x>510</x>
+       <x>460</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -568,7 +706,7 @@
     <widget class="QLabel" name="knobB_colorLabel">
      <property name="geometry">
       <rect>
-       <x>650</x>
+       <x>660</x>
        <y>20</y>
        <width>20</width>
        <height>20</height>
@@ -582,6 +720,75 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobB_colorHueMax">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>130</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobB_colorSatMax">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobB_colorValMax">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
      </property>
     </widget>
    </widget>
@@ -606,9 +813,9 @@
     <widget class="QCheckBox" name="knobC_isActive">
      <property name="geometry">
       <rect>
-       <x>99</x>
+       <x>100</x>
        <y>20</y>
-       <width>51</width>
+       <width>16</width>
        <height>20</height>
       </rect>
      </property>
@@ -621,13 +828,16 @@
      <property name="text">
       <string/>
      </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="knobC_colorHue">
+    <widget class="QLineEdit" name="knobC_colorHueMin">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>180</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -650,15 +860,15 @@
       </size>
      </property>
      <property name="text">
-      <string>240</string>
+      <string>230</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobC_colorSaturation">
+    <widget class="QLineEdit" name="knobC_colorSatMin">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>320</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -672,12 +882,12 @@
       <string>99</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobC_colorValue">
+    <widget class="QLineEdit" name="knobC_colorValMin">
      <property name="geometry">
       <rect>
-       <x>510</x>
+       <x>460</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -751,7 +961,7 @@
     <widget class="QLabel" name="knobC_colorLabel">
      <property name="geometry">
       <rect>
-       <x>650</x>
+       <x>660</x>
        <y>20</y>
        <width>20</width>
        <height>20</height>
@@ -765,6 +975,75 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobC_colorHueMax">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>250</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobC_colorSatMax">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobC_colorValMax">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
      </property>
     </widget>
    </widget>
@@ -789,9 +1068,9 @@
     <widget class="QCheckBox" name="knobD_isActive">
      <property name="geometry">
       <rect>
-       <x>99</x>
+       <x>100</x>
        <y>20</y>
-       <width>51</width>
+       <width>16</width>
        <height>20</height>
       </rect>
      </property>
@@ -804,13 +1083,16 @@
      <property name="text">
       <string/>
      </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="knobD_colorHue">
+    <widget class="QLineEdit" name="knobD_colorHueMin">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>180</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -833,15 +1115,15 @@
       </size>
      </property>
      <property name="text">
-      <string>60</string>
+      <string>50</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobD_colorSaturation">
+    <widget class="QLineEdit" name="knobD_colorSatMin">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>320</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -855,12 +1137,12 @@
       <string>99</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="knobD_colorValue">
+    <widget class="QLineEdit" name="knobD_colorValMin">
      <property name="geometry">
       <rect>
-       <x>510</x>
+       <x>460</x>
        <y>20</y>
-       <width>50</width>
+       <width>30</width>
        <height>20</height>
       </rect>
      </property>
@@ -934,7 +1216,7 @@
     <widget class="QLabel" name="knobD_colorLabel">
      <property name="geometry">
       <rect>
-       <x>650</x>
+       <x>660</x>
        <y>20</y>
        <width>20</width>
        <height>20</height>
@@ -948,6 +1230,75 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobD_colorHueMax">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>70</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobD_colorSatMax">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="knobD_colorValMax">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>20</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>99</string>
      </property>
     </widget>
    </widget>
