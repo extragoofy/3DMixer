@@ -32,14 +32,8 @@ private:
     knob knobs[4];
     void initializeKnobs();
     cv::Point center;
-    int hueUpperThreshold;
-    int hueLowerThreshold;
-    int saturationThreshold;
-    float alpha;
-    bool useMedian;
-    bool useOpening;
     void centerOfMass(cv::Mat& image);
-    cv::Mat colorKeying(cv::Mat& hsvFrame);
+    cv::Mat colorKeying(int knobIndex, cv::Mat& hsvFrame);
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
 };
 

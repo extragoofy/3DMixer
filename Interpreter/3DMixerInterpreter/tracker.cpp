@@ -4,15 +4,33 @@
 using namespace cv;
 using namespace std;
 
-Tracker::Tracker():
-    hueUpperThreshold(90),
-    hueLowerThreshold(70),
-    saturationThreshold(220),
-    alpha(0),
-    useMedian(false),
-    useOpening(false)
+Tracker::Tracker()
 {
     initializeKnobs();
+}
+
+Mat Tracker::process(const Mat &input) {
+
+    // convert BGR -> HSV
+    Mat hsvFrame;
+    cvtColor(input, hsvFrame, CV_BGR2HSV);
+
+    //for (int i = 0; i < 4; i++) {
+    //    if (knobs[i].active) {
+            Mat binaryMask = colorKeying(0, hsvFrame);
+            medianBlur(binaryMask, binaryMask, 5);
+            erode(binaryMask, binaryMask, Mat());
+            dilate(binaryMask, binaryMask, Mat());
+            centerOfMass(binaryMask);
+    //    }
+    //}
+
+    // convert binary Image to 3 channel image
+    Mat output;
+    cvtColor(binaryMask, output, CV_GRAY2BGR);
+    drawCross(output, center, 5, Scalar(0, 0, 255));
+
+    return output;
 }
 
 void Tracker::updateKnobParameters(const QVector<int> &paramData) {
@@ -35,35 +53,7 @@ void Tracker::updateCoordData(QVector<int> &data) {
     }
 }
 
-Mat Tracker::process(const Mat &input) {
-    // convert BGR -> HSV
-    Mat hsvFrame;
-    cvtColor(input, hsvFrame, CV_BGR2HSV);
-
-    // perform color keying
-    Mat binaryMask = colorKeying(hsvFrame);
-
-    if (useMedian){
-        medianBlur(binaryMask, binaryMask, 5);
-    }
-
-    if (useOpening){
-        erode(binaryMask, binaryMask, Mat());
-        dilate(binaryMask, binaryMask, Mat());
-    }
-
-    // calculate center of mass
-    centerOfMass(binaryMask);
-
-    // convert binary Image to 3 channel image
-    Mat output;
-    cvtColor(binaryMask, output, CV_GRAY2BGR);
-    drawCross(output, center, 5, Scalar(0, 0, 255));
-
-    return output;
-}
-
-Mat Tracker::colorKeying(Mat& hsvFrame) {
+Mat Tracker::colorKeying(int knobIndex, Mat& hsvFrame) {
     // initialize Mat object for output
     Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
 
@@ -72,30 +62,24 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
             Vec3b hsvPixel = hsvFrame.at<Vec3b>(y,x);
             int hue = hsvPixel[0];
             int saturation = hsvPixel[1];
-            /*
+            int value = hsvPixel[2];
+
             // Maskierung und Schwerpunktsberechnung
             bool isWhite = false;
-            if (saturation > saturationThreshold){
-                if (hueLowerThreshold < hueUpperThreshold){
-                    if (hue >= hueLowerThreshold && hue <= hueUpperThreshold){
-                        isWhite = true;
+            if (knobs[knobIndex].color_minVal <= value <= knobs[knobIndex].color_maxVal) {
+                if (knobs[knobIndex].color_minSat <= saturation <= knobs[knobIndex].color_maxSat) {
+                    if (knobs[knobIndex].color_minHue < knobs[knobIndex].color_maxHue) {
+                        if (hue >= knobs[knobIndex].color_minHue && hue <= knobs[knobIndex].color_maxHue){
+                            isWhite = true;
+                        }
                     }
-                }
-                else {
-                    if (hue >= hueLowerThreshold || hue <= hueUpperThreshold){
-                        isWhite = true;
+                    else {
+                        if (hue >= knobs[knobIndex].color_minHue || hue <= knobs[knobIndex].color_maxHue){
+                            isWhite = true;
+                        }
                     }
                 }
             }
-            */
-
-            bool isWhite = false;
-            if (saturation > knobs[0].color_minSat) {
-                if (hue >= knobs[0].color_minHue - 10 && hue <= knobs[0].color_minHue + 10) {
-                    isWhite = true;
-                }
-            }
-
             if (isWhite){
                 output.at<uchar>(y,x) = 255;
             }
@@ -104,27 +88,14 @@ Mat Tracker::colorKeying(Mat& hsvFrame) {
             }
         }
     }
+    /*
     for (int i = 0; i < 12; i++) {
         knobs[i/3].xCoords = qrand();
         knobs[i/3].yCoords = qrand();
         knobs[i/3].zCoords = qrand();
     }
+    */
     return output;
-}
-
-void Tracker::initializeKnobs() {
-    for (int i = 0; i < 4; i++) {
-        knobs[i].active = false;
-        knobs[i].color_minHue = 0;
-        knobs[i].color_maxHue = 0;
-        knobs[i].color_minSat = 0;
-        knobs[i].color_maxSat = 0;
-        knobs[i].color_minVal = 0;
-        knobs[i].color_maxVal = 0;
-        knobs[i].xCoords = 0;
-        knobs[i].yCoords = 0;
-        knobs[i].zCoords = 0;
-    }
 }
 
 void Tracker::centerOfMass(Mat& image){
@@ -141,7 +112,7 @@ void Tracker::centerOfMass(Mat& image){
         }
     }
     if (count > 0){
-        center = (1 - alpha) * center + alpha * Point(sumx/count, sumy/count);
+        center = (1 - 0) * center + 0 * Point(sumx/count, sumy/count);
 
     }
 }
@@ -149,4 +120,19 @@ void Tracker::centerOfMass(Mat& image){
 void Tracker::drawCross(Mat& image, Point center, int length, Scalar color){
     line(image, center-Point(0, length), center+Point(0,length), color, 1);
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
+}
+
+void Tracker::initializeKnobs() {
+    for (int i = 0; i < 4; i++) {
+        knobs[i].active = false;
+        knobs[i].color_minHue = 0;
+        knobs[i].color_maxHue = 0;
+        knobs[i].color_minSat = 0;
+        knobs[i].color_maxSat = 0;
+        knobs[i].color_minVal = 0;
+        knobs[i].color_maxVal = 0;
+        knobs[i].xCoords = 0;
+        knobs[i].yCoords = 0;
+        knobs[i].zCoords = 0;
+    }
 }
