@@ -1,0 +1,26 @@
+{
+    "oscillatorA": {
+        "volume": 1,
+        "voices": 2,
+        "waveform": "square",
+        "octave": "+1",
+        "detune": 0.35
+    },
+    "oscillatorB": {
+        "volume": 1,
+        "voices": 2,
+        "waveform": "square",
+        "octave": "+1",
+        "detune": 0.3
+    },
+    "ampEnv": {
+        "attack": 0,
+        "decay": 0.455,
+        "sustain": 0
+    },
+    "filter": {
+        "type": "lowpass",
+        "cutoff": 0.55,
+        "resonance": 0
+    }
+}

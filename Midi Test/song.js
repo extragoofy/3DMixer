@@ -4,9 +4,11 @@ flute.loadJSON('song1_flute.json');
 
 let synth = new Instrument('song1_synth.mid');
 synth.loadMidi();
+synth.loadJSON('song1_synth.json');
 
 let bass = new Instrument('song1_bass.mid');
 bass.loadMidi();
+bass.loadJSON('song1_bass.json');
 
   
 //
@@ -27,8 +29,8 @@ document.getElementById("playClass").addEventListener('click', function(){
     let context = new AudioContext();
     let start = context.currentTime;
     flute.playInstrument(start, context);
-//    synth.playInstrument(start, context);
-//    bass.playInstrument(start, context);
+    synth.playInstrument(start, context);
+    bass.playInstrument(start, context);
 });
 
 document.getElementById("stopClass").addEventListener('click', function(){

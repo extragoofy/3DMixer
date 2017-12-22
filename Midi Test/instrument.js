@@ -141,16 +141,16 @@ class Instrument {
         this.gainNode = this.context.createGain();
         this.biquadFilter = this.context.createBiquadFilter();
         
-        this.biquadFilter.type = "lowpass";
-        this.biquadFilter.frequency.value = 1000;
+        this.biquadFilter.type = this.instrumentConfigs.filter.type;
+        this.biquadFilter.frequency.value = 2000;
         this.biquadFilter.connect(this.gainNode);
         
         this.gainNode.gain.setValueAtTime(0, time);
-        this.gainNode.gain.linearRampToValueAtTime(1, time + 0.06); //attack
+        this.gainNode.gain.linearRampToValueAtTime(1, time + this.instrumentConfigs.ampEnv.attack); //attack
         
         this.gainNode.connect(this.context.destination);
         
-        this.gainNode.gain.linearRampToValueAtTime(0, time + this.frequencies[this.currentNote].duration); //decay
+        this.gainNode.gain.linearRampToValueAtTime(0, time + this.frequencies[this.currentNote].duration + this.frequencies[this.currentNote].duration * this.instrumentConfigs.ampEnv.decay); //decay
         
         
         for(let i = 0; i < this.instrumentConfigs.oscillatorA.voices; i++){
@@ -158,12 +158,12 @@ class Instrument {
 
             this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.frequencies[this.currentNote].midi);
             this.oscillatorsA[i].type = this.instrumentConfigs.oscillatorA.waveform;
-            this.oscillatorsA[i].detune.value = 23 + (i * 2 * 23) / (this.instrumentConfigs.oscillatorA.voices - 1);
+            this.oscillatorsA[i].detune.value = (this.instrumentConfigs.oscillatorA.detune * 100) + (i * 2 * (this.instrumentConfigs.oscillatorA.detune * 100)) / (this.instrumentConfigs.oscillatorA.voices);
 
             this.oscillatorsA[i].connect(this.biquadFilter);
             
             this.oscillatorsA[i].start(time);
-            this.oscillatorsA[i].stop(time + this.frequencies[this.currentNote].duration);
+//            this.oscillatorsA[i].stop(time + this.frequencies[this.currentNote].duration);
         }
         
         for(let i = 0; i < this.instrumentConfigs.oscillatorB.voices; i++){
@@ -171,18 +171,14 @@ class Instrument {
 
             this.oscillatorsB[i].frequency.value = this.midiNoteToFrequency(this.frequencies[this.currentNote].midi);
             this.oscillatorsB[i].type = this.instrumentConfigs.oscillatorB.waveform;
-            this.oscillatorsB[i].detune.value = 30 + (i * 2 * 30) / (this.instrumentConfigs.oscillatorB.voices - 1);
+            this.oscillatorsB[i].detune.value = (this.instrumentConfigs.oscillatorB.detune * 100) + (i * 2 * (this.instrumentConfigs.oscillatorB.detune * 100)) / (this.instrumentConfigs.oscillatorB.voices);
 
             this.oscillatorsB[i].connect(this.biquadFilter);
             this.oscillatorsB[i].start(time);
-            this.oscillatorsB[i].stop(time + this.frequencies[this.currentNote].duration);
+//            this.oscillatorsB[i].stop(time + this.frequencies[this.currentNote].duration);
         }
         this.currentNote++;
     }
-    
-//    get returnFilePath() {
-//        return this.filePath;
-//    }
     
     stop(){
         this.context.close();
