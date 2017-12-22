@@ -20,6 +20,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -45,6 +46,7 @@ public:
     QLineEdit *knobA_colorHueMax;
     QLineEdit *knobA_colorSatMax;
     QLineEdit *knobA_colorValMax;
+    QRadioButton *knobA_isView;
     QLabel *label_hueMax;
     QLabel *label_satMin;
     QLabel *label_valMin;
@@ -68,6 +70,7 @@ public:
     QLineEdit *knobB_colorHueMax;
     QLineEdit *knobB_colorSatMax;
     QLineEdit *knobB_colorValMax;
+    QRadioButton *knobB_isView;
     QGroupBox *knobCBox;
     QCheckBox *knobC_isActive;
     QLineEdit *knobC_colorHueMin;
@@ -80,6 +83,7 @@ public:
     QLineEdit *knobC_colorHueMax;
     QLineEdit *knobC_colorSatMax;
     QLineEdit *knobC_colorValMax;
+    QRadioButton *knobC_isView;
     QGroupBox *knobDBox;
     QCheckBox *knobD_isActive;
     QLineEdit *knobD_colorHueMin;
@@ -92,6 +96,10 @@ public:
     QLineEdit *knobD_colorHueMax;
     QLineEdit *knobD_colorSatMax;
     QLineEdit *knobD_colorValMax;
+    QRadioButton *knobD_isView;
+    QLabel *label_zCoords_2;
+    QRadioButton *all_isView;
+    QLabel *label_zCoords_3;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -178,6 +186,10 @@ public:
         knobA_colorValMax->setGeometry(QRect(510, 20, 30, 20));
         sizePolicy.setHeightForWidth(knobA_colorValMax->sizePolicy().hasHeightForWidth());
         knobA_colorValMax->setSizePolicy(sizePolicy);
+        knobA_isView = new QRadioButton(knobABox);
+        knobA_isView->setObjectName(QStringLiteral("knobA_isView"));
+        knobA_isView->setGeometry(QRect(1250, 20, 17, 17));
+        knobA_isView->setAutoExclusive(false);
         label_hueMax = new QLabel(centralWidget);
         label_hueMax->setObjectName(QStringLiteral("label_hueMax"));
         label_hueMax->setGeometry(QRect(230, 530, 50, 16));
@@ -293,6 +305,10 @@ public:
         knobB_colorValMax->setGeometry(QRect(510, 20, 30, 20));
         sizePolicy.setHeightForWidth(knobB_colorValMax->sizePolicy().hasHeightForWidth());
         knobB_colorValMax->setSizePolicy(sizePolicy);
+        knobB_isView = new QRadioButton(knobBBox);
+        knobB_isView->setObjectName(QStringLiteral("knobB_isView"));
+        knobB_isView->setGeometry(QRect(1250, 20, 17, 17));
+        knobB_isView->setAutoExclusive(false);
         knobCBox = new QGroupBox(centralWidget);
         knobCBox->setObjectName(QStringLiteral("knobCBox"));
         knobCBox->setGeometry(QRect(50, 690, 1341, 51));
@@ -353,6 +369,10 @@ public:
         knobC_colorValMax->setGeometry(QRect(510, 20, 30, 20));
         sizePolicy.setHeightForWidth(knobC_colorValMax->sizePolicy().hasHeightForWidth());
         knobC_colorValMax->setSizePolicy(sizePolicy);
+        knobC_isView = new QRadioButton(knobCBox);
+        knobC_isView->setObjectName(QStringLiteral("knobC_isView"));
+        knobC_isView->setGeometry(QRect(1250, 20, 17, 17));
+        knobC_isView->setAutoExclusive(false);
         knobDBox = new QGroupBox(centralWidget);
         knobDBox->setObjectName(QStringLiteral("knobDBox"));
         knobDBox->setGeometry(QRect(50, 760, 1341, 51));
@@ -413,6 +433,25 @@ public:
         knobD_colorValMax->setGeometry(QRect(510, 20, 30, 20));
         sizePolicy.setHeightForWidth(knobD_colorValMax->sizePolicy().hasHeightForWidth());
         knobD_colorValMax->setSizePolicy(sizePolicy);
+        knobD_isView = new QRadioButton(knobDBox);
+        knobD_isView->setObjectName(QStringLiteral("knobD_isView"));
+        knobD_isView->setGeometry(QRect(1250, 20, 17, 17));
+        knobD_isView->setAutoExclusive(false);
+        label_zCoords_2 = new QLabel(centralWidget);
+        label_zCoords_2->setObjectName(QStringLiteral("label_zCoords_2"));
+        label_zCoords_2->setGeometry(QRect(1300, 530, 31, 16));
+        label_zCoords_2->setFont(font);
+        label_zCoords_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        all_isView = new QRadioButton(centralWidget);
+        all_isView->setObjectName(QStringLiteral("all_isView"));
+        all_isView->setGeometry(QRect(1300, 830, 17, 17));
+        all_isView->setChecked(true);
+        all_isView->setAutoExclusive(false);
+        label_zCoords_3 = new QLabel(centralWidget);
+        label_zCoords_3->setObjectName(QStringLiteral("label_zCoords_3"));
+        label_zCoords_3->setGeometry(QRect(1240, 830, 51, 16));
+        label_zCoords_3->setFont(font);
+        label_zCoords_3->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -447,6 +486,7 @@ public:
         knobA_colorHueMax->setText(QApplication::translate("MainWindow", "10", Q_NULLPTR));
         knobA_colorSatMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
         knobA_colorValMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobA_isView->setText(QString());
         label_hueMax->setText(QApplication::translate("MainWindow", "MinHue", Q_NULLPTR));
         label_satMin->setText(QApplication::translate("MainWindow", "MinSat", Q_NULLPTR));
         label_valMin->setText(QApplication::translate("MainWindow", "MinVal", Q_NULLPTR));
@@ -470,6 +510,7 @@ public:
         knobB_colorHueMax->setText(QApplication::translate("MainWindow", "130", Q_NULLPTR));
         knobB_colorSatMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
         knobB_colorValMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobB_isView->setText(QString());
         knobCBox->setTitle(QApplication::translate("MainWindow", "Knob C", Q_NULLPTR));
         knobC_isActive->setText(QString());
         knobC_colorHueMin->setText(QApplication::translate("MainWindow", "230", Q_NULLPTR));
@@ -482,6 +523,7 @@ public:
         knobC_colorHueMax->setText(QApplication::translate("MainWindow", "250", Q_NULLPTR));
         knobC_colorSatMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
         knobC_colorValMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobC_isView->setText(QString());
         knobDBox->setTitle(QApplication::translate("MainWindow", "Knob D", Q_NULLPTR));
         knobD_isActive->setText(QString());
         knobD_colorHueMin->setText(QApplication::translate("MainWindow", "50", Q_NULLPTR));
@@ -494,6 +536,10 @@ public:
         knobD_colorHueMax->setText(QApplication::translate("MainWindow", "70", Q_NULLPTR));
         knobD_colorSatMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
         knobD_colorValMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
+        knobD_isView->setText(QString());
+        label_zCoords_2->setText(QApplication::translate("MainWindow", "View", Q_NULLPTR));
+        all_isView->setText(QString());
+        label_zCoords_3->setText(QApplication::translate("MainWindow", "View All", Q_NULLPTR));
     } // retranslateUi
 
 };

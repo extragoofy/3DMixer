@@ -114,6 +114,14 @@ void MainWindow::setUpUiEvents() {
 
 }
 
+void MainWindow::resetRadioButtons() {
+    ui->knobA_isView->setChecked(false);
+    ui->knobB_isView->setChecked(false);
+    ui->knobC_isView->setChecked(false);
+    ui->knobD_isView->setChecked(false);
+    ui->all_isView->setChecked(false);
+}
+
 // SIGNALS/SLOTS
 
 void MainWindow::updateParameters() {
@@ -173,6 +181,41 @@ void MainWindow::updateCoordLabels() {
     ui->knobD_yCoordsLabel->setText(QString::number(knobCoords[10]));
     ui->knobD_zCoordsLabel->setText(QString::number(knobCoords[11]));
     updateTimer->start(500);
+}
+
+void MainWindow::on_knobA_isView_clicked()
+{
+    resetRadioButtons();
+    ui->knobA_isView->setChecked(true);
+    tracker->setView(0);
+}
+
+void MainWindow::on_knobB_isView_clicked()
+{
+    resetRadioButtons();
+    ui->knobB_isView->setChecked(true);
+    tracker->setView(1);
+}
+
+void MainWindow::on_knobC_isView_clicked()
+{
+    resetRadioButtons();
+    ui->knobC_isView->setChecked(true);
+    tracker->setView(2);
+}
+
+void MainWindow::on_knobD_isView_clicked()
+{
+    resetRadioButtons();
+    ui->knobD_isView->setChecked(true);
+    tracker->setView(3);
+}
+
+void MainWindow::on_all_isView_clicked()
+{
+    resetRadioButtons();
+    ui->all_isView->setChecked(true);
+    tracker->setView(4);
 }
 
 QString MainWindow::createStylesheetColorString(ushort knobIndex) {

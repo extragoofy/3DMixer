@@ -23,6 +23,11 @@ public:
 private slots:
     void updateParameters();
     void updateCoordLabels();
+    void on_knobA_isView_clicked();
+    void on_knobB_isView_clicked();
+    void on_knobC_isView_clicked();
+    void on_knobD_isView_clicked();
+    void on_all_isView_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -34,6 +39,7 @@ private:
     void setUpVideo();
     void setUpValidators();
     void setUpUiEvents();
+    void resetRadioButtons();
     QString createStylesheetColorString(ushort knobIndex);
 };
 

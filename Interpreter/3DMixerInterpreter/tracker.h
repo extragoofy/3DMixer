@@ -27,13 +27,15 @@ public:
     cv::Mat process(const cv::Mat& source);
     void updateKnobParameters(const QVector<int> &paramData);
     void updateCoordData(QVector<int>& target);
+    void setView(int id);
 
 private:
-    knob knobs[4];
-    void initializeKnobs();
+    QVector<knob> knobs;
+    int activeView;
     cv::Point center;
-    void centerOfMass(cv::Mat& image);
-    cv::Mat colorKeying(int knobIndex, cv::Mat& hsvFrame);
+    void initializeKnobs();
+    void centerOfMass(int knobID, cv::Mat& image);
+    cv::Mat colorKeying(int knobID, cv::Mat& hsvFrame);
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
 };
 
