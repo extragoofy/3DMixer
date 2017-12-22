@@ -21,10 +21,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_knobA_colorHue_editingFinished();
-    void on_knobA_colorSaturation_editingFinished();
-    void on_knobA_colorValue_editingFinished();
-    void on_knobA_isActive_clicked(bool checked);
+    void updateParameters();
     void updateCoordLabels();
 
 private:
@@ -35,7 +32,7 @@ private:
     QVector<int> knobCoords;
     void setUpVideo();
     void setUpValidators();
-    void updateParameters();
+    void setUpUiEvents();
 };
 
 #endif // MAINWINDOW_H
