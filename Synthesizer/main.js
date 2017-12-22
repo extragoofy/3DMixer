@@ -1,6 +1,3 @@
-//let song1 = ['flute', 'bass', 'synth'];
-let song2 = ['flute', 'bass', 'drums'];
-
 let song1 = [ 
     {
         instrument: 'flute',
@@ -19,8 +16,13 @@ let song1 = [
     }
 ]
 
+// needed to save intialized instruments
 let instruments = [];
 
+let context = new AudioContext();
+
+
+// get the choosen song from local Storage
 let choosenSong = localStorage.getItem('song');
 if(choosenSong === '1'){
     choosenSong = song1;
@@ -30,6 +32,7 @@ if(choosenSong === '1'){
 
 let sel = document.getElementById('instruments');
 
+// for each instrument create option in dropdown and initalize an instrument
 for(var i = 0; i < choosenSong.length; i++) {
     
     var opt = document.createElement('option');
@@ -38,13 +41,14 @@ for(var i = 0; i < choosenSong.length; i++) {
     sel.appendChild(opt);
     
     instruments.push(
-        new Instrument(choosenSong[i].midi, choosenSong[i].json)
+        new Instrument(choosenSong[i].midi, choosenSong[i].json, context)
     );
     
     instruments[i].loadMidi();
     instruments[i].loadJSON();
 }
 
+// initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
     let instrument = sel.options[sel.selectedIndex].value;
     knob = new Knob(0, instruments[instrument]);
@@ -52,4 +56,7 @@ document.getElementById('start').addEventListener('click', function(){
 //        new Knob(0, instrument)
 //    );
     console.log(knob.instrumentValue);
+    for(var i = 0; i < choosenSong.length; i++) {
+        instruments[i].playInstrument();
+    }
 });
