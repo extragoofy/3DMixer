@@ -19,8 +19,8 @@ class Instrument {
     
     loadMidi(){
         MidiConvert.load(this.midiFilePath).then((midi) => {
-            this.notes = midi.tracks.find((track) => track.name !== undefined).notes;
-            this.bpm = midi.header.bpm;
+//            this.notes = midi.tracks.find((track) => track.name !== undefined).notes;
+//            this.bpm = midi.header.bpm;
             console.log(midi);
         });
     }

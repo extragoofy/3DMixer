@@ -50,6 +50,8 @@ for(var i = 0; i < choosenSong.length; i++) {
 
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
+    let song = new Song('./song1/song1.mid');
+    song.loadMidi();
     let instrument = sel.options[sel.selectedIndex].value;
     knob = new Knob(0, instruments[instrument]);
 //    knobs.push(
