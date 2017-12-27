@@ -108,7 +108,6 @@ class Instrument{
             if(this.currentNote === this.notes.length){
                 this.currentNote = 0;
                 this.startTime = this.startTime + this.songDuration;
-//                this.startTime = this.startTime + this.notes[this.notes.length - 1].time + this.notes[this.notes.length - 1].duration;
             }
             this.nextNotetime += 0.24 * secondsPerBeat;
             this.playSound(this.startTime + this.notes[this.currentNote].time);

@@ -48,11 +48,30 @@ let song1 = [
 //    instruments[i].loadJSON();
 //}
 
+let sel = document.getElementById('instruments');
+
 let song = new Song('./song1/song1.mid');
-    song.loadMidi();
+song.loadMidi().then(() => {
+    song.getInstrumentList.forEach((instrument, i) => {
+        var opt = document.createElement('option');
+        opt.innerHTML = instrument;
+        opt.value = i;
+        sel.appendChild(opt);
+    });
+});
+//let instruments = song.getInstrumentList;
+//console.log(instruments);
+//instruments.forEach((instrument) => {
+//    var opt = document.createElement('option');
+//    opt.innerHTML = instrument;
+//    opt.value = i;
+//    sel.appendChild(opt);
+//});
 
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
+    let choosenInstrument = sel.options[sel.selectedIndex].value;
+    let knob = new Knob(0, song.getInstruments[choosenInstrument]);
     song.playSong();
 //    let instrument = sel.options[sel.selectedIndex].value;
 //    knob = new Knob(0, instruments[instrument]);
