@@ -12,27 +12,38 @@ class Song {
         this.context = new AudioContext();
     }
     
-    loadMidi(){
+    loadSong(){
         return new Promise((resolve, reject) => {
+            
+            let instrumentConfigs;
+            var xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', './song1/song1.json', true);
+            xobj.onreadystatechange = () => {
+                if (xobj.readyState == 4 && xobj.status == "200") {
+                    instrumentConfigs = JSON.parse(xobj.responseText);
+                }
+            };
+            xobj.send(null); 
+            
             MidiConvert.load(this.midiFilePath).then((midi) => {
                 midi.tracks.filter((track) => track.name !== undefined).forEach((instrument) => {
-                    this.initializeInstruments(instrument.notes, midi.header.bpm, midi.duration);
+                    this.bpm = midi.header.bpm;
+                    this.songDuration = midi.duration;
+                    this.initializeInstruments(instrument.notes, instrumentConfigs[instrument.name]);
                     this.instrumentList.push(
                         instrument.name
                     );
-    //                this.instrumentsNotes = Object.assign({}, {[instrument.name]: {notes: instrument.notes}}, this.instrumentsNotes);
                 });
-                this.bpm = midi.header.bpm;
-                this.songDuration = midi.duration;
                 console.log(midi);
                 resolve();
             });
         });
     }
     
-    initializeInstruments(notes, bpm, songDuration){
+    initializeInstruments(notes, configs){
         this.instruments.push(
-            new Instrument(notes, this.context, bpm, songDuration)
+            new Instrument(notes, configs, this.context, this.bpm, this.songDuration)
         );
         console.log(this.instruments);
     }

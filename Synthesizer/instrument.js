@@ -75,10 +75,11 @@
 
 
 class Instrument{
-    constructor(notes, audioContext, bpm, songDuration){
+    constructor(notes, configs, audioContext, bpm, songDuration){
         this.notes = notes;
         this.audioContext = audioContext;
         this.currentNote = 0;
+        this.configs = configs;
         
         this.bpm = bpm
         

@@ -51,7 +51,7 @@ let song1 = [
 let sel = document.getElementById('instruments');
 
 let song = new Song('./song1/song1.mid');
-song.loadMidi().then(() => {
+song.loadSong().then(() => {
     song.getInstrumentList.forEach((instrument, i) => {
         var opt = document.createElement('option');
         opt.innerHTML = instrument;
