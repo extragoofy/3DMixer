@@ -109,12 +109,10 @@ class Instrument{
     scheduler() {
         var secondsPerBeat = 60.0 / this.bpm;
 
-        while(this.nextNotetime < this.audioContext.currentTime + 0.1) {
-            if(this.currentNote === this.notes.length){
-                this.currentNote = 0;
-                this.startTime = this.startTime + this.songDuration;
-            }
+//        while(this.nextNotetime < this.audioContext.currentTime + 0.1) {
+        while((this.startTime + this.notes[this.currentNote].time) < this.audioContext.currentTime + 0.1) {
             this.nextNotetime += 0.24 * secondsPerBeat;
+             console.log(this.startTime + this.notes[this.currentNote].time, this.audioContext.currentTime);
             this.playSound(this.startTime + this.notes[this.currentNote].time);
         }
         this.timerID = window.setTimeout(() => this.scheduler(), 25.0);
@@ -169,5 +167,9 @@ class Instrument{
             }
         }
         this.currentNote++;
+        if(this.currentNote === this.notes.length){
+            this.currentNote = 0;
+            this.startTime = this.startTime + this.songDuration;
+        }
     }
 }
