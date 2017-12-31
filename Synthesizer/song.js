@@ -30,7 +30,7 @@ class Song {
                 midi.tracks.filter((track) => track.name !== undefined).forEach((instrument) => {
                     this.bpm = midi.header.bpm;
                     this.songDuration = midi.duration;
-                    this.initializeInstruments(instrument.notes, instrumentConfigs[instrument.name]);
+                    this.initializeInstruments(instrument.notes, instrumentConfigs[instrument.name], instrument.name);
                     this.instrumentList.push(
                         instrument.name
                     );
@@ -41,9 +41,9 @@ class Song {
         });
     }
     
-    initializeInstruments(notes, configs){
+    initializeInstruments(notes, configs, name){
         this.instruments.push(
-            new Instrument(notes, configs, this.context, this.bpm, this.songDuration)
+            new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)
         );
         console.log(this.instruments);
     }
