@@ -1,0 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: space-around;
+}
+
+.song{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.song:hover{
+    cursor: pointer;
+}
+
+.cover.song1{
+    height: 100%;
+    background: url('song.png');
+    background-size: cover;
+    background-position: center bottom;
+}
+
+.description{
+    font-family: 'Yrsa', serif;
+    background: #373C44;
+    color: #fff;
+    text-align: center;
+    height: 150px;
+    padding: 20px;
+}
+
+h4{
+    font-weight: 400;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.instruments{
+    font-weight: 300;
+}
