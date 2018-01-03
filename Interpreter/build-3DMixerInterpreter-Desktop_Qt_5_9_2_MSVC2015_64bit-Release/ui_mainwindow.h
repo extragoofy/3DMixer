@@ -100,6 +100,9 @@ public:
     QLabel *label_zCoords_2;
     QRadioButton *all_isView;
     QLabel *label_zCoords_3;
+    QCheckBox *options_blur;
+    QCheckBox *options_erode;
+    QCheckBox *options_dilate;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -452,6 +455,21 @@ public:
         label_zCoords_3->setGeometry(QRect(1240, 830, 51, 16));
         label_zCoords_3->setFont(font);
         label_zCoords_3->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        options_blur = new QCheckBox(centralWidget);
+        options_blur->setObjectName(QStringLiteral("options_blur"));
+        options_blur->setGeometry(QRect(80, 820, 91, 20));
+        options_blur->setFont(font1);
+        options_blur->setChecked(true);
+        options_erode = new QCheckBox(centralWidget);
+        options_erode->setObjectName(QStringLiteral("options_erode"));
+        options_erode->setGeometry(QRect(170, 820, 91, 20));
+        options_erode->setFont(font1);
+        options_erode->setChecked(true);
+        options_dilate = new QCheckBox(centralWidget);
+        options_dilate->setObjectName(QStringLiteral("options_dilate"));
+        options_dilate->setGeometry(QRect(260, 820, 91, 20));
+        options_dilate->setFont(font1);
+        options_dilate->setChecked(true);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -540,6 +558,9 @@ public:
         label_zCoords_2->setText(QApplication::translate("MainWindow", "View", Q_NULLPTR));
         all_isView->setText(QString());
         label_zCoords_3->setText(QApplication::translate("MainWindow", "View All", Q_NULLPTR));
+        options_blur->setText(QApplication::translate("MainWindow", "Median Blur", Q_NULLPTR));
+        options_erode->setText(QApplication::translate("MainWindow", "Erode", Q_NULLPTR));
+        options_dilate->setText(QApplication::translate("MainWindow", "Dilate", Q_NULLPTR));
     } // retranslateUi
 
 };

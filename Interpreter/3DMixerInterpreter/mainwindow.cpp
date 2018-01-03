@@ -112,6 +112,10 @@ void MainWindow::setUpUiEvents() {
     connect(ui->knobD_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobD_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
 
+    connect(ui->options_blur, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->options_erode, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateParameters()));
+
 }
 
 void MainWindow::resetRadioButtons() {
@@ -164,6 +168,10 @@ void MainWindow::updateParameters() {
     ui->knobB_colorLabel->setStyleSheet(createStylesheetColorString(1));
     ui->knobC_colorLabel->setStyleSheet(createStylesheetColorString(2));
     ui->knobD_colorLabel->setStyleSheet(createStylesheetColorString(3));
+
+    tracker->useBlur = ui->options_blur->isChecked();
+    tracker->useErode = ui->options_erode->isChecked();
+    tracker->useDilate = ui->options_dilate->isChecked();
 /*
     // Enable/Disable radio buttons for views
     ui->knobA_isView->setCheckable(knobParams[0]);

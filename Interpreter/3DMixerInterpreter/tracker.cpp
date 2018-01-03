@@ -9,6 +9,9 @@ Tracker::Tracker()
     initializeKnobs();
     binaryFrames = QVector<cv::Mat>(5);
     activeView = 0;
+    useBlur = true;
+    useErode = true;
+    useDilate = true;
 }
 
 Mat Tracker::process(const Mat &input) {
@@ -20,9 +23,9 @@ Mat Tracker::process(const Mat &input) {
     for (int i = 0; i < 4; i++) {
         if (knobs[i].active) {
             binaryFrames[i] = colorKeying(i, hsvFrame);
-            //medianBlur(binaryFrames[i], binaryFrames[i], 5);
-            //erode(binaryFrames[i], binaryFrames[i], Mat());
-            //dilate(binaryFrames[i], binaryFrames[i], Mat());
+            if (useBlur) medianBlur(binaryFrames[i], binaryFrames[i], 5);
+            if (useErode) erode(binaryFrames[i], binaryFrames[i], Mat());
+            if (useDilate) dilate(binaryFrames[i], binaryFrames[i], Mat());
             centerOfMass(i, binaryFrames[i]);
         }
     }
