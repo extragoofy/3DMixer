@@ -164,6 +164,27 @@ void MainWindow::updateParameters() {
     ui->knobB_colorLabel->setStyleSheet(createStylesheetColorString(1));
     ui->knobC_colorLabel->setStyleSheet(createStylesheetColorString(2));
     ui->knobD_colorLabel->setStyleSheet(createStylesheetColorString(3));
+/*
+    // Enable/Disable radio buttons for views
+    ui->knobA_isView->setCheckable(knobParams[0]);
+    ui->knobB_isView->setCheckable(knobParams[7]);
+    ui->knobC_isView->setCheckable(knobParams[14]);
+    ui->knobD_isView->setCheckable(knobParams[21]);
+    if (!knobParams[0] && ui->knobA_isView->isChecked()) {
+        on_all_isView_clicked();
+    }
+    cout << knobParams[7];
+    if (!knobParams[7] && ui->knobB_isView->isChecked()) {
+        on_all_isView_clicked();
+        cout << "Happened";
+    }
+    if (!knobParams[14] && ui->knobC_isView->isChecked()) {
+        on_all_isView_clicked();
+    }
+    if (!knobParams[21] && ui->knobD_isView->isChecked()) {
+        on_all_isView_clicked();
+    }
+*/
 }
 
 void MainWindow::updateCoordLabels() {
@@ -185,30 +206,38 @@ void MainWindow::updateCoordLabels() {
 
 void MainWindow::on_knobA_isView_clicked()
 {
-    resetRadioButtons();
-    ui->knobA_isView->setChecked(true);
-    tracker->setView(0);
+    if (ui->knobA_isView->isCheckable()) {
+        resetRadioButtons();
+        ui->knobA_isView->setChecked(true);
+        tracker->setView(0);
+    }
 }
 
 void MainWindow::on_knobB_isView_clicked()
 {
-    resetRadioButtons();
-    ui->knobB_isView->setChecked(true);
-    tracker->setView(1);
+    if (ui->knobB_isView->isCheckable()) {
+        resetRadioButtons();
+        ui->knobB_isView->setChecked(true);
+        tracker->setView(1);
+    }
 }
 
 void MainWindow::on_knobC_isView_clicked()
 {
-    resetRadioButtons();
-    ui->knobC_isView->setChecked(true);
-    tracker->setView(2);
+    if (ui->knobC_isView->isCheckable()) {
+        resetRadioButtons();
+        ui->knobC_isView->setChecked(true);
+        tracker->setView(2);
+    }
 }
 
 void MainWindow::on_knobD_isView_clicked()
 {
-    resetRadioButtons();
-    ui->knobD_isView->setChecked(true);
-    tracker->setView(3);
+    if (ui->knobD_isView->isCheckable()) {
+        resetRadioButtons();
+        ui->knobD_isView->setChecked(true);
+        tracker->setView(3);
+    }
 }
 
 void MainWindow::on_all_isView_clicked()

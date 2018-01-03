@@ -7,6 +7,7 @@ using namespace std;
 Tracker::Tracker()
 {
     initializeKnobs();
+    binaryFrames = QVector<cv::Mat>(5);
     activeView = 0;
 }
 
@@ -16,19 +17,19 @@ Mat Tracker::process(const Mat &input) {
     Mat hsvFrame;
     cvtColor(input, hsvFrame, CV_BGR2HSV);
 
-    //for (int i = 0; i < 4; i++) {
-    //    if (knobs[i].active) {
-            Mat binaryMask = colorKeying(0, hsvFrame);
-            medianBlur(binaryMask, binaryMask, 5);
-            erode(binaryMask, binaryMask, Mat());
-            dilate(binaryMask, binaryMask, Mat());
-            centerOfMass(0, binaryMask);
-    //    }
-    //}
+    for (int i = 0; i < 4; i++) {
+        if (knobs[i].active) {
+            binaryFrames[i] = colorKeying(i, hsvFrame);
+            //medianBlur(binaryFrames[i], binaryFrames[i], 5);
+            //erode(binaryFrames[i], binaryFrames[i], Mat());
+            //dilate(binaryFrames[i], binaryFrames[i], Mat());
+            centerOfMass(i, binaryFrames[i]);
+        }
+    }
 
     // convert binary Image to 3 channel image
     Mat output;
-    cvtColor(binaryMask, output, CV_GRAY2BGR);
+    cvtColor(binaryFrames[activeView], output, CV_GRAY2BGR);
     drawCross(output, center, 5, Scalar(0, 0, 255));
 
     return output;

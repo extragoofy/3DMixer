@@ -31,6 +31,7 @@ public:
 
 private:
     QVector<knob> knobs;
+    QVector<cv::Mat> binaryFrames;
     int activeView;
     cv::Point center;
     void initializeKnobs();
