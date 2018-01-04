@@ -57,13 +57,14 @@
 //    sel.appendChild(opt);
 //});
 
+let song;
+let knobs = [null, null, null, null];
+
 if(localStorage.getItem('song') === '1'){
     song = new Song('./song1/song1.mid');
 } else{
     console.log('Song not found!')
 }
-
-//let sel = document.getElementById('instruments');
 
 let selectBoxes = document.getElementsByClassName('instruments');
 
@@ -82,16 +83,12 @@ song.loadSong().then(() => {
 
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
-    let choosenInstrument = sel.options[sel.selectedIndex].value;
-    let knob = new Knob(0, song.getInstruments[choosenInstrument]);
+    knobs.forEach((knob, i) => {
+        let choosenInstrument = selectBoxes[i].selectedIndex;
+        knobs[i] = new Knob(i, song.getInstruments[choosenInstrument]);
+    });
+    
+    console.log(knobs);
+    
     song.playSong();
-//    let instrument = sel.options[sel.selectedIndex].value;
-//    knob = new Knob(0, instruments[instrument]);
-//    knobs.push(
-//        new Knob(0, instrument)
-//    );
-//    console.log(knob.instrumentValue);
-//    for(var i = 0; i < choosenSong.length; i++) {
-//        instruments[i].playInstrument();
-//    }
 });
