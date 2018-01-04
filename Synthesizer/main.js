@@ -1,20 +1,20 @@
-let song1 = [ 
-    {
-        instrument: 'flute',
-        midi: './song1/song1_flute.mid',
-        json: './song1/song1_flute.json',
-    },
-    {
-        instrument: 'bass',
-        midi: './song1/song1_bass.mid',
-        json: './song1/song1_bass.json',
-    },
-    {
-        instrument: 'synth',
-        midi: './song1/song1_synth.mid',
-        json: './song1/song1_synth.json',
-    }
-]
+//let song1 = [ 
+//    {
+//        instrument: 'flute',
+//        midi: './song1/song1_flute.mid',
+//        json: './song1/song1_flute.json',
+//    },
+//    {
+//        instrument: 'bass',
+//        midi: './song1/song1_bass.mid',
+//        json: './song1/song1_bass.json',
+//    },
+//    {
+//        instrument: 'synth',
+//        midi: './song1/song1_synth.mid',
+//        json: './song1/song1_synth.json',
+//    }
+//]
 
 // needed to save intialized instruments
 //let instruments = [];
@@ -48,17 +48,6 @@ let song1 = [
 //    instruments[i].loadJSON();
 //}
 
-let sel = document.getElementById('instruments');
-
-let song = new Song('./song1/song1.mid');
-song.loadSong().then(() => {
-    song.getInstrumentList.forEach((instrument, i) => {
-        var opt = document.createElement('option');
-        opt.innerHTML = instrument;
-        opt.value = i;
-        sel.appendChild(opt);
-    });
-});
 //let instruments = song.getInstrumentList;
 //console.log(instruments);
 //instruments.forEach((instrument) => {
@@ -67,6 +56,29 @@ song.loadSong().then(() => {
 //    opt.value = i;
 //    sel.appendChild(opt);
 //});
+
+if(localStorage.getItem('song') === '1'){
+    song = new Song('./song1/song1.mid');
+} else{
+    console.log('Song not found!')
+}
+
+//let sel = document.getElementById('instruments');
+
+let selectBoxes = document.getElementsByClassName('instruments');
+
+console.log(selectBoxes);
+
+song.loadSong().then(() => {
+    song.getInstrumentList.forEach((instrument, i) => {
+        Array.prototype.forEach.call(selectBoxes, (selectBox) =>{
+            var opt = document.createElement('option');
+            opt.innerHTML = instrument;
+            opt.value = i;
+            selectBox.appendChild(opt); 
+        });
+    });
+});
 
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){

@@ -101,6 +101,7 @@ class Instrument{
     }
     
     playInstrument(){
+        console.log("start");
         this.nextNotetime = this.audioContext.currentTime;
         this.startTime = this.audioContext.currentTime;
         this.currentSongTime = this.audioContext.currentTime;
@@ -134,11 +135,11 @@ class Instrument{
             this.oscillator.stop(time + this.notes[this.currentNote].duration);
         } else {
             this.gainNode = this.audioContext.createGain();
-//            this.biquadFilter = this.audioContext.createBiquadFilter();
-//            
-//            this.biquadFilter.type = this.configs.filter.type;
-//            this.biquadFilter.frequency.value = 1000;
-//            this.biquadFilter.connect(this.gainNode);
+            this.biquadFilter = this.audioContext.createBiquadFilter();
+            
+            this.biquadFilter.type = this.configs.filter.type;
+            this.biquadFilter.frequency.value = 1000;
+            this.biquadFilter.connect(this.gainNode);
 
             this.gainNode.gain.setValueAtTime(0, time);
             this.gainNode.gain.linearRampToValueAtTime(0.2, time + this.configs.ampEnv.attack); //attack
