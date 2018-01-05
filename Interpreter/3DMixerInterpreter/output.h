@@ -1,8 +1,14 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
+// Uses code from: http://www.ccarh.org/courses/253/lab/midiprog/keymidi/keymidi.c
+
 #include <QObject>
 #include <QTimer>
+#include <conio.h>     /* include for kbhit() and getch() functions */
+#include <stdio.h>     /* for printf() function */
+#include <windows.h>   /* required before including mmsystem.h */
+#include <mmsystem.h>  /* multimedia functions (such as MIDI) for Windows */
 #include "tracker.h"
 
 class Output : public QObject
@@ -20,6 +26,7 @@ private slots:
 private:
     Tracker* tracker;
     QTimer* outputTimer;
+    HMIDIOUT device;    // MIDI device interface for sending MIDI output
 
 };
 

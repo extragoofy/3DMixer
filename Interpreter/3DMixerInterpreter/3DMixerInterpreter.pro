@@ -49,3 +49,9 @@ INCLUDEPATH += C:\opencv\opencv-3.1.0\build\include
 
 LIBS += -LC:\opencv\opencv-3.1.0\build\x64\vc14\lib \
     -lopencv_world310d \
+
+win32: LIBS += -lWinMM
+
+unix|win32: LIBS += -lWinMM
+
+unix|win32: LIBS += -lWinMM

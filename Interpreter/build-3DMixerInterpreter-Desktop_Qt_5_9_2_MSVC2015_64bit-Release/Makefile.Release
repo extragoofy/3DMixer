@@ -17,7 +17,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStri
 INCPATH       = -I..\3DMixerInterpreter -I. -IC:\opencv\opencv-3.1.0\build\include -IC:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include -IC:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets -IC:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui -IC:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtANGLE -IC:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore -Irelease -I. -IC:\Qt\Qt5.9.2\5.9.2\msvc2015_64\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\qtmain.lib /LIBPATH:C:\utils\my_sql\my_sql\lib /LIBPATH:C:\utils\postgresql\pgsql\lib shell32.lib /LIBPATH:C:\opencv\opencv-3.1.0\build\x64\vc14\lib C:\opencv\opencv-3.1.0\build\x64\vc14\lib\opencv_world310d.lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\Qt5Widgets.lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\Qt5Gui.lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\Qt5Core.lib 
+LIBS          = /LIBPATH:C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\qtmain.lib /LIBPATH:C:\utils\my_sql\my_sql\lib /LIBPATH:C:\utils\postgresql\pgsql\lib shell32.lib /LIBPATH:C:\opencv\opencv-3.1.0\build\x64\vc14\lib C:\opencv\opencv-3.1.0\build\x64\vc14\lib\opencv_world310d.lib WinMM.lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\Qt5Widgets.lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\Qt5Gui.lib C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\lib\Qt5Core.lib 
 QMAKE         = C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl /NOLOGO
@@ -371,6 +371,7 @@ release\moc_mainwindow.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QM
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
 		..\3DMixerInterpreter\output.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		..\3DMixerInterpreter\mainwindow.h \
 		release\moc_predefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe
@@ -629,8 +630,10 @@ release\moc_videowidget.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\Q
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe
 	C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -IC:/Qt/Qt5.9.2/5.9.2/msvc2015_64/mkspecs/win32-msvc -IC:/Users/Eric/Documents/SourceTree/3DMixer/Interpreter/3DMixerInterpreter -IC:/opencv/opencv-3.1.0/build/include -IC:/Qt/Qt5.9.2/5.9.2/msvc2015_64/include -IC:/Qt/Qt5.9.2/5.9.2/msvc2015_64/include/QtWidgets -IC:/Qt/Qt5.9.2/5.9.2/msvc2015_64/include/QtGui -IC:/Qt/Qt5.9.2/5.9.2/msvc2015_64/include/QtANGLE -IC:/Qt/Qt5.9.2/5.9.2/msvc2015_64/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\3DMixerInterpreter\videowidget.h -o release\moc_videowidget.cpp
 
-release\moc_output.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+release\moc_output.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnamespace.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qglobal.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig.h \
@@ -652,10 +655,6 @@ release\moc_output.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmutex.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnumeric.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qversiontagging.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnamespace.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstring.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qchar.h \
@@ -678,6 +677,9 @@ release\moc_output.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject_impl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
 		..\3DMixerInterpreter\tracker.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
@@ -1091,6 +1093,7 @@ release\main.obj: ..\3DMixerInterpreter\main.cpp ../3DMixerInterpreter/mainwindo
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
 		../3DMixerInterpreter/output.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QApplication \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qapplication.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcoreapplication.h \
@@ -1272,6 +1275,7 @@ release\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpret
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
 		../3DMixerInterpreter/output.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		ui_mainwindow.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVariant \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QAction \
@@ -1794,8 +1798,10 @@ release\tracker.obj: ..\3DMixerInterpreter\tracker.cpp ../3DMixerInterpreter/tra
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug
 
 release\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/output.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnamespace.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qglobal.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig-bootstrapped.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qconfig.h \
@@ -1817,10 +1823,6 @@ release\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/outpu
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qmutex.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnumeric.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qversiontagging.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qnamespace.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobjectdefs_impl.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qstring.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qchar.h \
@@ -1843,6 +1845,9 @@ release\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/outpu
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvarlengtharray.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qobject_impl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
 		../3DMixerInterpreter/tracker.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \

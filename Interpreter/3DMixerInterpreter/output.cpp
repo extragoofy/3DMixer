@@ -16,5 +16,10 @@ Output::~Output() {
 }
 
 void Output::sendTrackerData() {
-    cout << "bing";
+    int flag = midiOutOpen(&device, 0, 0, 0, CALLBACK_NULL);
+    if (flag != MMSYSERR_NOERROR) {
+        printf("Error opening MIDI Output.\n");
+        return;
+    }
+    //message.data[2] = velocity;
 }
