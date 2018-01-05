@@ -92,6 +92,8 @@ class Instrument{
         this.oscillatorsA = [];
         this.oscillatorsB = [];
         
+        this.detune;
+        
         
         this.songDuration = songDuration;
     }
@@ -101,10 +103,15 @@ class Instrument{
     }
     
     playInstrument(){
+        console.log("start");
         this.nextNotetime = this.audioContext.currentTime;
         this.startTime = this.audioContext.currentTime;
         this.currentSongTime = this.audioContext.currentTime;
         this.currentNote = 0;
+        
+        if(this.configs !== undefined){
+            this.detune = this.configs.oscillatorA.detune;
+        }
         
         this.scheduler();
     }
@@ -133,12 +140,13 @@ class Instrument{
             this.oscillator.start(time);
             this.oscillator.stop(time + this.notes[this.currentNote].duration);
         } else {
+
             this.gainNode = this.audioContext.createGain();
-//            this.biquadFilter = this.audioContext.createBiquadFilter();
-//            
-//            this.biquadFilter.type = this.configs.filter.type;
-//            this.biquadFilter.frequency.value = 1000;
-//            this.biquadFilter.connect(this.gainNode);
+            this.biquadFilter = this.audioContext.createBiquadFilter();
+            
+            this.biquadFilter.type = this.configs.filter.type;
+            this.biquadFilter.frequency.value = 1000;
+            this.biquadFilter.connect(this.gainNode);
 
             this.gainNode.gain.setValueAtTime(0, time);
             this.gainNode.gain.linearRampToValueAtTime(0.2, time + this.configs.ampEnv.attack); //attack
@@ -153,7 +161,9 @@ class Instrument{
 
                 this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
                 this.oscillatorsA[i].type = this.configs.oscillatorA.waveform;
-                this.oscillatorsA[i].detune.value = (this.configs.oscillatorA.detune * 100) + (i * 2 * (this.configs.oscillatorA.detune * 100)) / (this.configs.oscillatorA.voices);
+//                this.oscillatorsA[i].detune.value = (this.configs.oscillatorA.detune * 100) + (i * 2 * (this.configs.oscillatorA.detune * 100)) / (this.configs.oscillatorA.voices);
+                
+                this.oscillatorsA[i].detune.value = (this.detune * 100) + (i * 2 * (this.detune * 100)) / (this.configs.oscillatorA.voices);
 
                 this.oscillatorsA[i].connect(this.gainNode);
 
@@ -178,5 +188,17 @@ class Instrument{
             this.currentNote = 0;
             this.startTime = this.startTime + this.songDuration;
         }
+    }
+    
+    changeXAxis(value){
+        this.detune = 10;
+    }
+    
+    changeXAxis(value){
+        console.log(value);
+    }
+    
+    changeZAxis(value){
+        console.log(value);
     }
 }

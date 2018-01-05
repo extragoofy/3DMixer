@@ -23,7 +23,8 @@
             "type": "lowpass",
             "cutoff": 0.45,
             "resonance": 0
-        }
+        },
+        "X-Axis": "detune"
     },
     "synth": {
         "oscillatorA": {
