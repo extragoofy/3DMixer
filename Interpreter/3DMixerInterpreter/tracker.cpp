@@ -62,6 +62,12 @@ void Tracker::setView(int id) {
     activeView = id;
 }
 
+void Tracker::getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z) {
+    x = knobs[knobID].xCoords;
+    y = knobs[knobID].yCoords;
+    z = knobs[knobID].zCoords;
+}
+
 Mat Tracker::colorKeying(int knobID, Mat& hsvFrame) {
     // initialize Mat object for output
     Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
@@ -119,8 +125,9 @@ void Tracker::centerOfMass(int knobID, Mat& image){
     } else {
         center = Point(0,0);
     }
-    knobs[knobID].xCoords = center.x;
-    knobs[knobID].yCoords = center.y;
+    // Apply to knob record and break down to fit a 1-byte-value (up to 255)
+    knobs[knobID].xCoords = center.x / 5;
+    knobs[knobID].yCoords = center.y / 3.76;
 }
 
 void Tracker::drawCross(Mat& image, Point center, int length, Scalar color){

@@ -28,6 +28,7 @@ public:
     void updateKnobParameters(const QVector<int> &paramData);
     void updateCoordData(QVector<int>& target);
     void setView(int id);
+    void getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z);
     bool useBlur;
     bool useErode;
     bool useDilate;

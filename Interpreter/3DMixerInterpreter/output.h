@@ -27,7 +27,11 @@ private:
     Tracker* tracker;
     QTimer* outputTimer;
     HMIDIOUT device;    // MIDI device interface for sending MIDI output
-    bool stopNote;
+    union {
+        unsigned long word;
+        unsigned char data[4];
+    } message;
+    unsigned char trackData[4];
 };
 
 #endif // OUTPUT_H
