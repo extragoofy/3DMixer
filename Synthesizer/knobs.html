@@ -1,22 +1,56 @@
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="knobs.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
     </head>
     <body>
-        <h1>Knob 1</h1>
+        <h1>Pick an instrument</h1>
+        
+        <div id="knobs">
+            <div class="column">
+                <div id="knobs1" class="knob"></div>
+                <select id="knob1" class="instruments">
+                    <option value="" disabled selected>Select an instrument</option>
+                </select>
+            </div>
+            <div class="column">
+                <div id="knobs2" class="knob"></div>
+                <select id="knob2" class="instruments">
+                     <option value="" disabled selected>Select an instrument</option>
+                </select>
+            </div>
+            <div class="column">
+                <div id="knobs3" class="knob"></div>
+                <select id="knob3" class="instruments">
+                     <option value="" disabled selected>Select an instrument</option>
+                </select>
+            </div>
+            <div class="column">
+                <div id="knobs4" class="knob"></div>
+                <select id="knob4" class="instruments">
+                     <option value="" disabled selected>Select an instrument</option>
+                </select>
+            </div>
+        </div>
+        
+        
+<!--
+        <h2>Knob 1</h2>
         <select id="knob1" class="instruments"></select>
         <input type="range" name="knob1X" id="knob1X"/>
         <label for="knob1X">X-Axis</label>
         <input type="range" name="knob1Y" id="knob1Y"/>
         <input type="range" name="knob1Z" id="knob1Z"/>
         
-        <h1>Knob 2</h1>
+        <h2>Knob 2</h2>
         <select id="knob2" class="instruments"></select>
         
-        <h1>Knob 3</h1>
+        <h2>Knob 3</h2>
         <select id="knob3" class="instruments"></select>
         
-        <h1>Knob 4</h1>
+        <h2>Knob 4</h2>
         <select id="knob4" class="instruments"></select>
+-->
         
         <button id="start">Start</button>
         

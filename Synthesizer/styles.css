@@ -4,6 +4,51 @@
 }
 
 body{
+    background: #FBFBFB;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    padding-top: 60px;
+}
+
+h1{
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+
+.song{
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 0 10px 0 #8686863d;
+    cursor: pointer;
+}
+
+#songs{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-self: center;
+}
+
+#song1{
+    background: url(img/Song1Cover.png);
+    background-size: cover;
+}
+
+#song2{
+    background: url(img/Song2Cover.png);
+    background-size: cover;
+}
+
+#song3{
+    background: url(img/Song3Cover.png);
+    background-size: cover;
+}
+
+
+
+/*
+body{
     display: flex;
     justify-content: space-around;
 }
@@ -20,7 +65,8 @@ body{
 .song:hover{
     cursor: pointer;
 }
-
+*/
+/*
 .cover.song1{
     height: 100%;
     background: url('song1.png');
@@ -82,4 +128,4 @@ h4{
     width: 30px;
     height: 30px;
     border-width: 17px 0px 17px 30px;
-}
+}*/
