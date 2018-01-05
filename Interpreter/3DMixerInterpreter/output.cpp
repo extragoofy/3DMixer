@@ -9,6 +9,7 @@ Output::Output(Tracker * trackerInstance):
     interval = 500;
     connect(outputTimer, SIGNAL(timeout()), this, SLOT(sendTrackerData()));
     outputTimer->start(interval);
+    stopNote = false;
 }
 
 Output::~Output() {
@@ -16,10 +17,17 @@ Output::~Output() {
 }
 
 void Output::sendTrackerData() {
-    int flag = midiOutOpen(&device, 0, 0, 0, CALLBACK_NULL);
+    int flag = midiOutOpen(&device, 1, 0, 0, CALLBACK_NULL);
     if (flag != MMSYSERR_NOERROR) {
-        printf("Error opening MIDI Output.\n");
-        return;
+        printf("Error opening MIDI Output: %d \n", flag);
+        printf("Number of devices: %d \n", midiOutGetNumDevs());
     }
-    //message.data[2] = velocity;
+    if (stopNote) {
+        midiOutShortMsg(device, 0x00003C90);
+        stopNote = false;
+    } else {
+        midiOutShortMsg(device, 0x00403C90);
+        stopNote = true;
+    }
+    midiOutClose(device);
 }
