@@ -7,7 +7,6 @@
 #include <iostream>
 #include <QIntValidator>
 #include <QVector>
-#include "tracker.h"
 
 using namespace cv;
 using namespace std;
@@ -17,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     videoEngine(new VideoEngine),
     tracker(new Tracker),
+    output(new Output(tracker)),
     updateTimer(new QTimer(this))
 {
     knobParams = QVector<int>(28);

@@ -7,6 +7,7 @@
 #include <QVector>
 #include "videoengine.h"
 #include "tracker.h"
+#include "output.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,10 +31,11 @@ private slots:
     void on_all_isView_clicked();
 
 private:
-    Ui::MainWindow *ui;
-    VideoEngine *videoEngine;
-    Tracker *tracker;
-    QTimer *updateTimer;
+    Ui::MainWindow * ui;
+    VideoEngine * videoEngine;
+    Tracker * tracker;
+    Output * output;
+    QTimer * updateTimer;
     QVector<int> knobParams;
     QVector<int> knobCoords;
     void setUpVideo();
