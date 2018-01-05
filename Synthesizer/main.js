@@ -81,9 +81,9 @@ song.loadSong().then(() => {
     });
 });
 
-document.getElementById('knob1X').addEventListener('change', () => {
-    knobs[0].instrumentValue.changeXAxis(3);
-})
+//document.getElementById('knob1X').addEventListener('change', () => {
+//    knobs[0].instrumentValue.changeXAxis(3);
+//})
 
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
