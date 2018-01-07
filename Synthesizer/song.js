@@ -49,9 +49,10 @@ class Song {
     }
     
     playSong(){
-        this.instruments.forEach((instrument) => {
+        this.instruments[3].playInstrument();
+        /*this.instruments.forEach((instrument) => {
             instrument.playInstrument();
-        })
+        })*/
     }
     
     get getInstruments(){

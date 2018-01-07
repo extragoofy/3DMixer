@@ -81,9 +81,6 @@ song.loadSong().then(() => {
     });
 });
 
-//document.getElementById('knob1X').addEventListener('change', () => {
-//    knobs[0].instrumentValue.changeXAxis(3);
-//})
 
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
@@ -92,10 +89,46 @@ document.getElementById('start').addEventListener('click', function(){
         knobs[i] = new Knob(i, song.getInstruments[choosenInstrument]);
     });
     
-//    document.getElementById('labelKnob1X').innerHTML = ;
     
     console.log(knobs);
     
     
     song.playSong();
 });
+
+// MIDIListener
+if (navigator.requestMIDIAccess) {
+    navigator.requestMIDIAccess({sysex: false}).then(function(midiAccess) {
+        midi = midiAccess;
+        var inputs = midi.inputs.values();
+        // loop through all inputs
+        for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
+            // listen for midi messages
+            input.value.onmidimessage = onMIDIMessage;
+        }
+    });
+} else {
+    alert("No MIDI support in your browser.");
+}
+
+let knob;
+let x;
+let y;
+let z;
+
+//wird aufgerufen wenn über Inputs (MidiQuelle) midi daten geschickt werden
+function onMIDIMessage(event) {
+    
+    console.log(event);
+    switch(event.data[0]) {
+        case 144:
+            knob = event.data[1];
+            x = event.data[2];
+            break;
+        case 128:
+            if(knobs[knob] !== null){
+                knobs[knob].instrumentValue.changeAxis(x, event.data[1], event.data[2]);   
+            }
+            break;
+    }
+}

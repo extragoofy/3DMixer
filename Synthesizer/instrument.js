@@ -93,6 +93,8 @@ class Instrument{
         this.oscillatorsB = [];
         
         this.detune;
+        this.lowpassFilter;
+        this.volume;
         
         
         this.songDuration = songDuration;
@@ -111,6 +113,8 @@ class Instrument{
         
         if(this.configs !== undefined){
             this.detune = this.configs.oscillatorA.detune;
+            this.lowpassFilter = 1000;
+            this.volume = 1;
         }
         
         this.scheduler();
@@ -145,11 +149,11 @@ class Instrument{
             this.biquadFilter = this.audioContext.createBiquadFilter();
             
             this.biquadFilter.type = this.configs.filter.type;
-            this.biquadFilter.frequency.value = 1000;
+            this.biquadFilter.frequency.value = this.lowpassFilter;
             this.biquadFilter.connect(this.gainNode);
 
             this.gainNode.gain.setValueAtTime(0, time);
-            this.gainNode.gain.linearRampToValueAtTime(0.2, time + this.configs.ampEnv.attack); //attack
+            this.gainNode.gain.linearRampToValueAtTime(this.volume, time + this.configs.ampEnv.attack); //attack
 
             this.gainNode.connect(this.audioContext.destination);
         
@@ -165,7 +169,7 @@ class Instrument{
                 
                 this.oscillatorsA[i].detune.value = (this.detune * 100) + (i * 2 * (this.detune * 100)) / (this.configs.oscillatorA.voices);
 
-                this.oscillatorsA[i].connect(this.gainNode);
+                this.oscillatorsA[i].connect(this.biquadFilter);
 
                 this.oscillatorsA[i].start(time);
                 this.oscillatorsA[i].stop(time + this.notes[this.currentNote].duration);
@@ -178,7 +182,7 @@ class Instrument{
                 this.oscillatorsB[i].type = this.configs.oscillatorB.waveform;
                 this.oscillatorsB[i].detune.value = (this.configs.oscillatorB.detune * 100) + (i * 2 * (this.configs.oscillatorB.detune * 100)) / (this.configs.oscillatorB.voices);
 
-                this.oscillatorsB[i].connect(this.gainNode);
+                this.oscillatorsB[i].connect(this.biquadFilter);
                 this.oscillatorsB[i].start(time);
                 this.oscillatorsB[i].stop(time + this.notes[this.currentNote].duration);
             }
@@ -188,6 +192,14 @@ class Instrument{
             this.currentNote = 0;
             this.startTime = this.startTime + this.songDuration;
         }
+    }
+    
+    changeAxis(x, y, z){
+        this.lowpassFilter = (24000 / 127) * x;
+        console.log(x);
+        console.log(y);
+        console.log(z);
+
     }
     
     changeXAxis(value){

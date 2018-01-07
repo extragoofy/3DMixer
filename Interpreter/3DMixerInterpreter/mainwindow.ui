@@ -306,6 +306,9 @@
      <property name="text">
       <string/>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
      <property name="autoExclusive">
       <bool>false</bool>
      </property>
@@ -1383,47 +1386,6 @@
     </property>
     <property name="text">
      <string>View</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="all_isView">
-    <property name="geometry">
-     <rect>
-      <x>1300</x>
-      <y>830</y>
-      <width>17</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-    <property name="autoExclusive">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_zCoords_3">
-    <property name="geometry">
-     <rect>
-      <x>1240</x>
-      <y>830</y>
-      <width>51</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>View All</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

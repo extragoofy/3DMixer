@@ -28,7 +28,6 @@ private slots:
     void on_knobB_isView_clicked();
     void on_knobC_isView_clicked();
     void on_knobD_isView_clicked();
-    void on_all_isView_clicked();
 
 private:
     Ui::MainWindow * ui;
