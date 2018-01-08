@@ -28,9 +28,11 @@ void Output::sendTrackerData() {
         trackData[0] = i;
         tracker->getCoordDataToSend(trackData[0], trackData[1], trackData[2], trackData[3]);
         printf("Knob: %d, x: %d, y: %d, z: %d \n", trackData[0], trackData[1], trackData[2], trackData[3]);
+        message.data[0] = 0x90;
         message.data[1] = trackData[0];
         message.data[2] = trackData[1];
         midiOutShortMsg(device, message.word);
+        message.data[0] = 0x80;
         message.data[1] = trackData[2];
         message.data[2] = trackData[3];
         midiOutShortMsg(device, message.word);

@@ -248,13 +248,6 @@ void MainWindow::on_knobD_isView_clicked()
     }
 }
 
-void MainWindow::on_all_isView_clicked()
-{
-    resetRadioButtons();
-    ui->all_isView->setChecked(true);
-    tracker->setView(4);
-}
-
 QString MainWindow::createStylesheetColorString(ushort knobIndex) {
     // May god forgive me for this
     if (knobParams[knobIndex*7+1] < knobParams[knobIndex*7+2]) {
