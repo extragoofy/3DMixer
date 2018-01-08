@@ -42,9 +42,23 @@ class Song {
     }
     
     initializeInstruments(notes, configs, name){
-        this.instruments.push(
-            new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)
-        );
+        if(name !== 'kick'){
+            this.instruments.push(
+                new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)
+            );
+        } else {
+            let request = new XMLHttpRequest();
+            request.open('GET', './song1/kick.wav', true); 
+            request.responseType = 'arraybuffer';
+            request.onload = () => {
+                let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
+                    this.instruments.push(
+                        new Drum(notes, buffer, this.context, this.bpm, this.songDuration)
+                    );
+                }); 
+            };
+            request.send();
+        }
         console.log(this.instruments);
     }
     
