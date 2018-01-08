@@ -63,10 +63,13 @@ class Song {
     }
     
     playSong(){
-        this.instruments[3].playInstrument();
-        /*this.instruments.forEach((instrument) => {
+        this.instruments.forEach((instrument) => {
             instrument.playInstrument();
-        })*/
+        })
+    }
+    
+    stopSong(){
+        this.context.close();
     }
     
     get getInstruments(){

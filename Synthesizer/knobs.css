@@ -73,9 +73,12 @@ h1{
     display: flex;
     width: 100%;
     justify-content: space-around;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
 }
 
-#start{
+#start, #stop{
     padding: 10px 20px;
     border-radius: 3px;
     background: #FF0082;
@@ -86,4 +89,14 @@ h1{
     box-shadow: 0 0 10px 2px #FF0082;
     cursor: pointer;
     font-size: 18px;
+    margin: 0 10px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

@@ -75,12 +75,8 @@ class Instrument{
             this.oscillator.stop(time + this.notes[this.currentNote].duration);
         } else {
 
-           
-            
             this.biquadFilter.type = this.configs.filter.type;
-
             this.biquadFilter.frequency.value = this.lowpassFilter;
-            this.biquadFilter.connect(this.gainNode);
 
             this.gainNode.gain.setValueAtTime(0, time);
             this.gainNode.gain.linearRampToValueAtTime(this.volume, time + this.configs.ampEnv.attack); //attack

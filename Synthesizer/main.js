@@ -82,6 +82,10 @@ song.loadSong().then(() => {
 });
 
 
+document.getElementById('stop').addEventListener('click', function(){
+   song.stopSong(); 
+});
+
 // initalize a knob with the selected instrument when clicking start
 document.getElementById('start').addEventListener('click', function(){
     knobs.forEach((knob, i) => {
