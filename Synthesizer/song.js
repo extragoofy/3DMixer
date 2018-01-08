@@ -2,6 +2,8 @@ class Song {
     constructor(midiFilePath){
         this.midiFilePath = midiFilePath;
         
+        this.drums = [];
+        
         this.instruments = [];
         
         this.instrumentList = [];
@@ -21,6 +23,7 @@ class Song {
             xobj.open('GET', './song1/song1.json', true);
             xobj.onreadystatechange = () => {
                 if (xobj.readyState == 4 && xobj.status == "200") {
+                    this.drums = JSON.parse(xobj.responseText).drums;
                     instrumentConfigs = JSON.parse(xobj.responseText);
                 }
             };
@@ -42,33 +45,9 @@ class Song {
     }
     
     initializeInstruments(notes, configs, name){
-        if (name === 'kick') {
+        if(this.drums.includes(name)){
             let request = new XMLHttpRequest();
-            request.open('GET', './song1/kick.wav', true); 
-            request.responseType = 'arraybuffer';
-            request.onload = () => {
-                let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
-                    this.instruments.push(
-                        new Drum(notes, buffer, this.context, this.bpm, this.songDuration)
-                    );
-                }); 
-            };
-            request.send();
-        } else if (name === 'clap') {
-            let request = new XMLHttpRequest();
-            request.open('GET', './song1/clap.wav', true); 
-            request.responseType = 'arraybuffer';
-            request.onload = () => {
-                let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
-                    this.instruments.push(
-                        new Drum(notes, buffer, this.context, this.bpm, this.songDuration)
-                    );
-                }); 
-            };
-            request.send();
-        } else if (name === 'hihat') {
-            let request = new XMLHttpRequest();
-            request.open('GET', './song1/hihat.wav', true); 
+            request.open('GET', `./song1/${name}.wav`, true); 
             request.responseType = 'arraybuffer';
             request.onload = () => {
                 let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
@@ -88,6 +67,7 @@ class Song {
     
     playSong(){
         this.instruments.forEach((instrument) => {
+            console.log(instrument);
             instrument.playInstrument();
         })
     }

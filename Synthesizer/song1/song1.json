@@ -1,4 +1,5 @@
 {
+    "drums": ["kick", "clap", "hihat"],
     "moog bass": {
         "oscillatorA": {
             "volume": 1,
