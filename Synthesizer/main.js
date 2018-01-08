@@ -60,15 +60,15 @@
 let song;
 let knobs = [null, null, null, null];
 
+// initalize a song based on the song selection
 if(localStorage.getItem('song') === '1'){
     song = new Song('./song1/song1.mid');
 } else{
     console.log('Song not found!')
 }
 
+// fill the select boxes with the selection of instruments in the song
 let selectBoxes = document.getElementsByClassName('instruments');
-
-console.log(selectBoxes);
 
 song.loadSong().then(() => {
     song.getInstrumentList.forEach((instrument, i) => {
@@ -82,21 +82,17 @@ song.loadSong().then(() => {
 });
 
 
+// stop the song
 document.getElementById('stop').addEventListener('click', function(){
    song.stopSong(); 
 });
 
-// initalize a knob with the selected instrument when clicking start
+// initalize a knob with the selected instrument when clicking start and play the song
 document.getElementById('start').addEventListener('click', function(){
     knobs.forEach((knob, i) => {
         let choosenInstrument = selectBoxes[i].selectedIndex;
         knobs[i] = new Knob(i, song.getInstruments[choosenInstrument]);
     });
-    
-    
-    console.log(knobs);
-    
-    
     song.playSong();
 });
 

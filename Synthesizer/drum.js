@@ -39,7 +39,12 @@ class Drum {
     }
     
     playSound(time){
-        let sourceBuffer = this.audioContext.createBufferSource(); sourceBuffer.buffer = this.buffer; sourceBuffer.connect(this.audioContext.destination); sourceBuffer.start(time);
+        let sourceBuffer = this.audioContext.createBufferSource();
+        
+        sourceBuffer.buffer = this.buffer;
+        sourceBuffer.connect(this.audioContext.destination);
+        sourceBuffer.start(time);
+        
         this.currentNote++;
         if(this.currentNote === this.notes.length){
             this.currentNote = 0;

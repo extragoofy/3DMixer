@@ -42,11 +42,7 @@ class Song {
     }
     
     initializeInstruments(notes, configs, name){
-        if(name !== 'kick'){
-            this.instruments.push(
-                new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)
-            );
-        } else {
+        if (name === 'kick') {
             let request = new XMLHttpRequest();
             request.open('GET', './song1/kick.wav', true); 
             request.responseType = 'arraybuffer';
@@ -58,6 +54,34 @@ class Song {
                 }); 
             };
             request.send();
+        } else if (name === 'clap') {
+            let request = new XMLHttpRequest();
+            request.open('GET', './song1/clap.wav', true); 
+            request.responseType = 'arraybuffer';
+            request.onload = () => {
+                let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
+                    this.instruments.push(
+                        new Drum(notes, buffer, this.context, this.bpm, this.songDuration)
+                    );
+                }); 
+            };
+            request.send();
+        } else if (name === 'hihat') {
+            let request = new XMLHttpRequest();
+            request.open('GET', './song1/hihat.wav', true); 
+            request.responseType = 'arraybuffer';
+            request.onload = () => {
+                let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
+                    this.instruments.push(
+                        new Drum(notes, buffer, this.context, this.bpm, this.songDuration)
+                    );
+                }); 
+            };
+            request.send();
+        } else {
+            this.instruments.push(
+                new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)
+            );
         }
         console.log(this.instruments);
     }
