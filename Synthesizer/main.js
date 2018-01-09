@@ -93,6 +93,7 @@ document.getElementById('start').addEventListener('click', function(){
         let choosenInstrument = selectBoxes[i].selectedIndex;
         knobs[i] = new Knob(i, song.getInstruments[choosenInstrument]);
     });
+    console.log(knobs);
     song.playSong();
 });
 

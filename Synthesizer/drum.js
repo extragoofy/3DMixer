@@ -7,6 +7,8 @@ class Drum {
         this.songDuration = songDuration;
         this.buffer = buffer;
         this.currentNote = 0;
+        
+        this.gainNode;
     }
     
 //    loadBuffer(){
@@ -26,6 +28,10 @@ class Drum {
         this.startTime = this.audioContext.currentTime;
         this.currentSongTime = this.audioContext.currentTime;
         this.currentNote = 0;
+        
+        this.gainNode = this.audioContext.createGain();
+        this.gainNode.connect(this.audioContext.destination);
+        
         this.scheduler();
     }
     
@@ -42,7 +48,7 @@ class Drum {
         let sourceBuffer = this.audioContext.createBufferSource();
         
         sourceBuffer.buffer = this.buffer;
-        sourceBuffer.connect(this.audioContext.destination);
+        sourceBuffer.connect(this.gainNode);
         sourceBuffer.start(time);
         
         this.currentNote++;

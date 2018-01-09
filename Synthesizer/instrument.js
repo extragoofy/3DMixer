@@ -29,14 +29,18 @@ class Instrument{
     }
     
     playInstrument(){
-        console.log("start");
         this.nextNotetime = this.audioContext.currentTime;
         this.startTime = this.audioContext.currentTime;
         this.currentSongTime = this.audioContext.currentTime;
         this.currentNote = 0;
         
+//        if(this.configs['X-Axis']){
+//            this.configs[this.configs['X-Axis']] = 0.5;
+//        }
+//        
         if(this.configs !== undefined){
             this.detune = this.configs.oscillatorA.detune;
+//            console.log(this.configs);
             
             this.gainNode = this.audioContext.createGain();
             this.biquadFilter = this.audioContext.createBiquadFilter();
@@ -121,6 +125,9 @@ class Instrument{
     }
     
     changeAxis(x, y, z){
+        if(this.configs['X-Axis']){
+            console.log(this.configs['X-Axis']);
+        }
         this.lowpassFilter = (24000 / 127) * x;
         console.log(x);
         console.log(y);
