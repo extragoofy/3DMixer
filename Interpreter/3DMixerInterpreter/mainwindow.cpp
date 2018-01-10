@@ -123,7 +123,6 @@ void MainWindow::resetRadioButtons() {
     ui->knobB_isView->setChecked(false);
     ui->knobC_isView->setChecked(false);
     ui->knobD_isView->setChecked(false);
-    ui->all_isView->setChecked(false);
 }
 
 // SIGNALS/SLOTS
