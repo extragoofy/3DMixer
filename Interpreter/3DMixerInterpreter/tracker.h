@@ -42,6 +42,7 @@ private:
     void centerOfMass(int knobID, cv::Mat& image);
     cv::Mat colorKeying(int knobID, cv::Mat& hsvFrame);
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
+    void radius(int knobID, cv::Mat& image);
 };
 
 #endif // TRACKER_H

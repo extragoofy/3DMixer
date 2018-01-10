@@ -27,6 +27,7 @@ Mat Tracker::process(const Mat &input) {
             if (useErode) erode(binaryFrames[i], binaryFrames[i], Mat());
             if (useDilate) dilate(binaryFrames[i], binaryFrames[i], Mat());
             centerOfMass(i, binaryFrames[i]);
+            radius(i, binaryFrames[i]);
         }
     }
 
@@ -34,6 +35,7 @@ Mat Tracker::process(const Mat &input) {
     Mat output;
     cvtColor(binaryFrames[activeView], output, CV_GRAY2BGR);
     drawCross(output, center, 5, Scalar(0, 0, 255));
+    circle(output, center, knobs[activeView].zCoords, Scalar(0, 0, 255));
 
     return output;
 }
@@ -133,6 +135,47 @@ void Tracker::centerOfMass(int knobID, Mat& image){
 void Tracker::drawCross(Mat& image, Point center, int length, Scalar color){
     line(image, center-Point(0, length), center+Point(0,length), color, 1);
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
+}
+
+void Tracker::radius(int knobID, cv::Mat& image) {
+    int sum = 0;
+    // Measure radius from center right
+    int y = center.y;
+    for (int x = center.x; x < image.cols; x++) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center left
+    for (int x = center.x; x < image.cols; x--) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center down
+    int x = center.x;
+    for (int y = center.y; y < image.rows; y++) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center up
+    for (int y = center.y; y < image.rows; y--) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Divide by 4 to get average radius in all directions
+    sum /= 4;
+    knobs[knobID].zCoords = sum;
 }
 
 void Tracker::initializeKnobs() {
