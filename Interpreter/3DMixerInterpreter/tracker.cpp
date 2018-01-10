@@ -30,6 +30,14 @@ Mat Tracker::process(const Mat &input) {
             centerOfMass(i, binaryFrames[i]);
             getRadius(i, binaryFrames[i]);
         }
+        // Reset knob data if knob is turned off.
+        // This is done here since blur, erode and dilate may take up to a second to calculate
+        // and state might have changed during that
+        if (!knobs[i].active) {
+            knobs[i].xCoords = 0;
+            knobs[i].yCoords = 0;
+            knobs[i].zCoords = 0;
+        }
     }
 
     // convert binary Image to 3 channel image
