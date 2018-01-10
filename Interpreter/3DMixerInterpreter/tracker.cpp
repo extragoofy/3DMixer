@@ -149,7 +149,6 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
             break;
         }
     }
-    printf("After right: %d\n", sum);
     // Measure radius from center left
     for (int x = center.x - 1; x >= 0; x--) {
         if (image.at<uchar>(y,x) == 255) {
@@ -158,7 +157,6 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
             break;
         }
     }
-    printf("After left: %d\n", sum);
     // Measure radius from center down
     int x = center.x;
     for (int y = center.y + 1; y < image.rows; y++) {
@@ -168,7 +166,6 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
             break;
         }
     }
-    printf("After down: %d\n", sum);
     // Measure radius from center up
     for (int y = center.y - 1; y >= 0; y--) {
         if (image.at<uchar>(y,x) == 255) {
@@ -177,10 +174,10 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
             break;
         }
     }
-    printf("After up: %d\n\n", sum);
     // Divide by 4 to get average radius in all directions
     radius = sum / 4;
-    knobs[knobID].zCoords = radius;
+    knobs[knobID].zCoords = radius / 1.1;       // Break this down to 255 max
+    if (knobs[knobID].zCoords > 255) knobs[knobID].zCoords = 255;
 }
 
 void Tracker::initializeKnobs() {
