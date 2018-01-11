@@ -1,4 +1,7 @@
 window.onload = function(){
+    var context = new AudioContext(),
+    oscillators = {};
+    
     var text = document.getElementById("midiText");
     text.innerHTML = "Hallo, Ladetest";
 
@@ -20,11 +23,14 @@ window.onload = function(){
     }
 
     //wird aufgerufen wenn über Inputs (MidiQuelle) midi daten geschickt werden
-    function onMIDIMessage(event) {
+    /*function onMIDIMessage(event) {
         // event.data is an array
         // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
         // event.data[1] = midi note
         // event.data[2] = velocity
+        
+         text.innerHTML = "Test: Midi receive";
+        console.log(event);
 
         switch(event.data[0]) {
             case 144:
@@ -48,6 +54,34 @@ window.onload = function(){
                 pitchBend(event.data[1], event.data[2]);
                 break;
         }
+    }*/
+    
+    function onMIDIMessage (message) {
+    var frequency = midiNoteToFrequency(message.data[1]);
+ 
+        if (message.data[0] === 144 && message.data[2] > 0) {
+            playNote(frequency);
+        }
+
+        if (message.data[0] === 128 || message.data[2] === 0) {
+            stopNote(frequency);
+        }
+    }
+ 
+    function midiNoteToFrequency (note) {
+        return Math.pow(2, ((note - 69) / 12)) * 440;
+    }
+
+    function playNote (frequency) {
+        oscillators[frequency] = context.createOscillator();
+        oscillators[frequency].frequency.value = frequency;
+        oscillators[frequency].connect(context.destination);
+        oscillators[frequency].start(context.currentTime);
+    }
+
+    function stopNote (frequency) {
+        oscillators[frequency].stop(context.currentTime);
+        oscillators[frequency].disconnect();
     }
     
     
