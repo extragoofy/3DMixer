@@ -4,6 +4,7 @@ window.onload = function(){
     
     var text = document.getElementById("midiText");
     text.innerHTML = "Hallo, Ladetest";
+    
 
     // ask if MIDI is available in browser
     if (navigator.requestMIDIAccess) {
@@ -23,7 +24,7 @@ window.onload = function(){
     }
 
     //wird aufgerufen wenn über Inputs (MidiQuelle) midi daten geschickt werden
-    /*function onMIDIMessage(event) {
+    function onMIDIMessage(event) {
         // event.data is an array
         // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
         // event.data[1] = midi note
@@ -32,7 +33,9 @@ window.onload = function(){
          text.innerHTML = "Test: Midi receive";
         console.log(event);
 
-        switch(event.data[0]) {
+        /*
+        *****wird später woanders implementiert*****    
+            switch(event.data[0]) {
             case 144:
                 // your function startNote(note, velocity)...
                 text.innerHTML = "144";
@@ -53,10 +56,12 @@ window.onload = function(){
                 text.innerHTML = "224";
                 pitchBend(event.data[1], event.data[2]);
                 break;
-        }
-    }*/
+        }*/
+    }
     
-    function onMIDIMessage (message) {
+   /* 
+   *****TestVersion, oscillator wird später woanders implementiert*****
+   function onMIDIMessage (message) {
     var frequency = midiNoteToFrequency(message.data[1]);
  
         if (message.data[0] === 144 && message.data[2] > 0) {
@@ -82,7 +87,7 @@ window.onload = function(){
     function stopNote (frequency) {
         oscillators[frequency].stop(context.currentTime);
         oscillators[frequency].disconnect();
-    }
+    }*/
     
     
 }
