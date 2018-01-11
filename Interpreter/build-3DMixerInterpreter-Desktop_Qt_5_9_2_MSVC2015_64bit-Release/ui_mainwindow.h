@@ -101,6 +101,8 @@ public:
     QCheckBox *options_blur;
     QCheckBox *options_erode;
     QCheckBox *options_dilate;
+    QLineEdit *midiDeviceID;
+    QLabel *label_midiDevID;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -459,6 +461,18 @@ public:
         options_dilate->setGeometry(QRect(260, 820, 91, 20));
         options_dilate->setFont(font1);
         options_dilate->setChecked(true);
+        midiDeviceID = new QLineEdit(centralWidget);
+        midiDeviceID->setObjectName(QStringLiteral("midiDeviceID"));
+        midiDeviceID->setGeometry(QRect(1250, 820, 30, 20));
+        sizePolicy.setHeightForWidth(midiDeviceID->sizePolicy().hasHeightForWidth());
+        midiDeviceID->setSizePolicy(sizePolicy);
+        midiDeviceID->setMinimumSize(QSize(0, 0));
+        midiDeviceID->setBaseSize(QSize(0, 0));
+        label_midiDevID = new QLabel(centralWidget);
+        label_midiDevID->setObjectName(QStringLiteral("label_midiDevID"));
+        label_midiDevID->setGeometry(QRect(1100, 820, 141, 20));
+        label_midiDevID->setFont(font);
+        label_midiDevID->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -548,6 +562,8 @@ public:
         options_blur->setText(QApplication::translate("MainWindow", "Median Blur", Q_NULLPTR));
         options_erode->setText(QApplication::translate("MainWindow", "Erode", Q_NULLPTR));
         options_dilate->setText(QApplication::translate("MainWindow", "Dilate", Q_NULLPTR));
+        midiDeviceID->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        label_midiDevID->setText(QApplication::translate("MainWindow", "MIDI Output Device ID:", Q_NULLPTR));
     } // retranslateUi
 
 };

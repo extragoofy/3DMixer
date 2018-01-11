@@ -19,6 +19,7 @@ public:
     Output(Tracker * trackerInstance);
     ~Output();
     int interval;
+    void setMidiDeviceID(int id);
 
 private slots:
     void sendTrackerData();
@@ -27,6 +28,7 @@ private:
     Tracker* tracker;
     QTimer* outputTimer;
     HMIDIOUT device;    // MIDI device interface for sending MIDI output
+    int midiDeviceID;
     union {
         unsigned long word;
         unsigned char data[4];
