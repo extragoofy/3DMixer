@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[9];
-    char stringdata0[165];
+    char stringdata0[168];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,17 +35,17 @@ QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 16), // "updateParameters"
 QT_MOC_LITERAL(2, 28, 0), // ""
 QT_MOC_LITERAL(3, 29, 17), // "updateCoordLabels"
-QT_MOC_LITERAL(4, 47, 23), // "on_knobA_isView_clicked"
-QT_MOC_LITERAL(5, 71, 23), // "on_knobB_isView_clicked"
-QT_MOC_LITERAL(6, 95, 23), // "on_knobC_isView_clicked"
-QT_MOC_LITERAL(7, 119, 23), // "on_knobD_isView_clicked"
-QT_MOC_LITERAL(8, 143, 21) // "on_all_isView_clicked"
+QT_MOC_LITERAL(4, 47, 24), // "updateMidiOutputDeviceID"
+QT_MOC_LITERAL(5, 72, 23), // "on_knobA_isView_clicked"
+QT_MOC_LITERAL(6, 96, 23), // "on_knobB_isView_clicked"
+QT_MOC_LITERAL(7, 120, 23), // "on_knobC_isView_clicked"
+QT_MOC_LITERAL(8, 144, 23) // "on_knobD_isView_clicked"
 
     },
     "MainWindow\0updateParameters\0\0"
-    "updateCoordLabels\0on_knobA_isView_clicked\0"
-    "on_knobB_isView_clicked\0on_knobC_isView_clicked\0"
-    "on_knobD_isView_clicked\0on_all_isView_clicked"
+    "updateCoordLabels\0updateMidiOutputDeviceID\0"
+    "on_knobA_isView_clicked\0on_knobB_isView_clicked\0"
+    "on_knobC_isView_clicked\0on_knobD_isView_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -91,11 +91,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->updateParameters(); break;
         case 1: _t->updateCoordLabels(); break;
-        case 2: _t->on_knobA_isView_clicked(); break;
-        case 3: _t->on_knobB_isView_clicked(); break;
-        case 4: _t->on_knobC_isView_clicked(); break;
-        case 5: _t->on_knobD_isView_clicked(); break;
-        case 6: _t->on_all_isView_clicked(); break;
+        case 2: _t->updateMidiOutputDeviceID(); break;
+        case 3: _t->on_knobA_isView_clicked(); break;
+        case 4: _t->on_knobB_isView_clicked(); break;
+        case 5: _t->on_knobC_isView_clicked(); break;
+        case 6: _t->on_knobD_isView_clicked(); break;
         default: ;
         }
     }

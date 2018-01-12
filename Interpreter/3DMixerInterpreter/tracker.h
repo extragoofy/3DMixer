@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QVector>
+#include <stdio.h>     /* for printf() function */
 #include "videoprocessor.h"
 
 class Tracker : public VideoProcessor
@@ -22,6 +23,8 @@ class Tracker : public VideoProcessor
     };
 
 public:
+    // SETTINGS
+    int maxDistance;    // Maximum distance the tracker should track on the z axis
     Tracker();
     void startProcessing(const VideoFormat& format){}
     cv::Mat process(const cv::Mat& source);
@@ -38,10 +41,12 @@ private:
     QVector<cv::Mat> binaryFrames;
     int activeView;
     cv::Point center;
+    int radius;
     void initializeKnobs();
     void centerOfMass(int knobID, cv::Mat& image);
     cv::Mat colorKeying(int knobID, cv::Mat& hsvFrame);
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
+    void getRadius(int knobID, cv::Mat& image);
 };
 
 #endif // TRACKER_H

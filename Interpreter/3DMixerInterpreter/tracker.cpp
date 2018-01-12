@@ -9,6 +9,7 @@ Tracker::Tracker()
     initializeKnobs();
     binaryFrames = QVector<cv::Mat>(5);
     activeView = 0;
+    radius = 0;
     useBlur = true;
     useErode = true;
     useDilate = true;
@@ -27,6 +28,15 @@ Mat Tracker::process(const Mat &input) {
             if (useErode) erode(binaryFrames[i], binaryFrames[i], Mat());
             if (useDilate) dilate(binaryFrames[i], binaryFrames[i], Mat());
             centerOfMass(i, binaryFrames[i]);
+            getRadius(i, binaryFrames[i]);
+        }
+        // Reset knob data if knob is turned off.
+        // This is done here since blur, erode and dilate may take up to a second to calculate
+        // and state might have changed during that
+        if (!knobs[i].active) {
+            knobs[i].xCoords = 0;
+            knobs[i].yCoords = 0;
+            knobs[i].zCoords = 0;
         }
     }
 
@@ -34,6 +44,7 @@ Mat Tracker::process(const Mat &input) {
     Mat output;
     cvtColor(binaryFrames[activeView], output, CV_GRAY2BGR);
     drawCross(output, center, 5, Scalar(0, 0, 255));
+    circle(output, center, radius, Scalar(0, 0, 255));
 
     return output;
 }
@@ -133,6 +144,48 @@ void Tracker::centerOfMass(int knobID, Mat& image){
 void Tracker::drawCross(Mat& image, Point center, int length, Scalar color){
     line(image, center-Point(0, length), center+Point(0,length), color, 1);
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
+}
+
+void Tracker::getRadius(int knobID, cv::Mat& image) {
+    int sum = 0;
+    // Measure radius from center right
+    int y = center.y;
+    for (int x = center.x + 1; x < image.cols; x++) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center left
+    for (int x = center.x - 1; x >= 0; x--) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center down
+    int x = center.x;
+    for (int y = center.y + 1; y < image.rows; y++) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center up
+    for (int y = center.y - 1; y >= 0; y--) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+        } else {
+            break;
+        }
+    }
+    // Divide by 4 to get average radius in all directions
+    radius = sum / 4;
+    knobs[knobID].zCoords = radius / 1.1;       // Break this down to 255 max
+    if (knobs[knobID].zCoords > 255) knobs[knobID].zCoords = 255;
 }
 
 void Tracker::initializeKnobs() {

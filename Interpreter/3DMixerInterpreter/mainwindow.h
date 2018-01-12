@@ -24,6 +24,7 @@ public:
 private slots:
     void updateParameters();
     void updateCoordLabels();
+    void updateMidiOutputDeviceID();
     void on_knobA_isView_clicked();
     void on_knobB_isView_clicked();
     void on_knobC_isView_clicked();

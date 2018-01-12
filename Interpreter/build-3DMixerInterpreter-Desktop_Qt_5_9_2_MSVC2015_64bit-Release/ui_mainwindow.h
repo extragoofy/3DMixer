@@ -98,11 +98,11 @@ public:
     QLineEdit *knobD_colorValMax;
     QRadioButton *knobD_isView;
     QLabel *label_zCoords_2;
-    QRadioButton *all_isView;
-    QLabel *label_zCoords_3;
     QCheckBox *options_blur;
     QCheckBox *options_erode;
     QCheckBox *options_dilate;
+    QLineEdit *midiDeviceID;
+    QLabel *label_midiDevID;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -192,6 +192,7 @@ public:
         knobA_isView = new QRadioButton(knobABox);
         knobA_isView->setObjectName(QStringLiteral("knobA_isView"));
         knobA_isView->setGeometry(QRect(1250, 20, 17, 17));
+        knobA_isView->setChecked(true);
         knobA_isView->setAutoExclusive(false);
         label_hueMax = new QLabel(centralWidget);
         label_hueMax->setObjectName(QStringLiteral("label_hueMax"));
@@ -445,16 +446,6 @@ public:
         label_zCoords_2->setGeometry(QRect(1300, 530, 31, 16));
         label_zCoords_2->setFont(font);
         label_zCoords_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-        all_isView = new QRadioButton(centralWidget);
-        all_isView->setObjectName(QStringLiteral("all_isView"));
-        all_isView->setGeometry(QRect(1300, 830, 17, 17));
-        all_isView->setChecked(true);
-        all_isView->setAutoExclusive(false);
-        label_zCoords_3 = new QLabel(centralWidget);
-        label_zCoords_3->setObjectName(QStringLiteral("label_zCoords_3"));
-        label_zCoords_3->setGeometry(QRect(1240, 830, 51, 16));
-        label_zCoords_3->setFont(font);
-        label_zCoords_3->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         options_blur = new QCheckBox(centralWidget);
         options_blur->setObjectName(QStringLiteral("options_blur"));
         options_blur->setGeometry(QRect(80, 820, 91, 20));
@@ -470,6 +461,18 @@ public:
         options_dilate->setGeometry(QRect(260, 820, 91, 20));
         options_dilate->setFont(font1);
         options_dilate->setChecked(true);
+        midiDeviceID = new QLineEdit(centralWidget);
+        midiDeviceID->setObjectName(QStringLiteral("midiDeviceID"));
+        midiDeviceID->setGeometry(QRect(1250, 820, 30, 20));
+        sizePolicy.setHeightForWidth(midiDeviceID->sizePolicy().hasHeightForWidth());
+        midiDeviceID->setSizePolicy(sizePolicy);
+        midiDeviceID->setMinimumSize(QSize(0, 0));
+        midiDeviceID->setBaseSize(QSize(0, 0));
+        label_midiDevID = new QLabel(centralWidget);
+        label_midiDevID->setObjectName(QStringLiteral("label_midiDevID"));
+        label_midiDevID->setGeometry(QRect(1100, 820, 141, 20));
+        label_midiDevID->setFont(font);
+        label_midiDevID->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -556,11 +559,11 @@ public:
         knobD_colorValMax->setText(QApplication::translate("MainWindow", "100", Q_NULLPTR));
         knobD_isView->setText(QString());
         label_zCoords_2->setText(QApplication::translate("MainWindow", "View", Q_NULLPTR));
-        all_isView->setText(QString());
-        label_zCoords_3->setText(QApplication::translate("MainWindow", "View All", Q_NULLPTR));
         options_blur->setText(QApplication::translate("MainWindow", "Median Blur", Q_NULLPTR));
         options_erode->setText(QApplication::translate("MainWindow", "Erode", Q_NULLPTR));
         options_dilate->setText(QApplication::translate("MainWindow", "Dilate", Q_NULLPTR));
+        midiDeviceID->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        label_midiDevID->setText(QApplication::translate("MainWindow", "MIDI Output Device ID:", Q_NULLPTR));
     } // retranslateUi
 
 };

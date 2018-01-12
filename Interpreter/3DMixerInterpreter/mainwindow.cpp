@@ -76,6 +76,8 @@ void MainWindow::setUpValidators() {
     ui->knobD_colorValMin->setValidator(new QIntValidator(0, 100, this));
     ui->knobD_colorValMax->setValidator(new QIntValidator(0, 100, this));
 
+    ui->midiDeviceID->setValidator(new QIntValidator(0, 10, this));
+
 }
 
 void MainWindow::setUpUiEvents() {
@@ -116,6 +118,8 @@ void MainWindow::setUpUiEvents() {
     connect(ui->options_erode, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
+    connect(ui->midiDeviceID, SIGNAL(editingFinished()), this, SLOT(updateMidiOutputDeviceID()));
+
 }
 
 void MainWindow::resetRadioButtons() {
@@ -123,7 +127,6 @@ void MainWindow::resetRadioButtons() {
     ui->knobB_isView->setChecked(false);
     ui->knobC_isView->setChecked(false);
     ui->knobD_isView->setChecked(false);
-    ui->all_isView->setChecked(false);
 }
 
 // SIGNALS/SLOTS
@@ -210,6 +213,10 @@ void MainWindow::updateCoordLabels() {
     ui->knobD_yCoordsLabel->setText(QString::number(knobCoords[10]));
     ui->knobD_zCoordsLabel->setText(QString::number(knobCoords[11]));
     updateTimer->start(500);
+}
+
+void MainWindow::updateMidiOutputDeviceID() {
+    output->setMidiDeviceID(ui->knobA_colorHueMin->text().toInt());
 }
 
 void MainWindow::on_knobA_isView_clicked()
