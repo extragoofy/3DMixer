@@ -20,6 +20,8 @@ class Instrument{
         this.lowpassFilter;
         this.volume;
         
+        this.filters = {};
+        
         
         this.songDuration = songDuration;
     }
@@ -29,24 +31,33 @@ class Instrument{
     }
     
     playInstrument(){
+        this.filters = {
+            lowpassFilter: this.configs.filter.cutoff,
+            oscillatorAVolume: this.configs.oscillatorA.volume,
+            oscillatorBVolume: this.configs.oscillatorB.volume,
+            oscillatorADetune: this.configs.oscillatorA.detune,
+            oscillatorBDetune: this.configs.oscillatorB.detune,
+            oscillatorAVoices: this.configs.oscillatorA.voices,
+            oscillatorBVoices: this.configs.oscillatorB.voices,
+//            attack: this.configs.ampEnv.attack,
+//            decay: this.configs.ampEnv.decay,
+        };
+            
         this.nextNotetime = this.audioContext.currentTime;
         this.startTime = this.audioContext.currentTime;
         this.currentSongTime = this.audioContext.currentTime;
         this.currentNote = 0;
-        
-//        if(this.configs['X-Axis']){
-//            this.configs[this.configs['X-Axis']] = 0.5;
-//        }
-//        
+   
         if(this.configs !== undefined){
             this.detune = this.configs.oscillatorA.detune;
-//            console.log(this.configs);
             
             this.gainNode = this.audioContext.createGain();
+            this.convolver = this.audioContext.createConvolver();
             this.biquadFilter = this.audioContext.createBiquadFilter();
             this.biquadFilter.connect(this.gainNode);
             this.gainNode.connect(this.audioContext.destination);
             
+             
             this.lowpassFilter = 1000;
             this.volume = 1;
         }
@@ -56,14 +67,8 @@ class Instrument{
     
     scheduler() {
         var secondsPerBeat = 60.0 / this.bpm;
-//        if(this.name === 'flute'){
-//            console.log(this.name + ' + ' + (this.startTime + this.notes[this.currentNote].time), this.audioContext.currentTime);
-//        }
-//        while(this.nextNotetime < this.audioContext.currentTime + 0.1) {
+
         while((this.startTime + this.notes[this.currentNote].time) < this.audioContext.currentTime + 1) {
-            if(this.name === 'flute'){
-                console.log(this.oscillatorsA);
-            }
             this.nextNotetime += 0.24 * secondsPerBeat;
             this.playSound(this.startTime + this.notes[this.currentNote].time);
         }
@@ -78,26 +83,34 @@ class Instrument{
             this.oscillator.start(time);
             this.oscillator.stop(time + this.notes[this.currentNote].duration);
         } else {
-
             this.biquadFilter.type = this.configs.filter.type;
-            this.biquadFilter.frequency.value = this.lowpassFilter;
+            this.biquadFilter.Q.value = 1;
+            this.biquadFilter.frequency.value = this.filters.lowpassFilter;
 
             this.gainNode.gain.setValueAtTime(0, time);
             this.gainNode.gain.linearRampToValueAtTime(this.volume, time + this.configs.ampEnv.attack); //attack
-
+//            this.gainNode.gain.setTargetAtTime(1, time, this.configs.ampEnv.attack);
+            
+            this.gainNode.gain.setTargetAtTime(0, this.notes[this.currentNote].duration, this.configs.ampEnv.decay);
            
+//        this.gainNode.gain.linearRampToValueAtTime(0, time + this.notes[this.currentNote].duration + this.notes[this.currentNote].duration * this.configs.ampEnv.decay); //decay
         
-//        this.gainNode.gain.linearRampToValueAtTime(0, time + this.frequencies[this.currentNote].duration + this.frequencies[this.currentNote].duration * this.configs.ampEnv.decay); //decay
-        
-        
-            for(let i = 0; i < this.configs.oscillatorA.voices; i++){
+            for(let i = 0; i < this.filters.oscillatorAVoices; i++){
                 this.oscillatorsA[i] = this.audioContext.createOscillator();
-
-                this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
-                this.oscillatorsA[i].type = this.configs.oscillatorA.waveform;
-//                this.oscillatorsA[i].detune.value = (this.configs.oscillatorA.detune * 100) + (i * 2 * (this.configs.oscillatorA.detune * 100)) / (this.configs.oscillatorA.voices);
                 
-                this.oscillatorsA[i].detune.value = (this.detune * 100) + (i * 2 * (this.detune * 100)) / (this.configs.oscillatorA.voices);
+                if(this.configs.oscillatorA.octave === '-1'){
+                    this.oscillatorsA[i].frequency.value = (this.midiNoteToFrequency(this.notes[this.currentNote].midi) / 2);
+                } else if(this.configs.oscillatorA.octave === '+1'){
+                    this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi) * 2;
+                } else {
+                    this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
+                }
+                
+                this.oscillatorsA[i].type = this.configs.oscillatorA.waveform;
+                
+                this.oscillatorsA[i].detune.value = (this.filters.oscillatorADetune * 100) + (i * 2 * (this.filters.oscillatorADetune * 100)) / (this.filters.oscillatorAVoices);
+                
+//                this.oscillatorsA[i].detune.value = (this.detune * 100) + (i * 2 * (this.detune * 100)) / (this.configs.oscillatorA.voices);
 
                 this.oscillatorsA[i].connect(this.biquadFilter);
 
@@ -105,12 +118,18 @@ class Instrument{
                 this.oscillatorsA[i].stop(time + this.notes[this.currentNote].duration);
             }
         
-            for(let i = 0; i < this.configs.oscillatorB.voices; i++){
+            for(let i = 0; i < this.filters.oscillatorBVoices; i++){
                 this.oscillatorsB[i] = this.audioContext.createOscillator();
 
-                this.oscillatorsB[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
+                if(this.configs.oscillatorB.octave === '-1'){
+                    this.oscillatorsB[i].frequency.value = (this.midiNoteToFrequency(this.notes[this.currentNote].midi) / 2);
+                } else if(this.configs.oscillatorB.octave === '+1'){
+                    this.oscillatorsB[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi) * 2;
+                } else {
+                    this.oscillatorsB[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
+                }
                 this.oscillatorsB[i].type = this.configs.oscillatorB.waveform;
-                this.oscillatorsB[i].detune.value = (this.configs.oscillatorB.detune * 100) + (i * 2 * (this.configs.oscillatorB.detune * 100)) / (this.configs.oscillatorB.voices);
+                this.oscillatorsB[i].detune.value = (this.filters.oscillatorBDetune * 100) + (i * 2 * (this.filters.oscillatorBDetune * 100)) / (this.filters.oscillatorBVoices);
 
                 this.oscillatorsB[i].connect(this.biquadFilter);
                 this.oscillatorsB[i].start(time);
@@ -125,13 +144,14 @@ class Instrument{
     }
     
     changeAxis(x, y, z){
-        if(this.configs['X-Axis']){
-            console.log(this.configs['X-Axis']);
-        }
-        this.lowpassFilter = (24000 / 127) * x;
-        console.log(x);
-        console.log(y);
-        console.log(z);
+        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
+        this.filters[this.configs['Y-Axis']] = (1 / 127) * y;
+//        this.filters[this.configs['Y-Axis']] = Math.round( y / 12.7);
+        this.filters[this.configs['Z-Axis']] = (1 / 127) * z;
+//        console.log(this.filters.decay);
+//        console.log(x);
+//        console.log(y);
+//        console.log(z);
 
     }
     

@@ -44,11 +44,11 @@ class Song {
                 this.instrumentList.push(
                     'drums'
                 );
-                
                 this.instruments.push(
                     new Drums(midi, this.drums, this.context, this.bpm, this.songDuration)
                 );
                 this.instruments[this.instruments.length - 1].initializeDrums();
+                
                 console.log(midi);
                 resolve();
             });
@@ -56,23 +56,6 @@ class Song {
     }
     
     initializeInstruments(notes, configs, name){
-//        if(this.drums.includes(name)){
-//            let request = new XMLHttpRequest();
-//            request.open('GET', `./song1/${name}.wav`, true); 
-//            request.responseType = 'arraybuffer';
-//            request.onload = () => {
-//                let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
-//                    this.instruments.push(
-//                        new Drum(notes, buffer, this.context, this.bpm, this.songDuration)
-//                    );
-//                }); 
-//            };
-//            request.send();
-//        } else {
-//            this.instruments.push(
-//                new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)
-//            );
-//        }
         if(!this.drums.includes(name)){
             this.instruments.push(
                 new Instrument(notes, configs, this.context, this.bpm, this.songDuration, name)

@@ -1,62 +1,3 @@
-//let song1 = [ 
-//    {
-//        instrument: 'flute',
-//        midi: './song1/song1_flute.mid',
-//        json: './song1/song1_flute.json',
-//    },
-//    {
-//        instrument: 'bass',
-//        midi: './song1/song1_bass.mid',
-//        json: './song1/song1_bass.json',
-//    },
-//    {
-//        instrument: 'synth',
-//        midi: './song1/song1_synth.mid',
-//        json: './song1/song1_synth.json',
-//    }
-//]
-
-// needed to save intialized instruments
-//let instruments = [];
-//
-//let context = new AudioContext();
-//
-//
-//// get the choosen song from local Storage
-//let choosenSong = localStorage.getItem('song');
-//if(choosenSong === '1'){
-//    choosenSong = song1;
-//} else if(choosenSong === '2'){
-//    choosenSong = song2;
-//}
-//
-//let sel = document.getElementById('instruments');
-//
-//// for each instrument create option in dropdown and initalize an instrument
-//for(var i = 0; i < choosenSong.length; i++) {
-//    
-//    var opt = document.createElement('option');
-//    opt.innerHTML = choosenSong[i].instrument;
-//    opt.value = i;
-//    sel.appendChild(opt);
-//    
-//    instruments.push(
-//        new Instrument(choosenSong[i].midi, choosenSong[i].json, context)
-//    );
-//    
-//    instruments[i].loadMidi();
-//    instruments[i].loadJSON();
-//}
-
-//let instruments = song.getInstrumentList;
-//console.log(instruments);
-//instruments.forEach((instrument) => {
-//    var opt = document.createElement('option');
-//    opt.innerHTML = instrument;
-//    opt.value = i;
-//    sel.appendChild(opt);
-//});
-
 let song;
 let knobs = [null, null, null, null];
 
@@ -133,3 +74,80 @@ function onMIDIMessage(event) {
             break;
     }
 }
+
+
+let knob1X = 0;
+let knob1Y = 0;
+let knob1Z = 0;
+
+document.getElementById('knob1X').addEventListener('input', (e) => {
+    knob1X = e.target.value;
+    knobs[0].instrumentValue.changeAxis(knob1X, knob1Y, knob1Z);
+});
+
+document.getElementById('knob1Y').addEventListener('input', (e) => {
+    knob1Y = e.target.value;
+    knobs[0].instrumentValue.changeAxis(knob1X, knob1Y, knob1Z);
+});
+
+document.getElementById('knob1Z').addEventListener('input', (e) => {
+    knob1Z = e.target.value;
+    knobs[0].instrumentValue.changeAxis(knob1X, knob1Y, knob1Z);
+});
+
+let knob2X = 0;
+let knob2Y = 0;
+let knob2Z = 0;
+
+document.getElementById('knob2X').addEventListener('input', (e) => {
+    knob2X = e.target.value;
+    knobs[1].instrumentValue.changeAxis(knob2X, knob2Y, knob2Z);
+});
+
+document.getElementById('knob2Y').addEventListener('input', (e) => {
+    knob2Y = e.target.value;
+    knobs[1].instrumentValue.changeAxis(knob2X, knob2Y, knob2Z);
+});
+
+document.getElementById('knob2Z').addEventListener('input', (e) => {
+    knob2Z = e.target.value;
+    knobs[1].instrumentValue.changeAxis(knob2X, knob2Y, knob2Z);
+});
+
+let knob3X = 0;
+let knob3Y = 0;
+let knob3Z = 0;
+
+document.getElementById('knob3X').addEventListener('input', (e) => {
+    knob3X = e.target.value;
+    knobs[2].instrumentValue.changeAxis(knob3X, knob3Y, knob3Z);
+});
+
+document.getElementById('knob3Y').addEventListener('input', (e) => {
+    knob3Y = e.target.value;
+    knobs[2].instrumentValue.changeAxis(knob3X, knob3Y, knob3Z);
+});
+
+document.getElementById('knob3Z').addEventListener('input', (e) => {
+    knob3Z = e.target.value;
+    knobs[2].instrumentValue.changeAxis(knob3X, knob3Y, knob3Z);
+});
+
+let knob4X = 0;
+let knob4Y = 0;
+let knob4Z = 0;
+
+document.getElementById('knob4X').addEventListener('input', (e) => {
+    knob4X = e.target.value;
+    knobs[3].instrumentValue.changeAxis(knob4X, knob4Y, knob4Z);
+});
+
+document.getElementById('knob4Y').addEventListener('input', (e) => {
+    knob4Y = e.target.value;
+    knobs[3].instrumentValue.changeAxis(knob4X, knob4Y, knob4Z);
+});
+
+document.getElementById('knob4Z').addEventListener('input', (e) => {
+    knob4Z = e.target.value;
+    knobs[3].instrumentValue.changeAxis(knob4X, knob4Y, knob4Z);
+});

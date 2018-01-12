@@ -1,6 +1,5 @@
 class Drum {
     constructor(notes, buffer, audioContext, bpm, songDuration){
-//        this.bufferSource = bufferSource;
         this.notes = notes;
         this.audioContext = audioContext;
         this.bpm = bpm;
@@ -10,19 +9,7 @@ class Drum {
         
         this.gainNode;
     }
-    
-//    loadBuffer(){
-//        let request = new XMLHttpRequest();
-//        request.open('GET', this.bufferSource, true); 
-//        request.responseType = 'arraybuffer';
-//        request.onload = () => {
-//            let undecodedAudio = request.response; this.audioContext.decodeAudioData(undecodedAudio, (buffer) => {
-//                this.buffer = buffer;
-//            }); 
-//        };
-//        request.send();
-//    }
-    
+
     playInstrument(){
         this.nextNotetime = this.audioContext.currentTime;
         this.startTime = this.audioContext.currentTime;

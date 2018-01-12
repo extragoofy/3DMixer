@@ -28,10 +28,13 @@ class Drums{
     }
     
     playInstrument(){
-//        this.drums[1].playInstrument();
         this.drums.forEach((drum) => {
             drum.playInstrument(); 
         });
+    }
+    
+    changeAxis(x, y, z){
+        console.log(x);   
     }
     
 }

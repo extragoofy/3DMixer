@@ -22,10 +22,12 @@
         },
         "filter": {
             "type": "lowpass",
-            "cutoff": 0.45,
+            "cutoff": 1000,
             "resonance": 0
         },
-        "X-Axis": "detune"
+        "X-Axis": "lowpassFilter",
+        "Y-Axis": "oscillatorAVolume",
+        "Z-Axis": "oscillatorBDetune"
     },
     "synth": {
         "oscillatorA": {
@@ -49,7 +51,7 @@
         },
         "filter": {
             "type": "lowpass",
-            "cutoff": 0.55,
+            "cutoff": 1000,
             "resonance": 0
         }
     }, 
@@ -75,8 +77,11 @@
         },
         "filter": {
             "type": "lowpass",
-            "cutoff": 0.35,
+            "cutoff": 1000,
             "resonance": 0
-        }
+        },
+        "X-Axis": "lowpassFilter",
+        "Y-Axis": "oscillatorBVolume",
+        "Z-Axis": "oscillatorBDetune"
     }
 }
