@@ -16,10 +16,6 @@ class Instrument{
         this.oscillatorsA = [];
         this.oscillatorsB = [];
         
-        this.detune;
-        this.lowpassFilter;
-        this.volume;
-        
         this.filters = {};
         
         
@@ -48,19 +44,31 @@ class Instrument{
         this.currentSongTime = this.audioContext.currentTime;
         this.currentNote = 0;
    
-        if(this.configs !== undefined){
-            this.detune = this.configs.oscillatorA.detune;
-            
-            this.gainNode = this.audioContext.createGain();
-            this.convolver = this.audioContext.createConvolver();
-            this.biquadFilter = this.audioContext.createBiquadFilter();
-            this.biquadFilter.connect(this.gainNode);
-            this.gainNode.connect(this.audioContext.destination);
-            
-             
-            this.lowpassFilter = 1000;
-            this.volume = 1;
-        }
+        
+        this.detune = this.configs.oscillatorA.detune;
+        
+        
+        this.gainNodeA = this.audioContext.createGain();
+        this.gainNodeB = this.audioContext.createGain();
+        
+        this.filter1 = this.audioContext.createBiquadFilter();
+        this.filter2 = this.audioContext.createBiquadFilter();
+        
+        this.gainNodeA.connect(this.filter1);
+        this.gainNodeB.connect(this.filter1);
+        this.filter1.connect(this.filter2);
+        
+        this.modFilterGain = this.audioContext.createGain();
+        this.modFilterGain.connect(this.filter1.detune);
+        this.modFilterGain.connect(this.filter2.detune);
+        
+        this.envelope = this.audioContext.createGain();
+        
+        this.filter2.connect(this.envelope);
+        
+        this.envelope.connect(this.audioContext.destination);
+
+        
         
         this.scheduler();
     }
@@ -76,22 +84,65 @@ class Instrument{
     }
     
     playSound(time){
-        if(this.configs === undefined){
-            this.oscillator = this.audioContext.createOscillator();
-            this.oscillator.frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
-            this.oscillator.connect(this.audioContext.destination);
-            this.oscillator.start(time);
-            this.oscillator.stop(time + this.notes[this.currentNote].duration);
-        } else {
-            this.biquadFilter.type = this.configs.filter.type;
-            this.biquadFilter.Q.value = 1;
-            this.biquadFilter.frequency.value = this.filters.lowpassFilter;
+        this.filter1.type = this.configs.filter.type;
+        this.filter1.Q.value = 0;
+        this.filter1.frequency.value = this.filters.lowpassFilter;
+        
+//        this.filter2.type = this.configs.filter.type;
+//        this.filter2.Q.value = 0;
+//        this.filter2.frequency.value = this.filters.lowpassFilter;
+//  
+        this.gainNodeA.gain.value = this.configs.oscillatorA.volume;
+        this.gainNodeB.gain.value = this.configs.oscillatorB.volume;
+//        
+//        
+//        this.envelope.gain.value = 0.0;
+//        this.envelope.gain.setValueAtTime( 0.0, time );
+//        this.envelope.gain.linearRampToValueAtTime( 1.0, time + this.configs.ampEnv.attack);
+//        this.envelope.gain.setTargetAtTime( (this.configs.ampEnv.sustain/100.0), this.notes[this.currentNote].duration, this.configs.ampEnv.decay );
+//        
+        this.modFilterGain.gain.value = this.configs.modFilterGain*24;
+        
+        var envAttackEnd = time + (this.configs.currentEnvA/20.0);
 
-            this.gainNode.gain.setValueAtTime(0, time);
-            this.gainNode.gain.linearRampToValueAtTime(this.volume, time + this.configs.ampEnv.attack); //attack
-//            this.gainNode.gain.setTargetAtTime(1, time, this.configs.ampEnv.attack);
-            
-            this.gainNode.gain.setTargetAtTime(0, this.notes[this.currentNote].duration, this.configs.ampEnv.decay);
+        this.envelope.gain.value = 0.0;
+        this.envelope.gain.setValueAtTime( 0.0, time );
+        this.envelope.gain.linearRampToValueAtTime( 1.0, envAttackEnd );
+        this.envelope.gain.setTargetAtTime( (this.configs.currentEnvS/100), time + envAttackEnd, (this.configs.currentEnvD/100.0)+0.001 );
+
+        var filterAttackLevel = this.configs.currentFilterEnv*72;  // Range: 0-7200: 6-octave range
+        var filterSustainLevel = filterAttackLevel* this.configs.currentFilterEnvS / 100.0; // range: 0-7200
+        var filterAttackEnd = (this.configs.currentFilterEnvA/20.0);
+
+    /*	console.log( "filterAttackLevel: " + filterAttackLevel + 
+                     " filterSustainLevel: " + filterSustainLevel +
+                     " filterAttackEnd: " + filterAttackEnd);
+//    */
+        if (!filterAttackEnd) 
+                    filterAttackEnd=0.05; // tweak to get target decay to work properly
+        this.filter1.detune.setValueAtTime( 0, time );
+        this.filter1.detune.linearRampToValueAtTime( filterAttackLevel, time+filterAttackEnd );
+        this.filter2.detune.setValueAtTime( 0, time );
+        this.filter2.detune.linearRampToValueAtTime( filterAttackLevel, time+filterAttackEnd );
+        this.filter1.detune.setTargetAtTime( filterSustainLevel, time+filterAttackEnd, (this.configs.currentFilterEnvD/100.0) );
+        this.filter2.detune.setTargetAtTime( filterSustainLevel, time+filterAttackEnd, (this.configs.currentFilterEnvD/100.0) );
+////        
+        this.modOsc = this.audioContext.createOscillator();
+        this.modOsc.connect(this.modFilterGain);
+//        
+        
+//            this.biquadFilter.type = this.configs.filter.type;
+//            this.biquadFilter.Q.value = 1;
+//            this.biquadFilter.frequency.value = this.filters.lowpassFilter;
+        
+        
+        
+//
+//            this.gainNode.gain.setValueAtTime(0, time);
+//            this.gainNode.gain.linearRampToValueAtTime(1, time + this.configs.ampEnv.attack); //attack
+////            this.gainNode.gain.setTargetAtTime(1, time, this.configs.ampEnv.attack);
+//            
+//            this.gainNode.gain.setTargetAtTime(0, this.notes[this.currentNote].duration, this.configs.ampEnv.decay);
            
 //        this.gainNode.gain.linearRampToValueAtTime(0, time + this.notes[this.currentNote].duration + this.notes[this.currentNote].duration * this.configs.ampEnv.decay); //decay
         
@@ -112,7 +163,7 @@ class Instrument{
                 
 //                this.oscillatorsA[i].detune.value = (this.detune * 100) + (i * 2 * (this.detune * 100)) / (this.configs.oscillatorA.voices);
 
-                this.oscillatorsA[i].connect(this.biquadFilter);
+                this.oscillatorsA[i].connect(this.gainNodeA);
 
                 this.oscillatorsA[i].start(time);
                 this.oscillatorsA[i].stop(time + this.notes[this.currentNote].duration);
@@ -131,11 +182,14 @@ class Instrument{
                 this.oscillatorsB[i].type = this.configs.oscillatorB.waveform;
                 this.oscillatorsB[i].detune.value = (this.filters.oscillatorBDetune * 100) + (i * 2 * (this.filters.oscillatorBDetune * 100)) / (this.filters.oscillatorBVoices);
 
-                this.oscillatorsB[i].connect(this.biquadFilter);
+                this.oscillatorsB[i].connect(this.gainNodeB);
                 this.oscillatorsB[i].start(time);
                 this.oscillatorsB[i].stop(time + this.notes[this.currentNote].duration);
             }
-        }
+        
+        this.modOsc.start(time);
+        this.modOsc.stop(time + this.notes[this.currentNote].duration);
+        
         this.currentNote++;
         if(this.currentNote === this.notes.length){
             this.currentNote = 0;
