@@ -68,7 +68,8 @@ class Song {
         this.instruments.forEach((instrument) => {
             console.log(instrument);
             instrument.playInstrument();
-        })
+        });
+        //this.instruments[1].playInstrument();
     }
     
     stopSong(){

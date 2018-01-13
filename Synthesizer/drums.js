@@ -18,7 +18,7 @@ class Drums{
             request.onload = () => {
                 let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {
                     this.drums.push(
-                        new Drum(this.configs.tracks.find((track) => track.name === drum).notes, buffer, this.context, this.bpm, this.songDuration)
+                        new Drum(this.configs.tracks.find((track) => track.name === drum).notes, buffer, this.context, this.bpm, this.songDuration, drum)
                     );
                 }); 
             };
@@ -34,7 +34,63 @@ class Drums{
     }
     
     changeAxis(x, y, z){
-        if(x == 0 && y == 0){
+        console.log(this.drums);
+        if(x > 63){
+            this.drums.forEach((drum) =>{
+                if(drum.getName === 'kick'){
+                    drum.changeGain(1);
+                }
+            })
+        } else {
+            this.drums.forEach((drum) =>{
+                if(drum.getName === 'kick'){
+                    drum.changeGain(0);
+                }
+            })
+        }
+        
+        if(y > 63){
+            this.drums.forEach((drum) =>{
+                if(drum.getName === 'clap'){
+                    drum.changeGain(1);
+                }
+            })
+        } else {
+            this.drums.forEach((drum) =>{
+                if(drum.getName === 'clap'){
+                    drum.changeGain(0);
+                }
+            })
+        }
+        
+        if(z > 40){
+            this.drums.forEach((drum) =>{
+                if(drum.getName === 'hihat'){
+                    drum.changeGain(1);
+                }
+            })
+        } else {
+            this.drums.forEach((drum) =>{
+                if(drum.getName === 'hihat'){
+                    drum.changeGain(0);
+                }
+            })
+        }
+        
+
+        
+        /*if(y > 63){
+            this.drums[1].changeGain(1);
+        } else {
+            this.drums[1].changeGain(0);
+        }
+        
+        if(z > 63){
+            this.drums[2].changeGain(1);
+        } else {
+            this.drums[2].changeGain(0);
+        }*/
+        /*if(x == 0 && y == 0){
             this.drums.forEach((drum) => {
                 drum.changeGain(0);
             });
@@ -53,7 +109,7 @@ class Drums{
             this.drums.forEach((drum) => {
                 drum.changeGain(1); 
             });
-        }        
+        }*/        
     }
     
 }

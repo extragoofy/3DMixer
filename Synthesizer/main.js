@@ -31,9 +31,13 @@ document.getElementById('stop').addEventListener('click', function(){
 // initalize a knob with the selected instrument when clicking start and play the song
 document.getElementById('start').addEventListener('click', function(){
     knobs.forEach((knob, i) => {
-        let choosenInstrument = selectBoxes[i].selectedIndex;
-        knobs[i] = new Knob(i, song.getInstruments[choosenInstrument]);
+        if(selectBoxes[i].options[selectBoxes[i].selectedIndex].text != 'Select an instrument'){
+            console.log( selectBoxes[i].selectedIndex);
+            let choosenInstrument = selectBoxes[i].selectedIndex - 1;
+            knobs[i] = new Knob(i, song.getInstruments[choosenInstrument]);
+        }
     });
+    
     console.log(knobs);
     song.playSong();
 });
@@ -76,7 +80,7 @@ function onMIDIMessage(event) {
 }
 
 
-let knob1X = 0;
+/*let knob1X = 0;
 let knob1Y = 0;
 let knob1Z = 0;
 
@@ -150,4 +154,4 @@ document.getElementById('knob4Y').addEventListener('input', (e) => {
 document.getElementById('knob4Z').addEventListener('input', (e) => {
     knob4Z = e.target.value;
     knobs[3].instrumentValue.changeAxis(knob4X, knob4Y, knob4Z);
-});
+});*/

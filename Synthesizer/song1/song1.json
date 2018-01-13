@@ -5,19 +5,58 @@
             "volume": 1,
             "voices": 1,
             "waveform": "sawtooth",
-            "octave": "-1",
+            "octave": "-2",
             "detune": 0
         },
         "oscillatorB": {
             "volume": 1,
             "voices": 5,
             "waveform": "sawtooth",
-            "octave": 0,
+            "octave": "-1",
             "detune": 0.3
         },
         "ampEnv": {
             "attack": 0,
             "decay": 1,
+            "sustain": 1
+        },
+        "filter": {
+            "type": "lowpass",
+            "cutoff": 1000,
+            "resonance": 0
+        },
+        "X-Axis": "lowpassFilter",
+        "Y-Axis": "filterQ",
+        "Z-Axis": "volume",
+        "currentEnvA": 0,
+        "currentEnvS": 0,
+        "currentEnvD": 0,
+        "currentFilterEnv": 0,
+        "currentFilterEnvS": 0,
+        "currentFilterEnvA": 0,
+        "currentFilterEnvD": 0,
+        "modFilterGain": 0,
+        "filterQ": 0,
+        "volume": 1
+    },
+    "synth": {
+        "oscillatorA": {
+            "volume": 1,
+            "voices": 2,
+            "waveform": "square",
+            "octave": "-1",
+            "detune": 0.35
+        },
+        "oscillatorB": {
+            "volume": 1,
+            "voices": 2,
+            "waveform": "square",
+            "octave": "0",
+            "detune": 0.3
+        },
+        "ampEnv": {
+            "attack": 0,
+            "decay": 0.22,
             "sustain": 0
         },
         "filter": {
@@ -26,50 +65,18 @@
             "resonance": 0
         },
         "X-Axis": "lowpassFilter",
-        "Y-Axis": "oscillatorAVolume",
-        "Z-Axis": "oscillatorBDetune",
+        "Y-Axis": "volume",
+        "Z-Axis": "empty",
         "currentEnvA": 0,
-        "currentEnvS": 100,
+        "currentEnvS": 0,
         "currentEnvD": 0,
         "currentFilterEnv": 0,
         "currentFilterEnvS": 0,
-        "currentFilterEnvA":0,
+        "currentFilterEnvA": 0,
         "currentFilterEnvD": 0,
-        "modFilterGain": 0
-    },
-    "synth": {
-        "oscillatorA": {
-            "volume": 1,
-            "voices": 2,
-            "waveform": "square",
-            "octave": "+1",
-            "detune": 0.35
-        },
-        "oscillatorB": {
-            "volume": 1,
-            "voices": 2,
-            "waveform": "square",
-            "octave": "+1",
-            "detune": 0.3
-        },
-        "ampEnv": {
-            "attack": 0,
-            "decay": 0.455,
-            "sustain": 0
-        },
-        "filter": {
-            "type": "lowpass",
-            "cutoff": 1000,
-            "resonance": 0
-        },
-        "currentEnvA": 0,
-        "currentEnvS": 100,
-        "currentEnvD": 0,
-        "currentFilterEnv": 0,
-        "currentFilterEnvS": 0,
-        "currentFilterEnvA":0,
-        "currentFilterEnvD": 0,
-        "modFilterGain": 0
+        "modFilterGain": 0,
+        "filterQ": 0,
+        "volume": 0.6
     }, 
     "flute": {
         "oscillatorA": {
@@ -96,16 +103,18 @@
             "cutoff": 1000,
             "resonance": 0
         },
-        "X-Axis": "currentFilterEnv",
-        "Y-Axis": "oscillatorBVolume",
-        "Z-Axis": "oscillatorBDetune",
+        "X-Axis": "lowpassFilter",
+        "Y-Axis": "volume",
+        "Z-Axis": "empty",
         "currentEnvA": 0,
-        "currentEnvS": 100,
+        "currentEnvS": 0,
         "currentEnvD": 0,
-        "currentFilterEnv": 10 ,
-        "currentFilterEnvS": 100,
-        "currentFilterEnvA": 6,
+        "currentFilterEnv": 0 ,
+        "currentFilterEnvS": 0,
+        "currentFilterEnvA": 0,
         "currentFilterEnvD": 0,
-        "modFilterGain": 0
+        "modFilterGain": 0,
+        "filterQ": 0,
+         "volume": 1
     }
 }

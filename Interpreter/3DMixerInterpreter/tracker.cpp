@@ -136,9 +136,6 @@ void Tracker::centerOfMass(int knobID, Mat& image){
     } else {
         center = Point(0,0);
     }
-    // Apply to knob record and break down to fit a 1-byte-value (up to 255)
-    knobs[knobID].xCoords = center.x / 5;
-    knobs[knobID].yCoords = center.y / 3.76;
 }
 
 void Tracker::drawCross(Mat& image, Point center, int length, Scalar color){
@@ -184,8 +181,11 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
     }
     // Divide by 4 to get average radius in all directions
     radius = sum / 4;
-    knobs[knobID].zCoords = radius / 1.1;       // Break this down to 255 max
-    if (knobs[knobID].zCoords > 255) knobs[knobID].zCoords = 255;
+    // Apply to knob record and break down to fit a 1-byte-value (up to 127)
+    knobs[knobID].xCoords = center.x / 5;
+    knobs[knobID].yCoords = center.y / 3.76;
+    knobs[knobID].zCoords = radius / 2.2;
+    if (knobs[knobID].zCoords > 127) knobs[knobID].zCoords = 127;
 }
 
 void Tracker::initializeKnobs() {

@@ -1,5 +1,5 @@
 class Drum {
-    constructor(notes, buffer, audioContext, bpm, songDuration){
+    constructor(notes, buffer, audioContext, bpm, songDuration, name){
         this.notes = notes;
         this.audioContext = audioContext;
         this.bpm = bpm;
@@ -7,6 +7,7 @@ class Drum {
         this.buffer = buffer;
         this.currentNote = 0;
         this.volume = 1;
+        this.name = name;
         
         this.gainNode;
     }
@@ -50,5 +51,9 @@ class Drum {
     
     changeGain(value){
         this.volume = value;
+    }
+    
+    get getName(){
+        return this.name;
     }
 }

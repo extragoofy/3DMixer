@@ -36,8 +36,12 @@ class Instrument{
             oscillatorAVoices: this.configs.oscillatorA.voices,
             oscillatorBVoices: this.configs.oscillatorB.voices,
             currentFilterEnv: this.configs.currentFilterEnv,
-//            attack: this.configs.ampEnv.attack,
-//            decay: this.configs.ampEnv.decay,
+            currentEnvA: this.configs.currentEnvA,
+            currentEnvD: this.configs.currentEnvD,
+            filterQ: this.configs.filterQ,
+            volume: this.configs.volume,
+            decay: this.configs.ampEnv.decay,
+            empty: 0
         };
             
         this.nextNotetime = this.audioContext.currentTime;
@@ -50,24 +54,15 @@ class Instrument{
         
         
         this.gainNodeA = this.audioContext.createGain();
-        this.gainNodeB = this.audioContext.createGain();
         
         this.filter1 = this.audioContext.createBiquadFilter();
         this.filter2 = this.audioContext.createBiquadFilter();
+
         
         this.gainNodeA.connect(this.filter1);
-        this.gainNodeB.connect(this.filter1);
+        
         this.filter1.connect(this.filter2);
-        
-        this.modFilterGain = this.audioContext.createGain();
-        this.modFilterGain.connect(this.filter1.detune);
-        this.modFilterGain.connect(this.filter2.detune);
-        
-        this.envelope = this.audioContext.createGain();
-        
-        this.filter2.connect(this.envelope);
-        
-        this.envelope.connect(this.audioContext.destination);
+        this.filter2.connect(this.audioContext.destination);
 
         
         
@@ -86,15 +81,24 @@ class Instrument{
     
     playSound(time){
         this.filter1.type = this.configs.filter.type;
-        this.filter1.Q.value = 0;
+        this.filter1.Q.value = this.filters.filterQ;
         this.filter1.frequency.value = this.filters.lowpassFilter;
         
-//        this.filter2.type = this.configs.filter.type;
-//        this.filter2.Q.value = 0;
-//        this.filter2.frequency.value = this.filters.lowpassFilter;
-//  
-        this.gainNodeA.gain.value = this.configs.oscillatorA.volume;
-        this.gainNodeB.gain.value = this.configs.oscillatorB.volume;
+        this.filter2.type = this.configs.filter.type;
+        this.filter2.Q.value = this.filters.filterQ;
+        this.filter2.frequency.value = this.filters.lowpassFilter;
+        
+        
+        this.gainNodeA.gain.setValueAtTime(0.0, time);
+        this.gainNodeA.gain.linearRampToValueAtTime(this.filters.volume, time + this.configs.ampEnv.attack); 
+        //this.gainNodeA.gain.setTargetAtTime( this.configs.ampEnv.sustain, time + this.configs.ampEnv.attack, this.filters.decay); 
+        //this.gainNodeA.gain.value = this.filters.volume;
+        
+       //this.gainNodeB.gain.value = this.filters.volume;
+        
+       /* this.envelope.gain.setValueAtTime(0, time);
+        this.envelope.gain.linearRampToValueAtTime(1, time + this.configs.ampEnv.attack); 
+        this.envelope.gain.setTargetAtTime( 0, time + this.configs.ampEnv.attack, this.filters.decay );*/
 //        
 //        
 //        this.envelope.gain.value = 0.0;
@@ -102,16 +106,16 @@ class Instrument{
 //        this.envelope.gain.linearRampToValueAtTime( 1.0, time + this.configs.ampEnv.attack);
 //        this.envelope.gain.setTargetAtTime( (this.configs.ampEnv.sustain/100.0), this.notes[this.currentNote].duration, this.configs.ampEnv.decay );
 //        
-        this.modFilterGain.gain.value = this.configs.modFilterGain*24;
+        //this.modFilterGain.gain.value = this.configs.modFilterGain*24;
         
-        var envAttackEnd = time + (this.configs.currentEnvA/20.0);
+        /*var envAttackEnd = time + (this.filters.currentEnvA/20.0);
 
         this.envelope.gain.value = 0.0;
         this.envelope.gain.setValueAtTime( 0.0, time );
-        this.envelope.gain.linearRampToValueAtTime( 1.0, envAttackEnd );
-        this.envelope.gain.setTargetAtTime( (this.configs.currentEnvS/100), time + envAttackEnd, (this.configs.currentEnvD/100.0)+0.001 );
+        this.envelope.gain.linearRampToValueAtTime( 1.0, envAttackEnd );*/
+        //this.envelope.gain.setTargetAtTime( (this.configs.currentEnvS/100), time + envAttackEnd, (this.filters.currentEnvD/100.0)+0.001 );
 
-        var filterAttackLevel = this.filters.currentFilterEnv*72;  // Range: 0-7200: 6-octave range
+        /*var filterAttackLevel = this.filters.currentFilterEnv*72;  // Range: 0-7200: 6-octave range
         var filterSustainLevel = filterAttackLevel* this.configs.currentFilterEnvS / 100.0; // range: 0-7200
         var filterAttackEnd = (this.configs.currentFilterEnvA/20.0);
 
@@ -122,10 +126,10 @@ class Instrument{
         this.filter2.detune.setValueAtTime( 0, time );
         this.filter2.detune.linearRampToValueAtTime( filterAttackLevel, time+filterAttackEnd );
         this.filter1.detune.setTargetAtTime( filterSustainLevel, time+filterAttackEnd, (this.configs.currentFilterEnvD/100.0) );
-        this.filter2.detune.setTargetAtTime( filterSustainLevel, time+filterAttackEnd, (this.configs.currentFilterEnvD/100.0) );
+        this.filter2.detune.setTargetAtTime( filterSustainLevel, time+filterAttackEnd, (this.configs.currentFilterEnvD/100.0) );*/
 ////        
-        this.modOsc = this.audioContext.createOscillator();
-        this.modOsc.connect(this.modFilterGain);
+        /*this.modOsc = this.audioContext.createOscillator();
+        this.modOsc.connect(this.modFilterGain);*/
 
         
         
@@ -147,10 +151,12 @@ class Instrument{
             for(let i = 0; i < this.filters.oscillatorAVoices; i++){
                 this.oscillatorsA[i] = this.audioContext.createOscillator();
                 
-                if(this.configs.oscillatorA.octave === '-1'){
+                if(this.configs.oscillatorA.octave == '-1'){
                     this.oscillatorsA[i].frequency.value = (this.midiNoteToFrequency(this.notes[this.currentNote].midi) / 2);
-                } else if(this.configs.oscillatorA.octave === '+1'){
+                } else if(this.configs.oscillatorA.octave == '+1'){
                     this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi) * 2;
+                } else if(this.configs.oscillatorA.octave == '-2'){
+                    this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi) / 4;
                 } else {
                     this.oscillatorsA[i].frequency.value = this.midiNoteToFrequency(this.notes[this.currentNote].midi);
                 }
@@ -180,13 +186,13 @@ class Instrument{
                 this.oscillatorsB[i].type = this.configs.oscillatorB.waveform;
                 this.oscillatorsB[i].detune.value = (this.filters.oscillatorBDetune * 100) + (i * 2 * (this.filters.oscillatorBDetune * 100)) / (this.filters.oscillatorBVoices);
 
-                this.oscillatorsB[i].connect(this.gainNodeB);
+                this.oscillatorsB[i].connect(this.gainNodeA);
                 this.oscillatorsB[i].start(time);
                 this.oscillatorsB[i].stop(time + this.notes[this.currentNote].duration);
             }
         
-        this.modOsc.start(time);
-        this.modOsc.stop(time + this.notes[this.currentNote].duration);
+        /*this.modOsc.start(time);
+        this.modOsc.stop(time + this.notes[this.currentNote].duration);*/
         
         this.currentNote++;
         if(this.currentNote === this.notes.length){
@@ -196,27 +202,16 @@ class Instrument{
     }
     
     changeAxis(x, y, z){
-//        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
-        this.filters[this.configs['X-Axis']] = (100 / 127) * x;
+        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
+        //this.filters[this.configs['X-Axis']] = (100 / 127) * x;
         this.filters[this.configs['Y-Axis']] = (1 / 127) * y;
-//        this.filters[this.configs['Y-Axis']] = Math.round( y / 12.7);
         this.filters[this.configs['Z-Axis']] = (1 / 127) * z;
+//        this.filters[this.configs['Y-Axis']] = Math.round( y / 12.7);
+        //this.filters[this.configs['Z-Axis']] = (1 / 127) * z;
 //        console.log(this.filters.decay);
 //        console.log(x);
 //        console.log(y);
 //        console.log(z);
 
-    }
-    
-    changeXAxis(value){
-        this.detune = 10;
-    }
-    
-    changeXAxis(value){
-        console.log(value);
-    }
-    
-    changeZAxis(value){
-        console.log(value);
     }
 }
