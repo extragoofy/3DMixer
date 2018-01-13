@@ -8,6 +8,7 @@ body{
     text-align: center;
     font-family: 'Lato', sans-serif;
     padding-top: 60px;
+    overflow: hidden;
 }
 
 h1{
@@ -22,6 +23,23 @@ h1{
     height: 150px;
     border-radius: 50%;
     margin-bottom: 50px;
+}
+
+#knobs1{
+    position: absolute;
+    box-shadow:
+        inset 0 0 50px #fff,      /* inner white */
+        inset 20px 0 50px #B90C0C,   /* inner left magenta short */
+        inset -20px 0 50px #B90C0C,  /* inner right cyan short */
+        inset 20px 0 150px #B90C0C,  /* inner left magenta broad */
+        inset -20px 0 150px #B90C0C, /* inner right cyan broad */
+        0 0 50px #fff,            /* outer white */
+        -10px 0 80px #B90C0C,        /* outer left magenta */
+        10px 0 80px #B90C0C; 
+}
+
+#knobs2{
+    position: absolute;
     box-shadow:
         inset 0 0 50px #fff,      /* inner white */
         inset 20px 0 50px #009A17,   /* inner left magenta short */
@@ -31,18 +49,6 @@ h1{
         0 0 50px #fff,            /* outer white */
         -10px 0 80px #009A17,        /* outer left magenta */
         10px 0 80px #009A17; 
-}
-
-#knobs2{
-    box-shadow:
-        inset 0 0 50px #fff,      /* inner white */
-        inset 20px 0 50px #B90C0C,   /* inner left magenta short */
-        inset -20px 0 50px #B90C0C,  /* inner right cyan short */
-        inset 20px 0 150px #B90C0C,  /* inner left magenta broad */
-        inset -20px 0 150px #B90C0C, /* inner right cyan broad */
-        0 0 50px #fff,            /* outer white */
-        -10px 0 80px #B90C0C,        /* outer left magenta */
-        10px 0 80px #B90C0C;  
 }
 
 #knobs3{
@@ -73,9 +79,9 @@ h1{
     display: flex;
     width: 100%;
     justify-content: space-around;
-    position: absolute;
+    /*position: absolute;*/
     top: 50%;
-    transform: translate(0%, -50%);
+    /*transform: translate(0%, -50%);*/
 }
 
 #start, #stop{

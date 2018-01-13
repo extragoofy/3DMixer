@@ -6,7 +6,7 @@ Output::Output(Tracker * trackerInstance):
     tracker(trackerInstance),
     outputTimer(new QTimer(this))
 {
-    interval = 500;
+    interval = 100;
     connect(outputTimer, SIGNAL(timeout()), this, SLOT(sendTrackerData()));
     outputTimer->start(interval);
     message.data[0] = 0x90;
