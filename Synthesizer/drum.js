@@ -6,6 +6,7 @@ class Drum {
         this.songDuration = songDuration;
         this.buffer = buffer;
         this.currentNote = 0;
+        this.volume = 1;
         
         this.gainNode;
     }
@@ -36,6 +37,8 @@ class Drum {
         
         sourceBuffer.buffer = this.buffer;
         sourceBuffer.connect(this.gainNode);
+        this.gainNode.gain.setValueAtTime( 0.0, time );
+        this.gainNode.gain.linearRampToValueAtTime( this.volume, time);
         sourceBuffer.start(time);
         
         this.currentNote++;
@@ -43,5 +46,9 @@ class Drum {
             this.currentNote = 0;
             this.startTime = this.startTime + this.songDuration;
         }
+    }
+    
+    changeGain(value){
+        this.volume = value;
     }
 }

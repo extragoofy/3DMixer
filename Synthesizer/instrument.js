@@ -35,6 +35,7 @@ class Instrument{
             oscillatorBDetune: this.configs.oscillatorB.detune,
             oscillatorAVoices: this.configs.oscillatorA.voices,
             oscillatorBVoices: this.configs.oscillatorB.voices,
+            currentFilterEnv: this.configs.currentFilterEnv,
 //            attack: this.configs.ampEnv.attack,
 //            decay: this.configs.ampEnv.decay,
         };
@@ -110,14 +111,10 @@ class Instrument{
         this.envelope.gain.linearRampToValueAtTime( 1.0, envAttackEnd );
         this.envelope.gain.setTargetAtTime( (this.configs.currentEnvS/100), time + envAttackEnd, (this.configs.currentEnvD/100.0)+0.001 );
 
-        var filterAttackLevel = this.configs.currentFilterEnv*72;  // Range: 0-7200: 6-octave range
+        var filterAttackLevel = this.filters.currentFilterEnv*72;  // Range: 0-7200: 6-octave range
         var filterSustainLevel = filterAttackLevel* this.configs.currentFilterEnvS / 100.0; // range: 0-7200
         var filterAttackEnd = (this.configs.currentFilterEnvA/20.0);
 
-    /*	console.log( "filterAttackLevel: " + filterAttackLevel + 
-                     " filterSustainLevel: " + filterSustainLevel +
-                     " filterAttackEnd: " + filterAttackEnd);
-//    */
         if (!filterAttackEnd) 
                     filterAttackEnd=0.05; // tweak to get target decay to work properly
         this.filter1.detune.setValueAtTime( 0, time );
@@ -129,14 +126,15 @@ class Instrument{
 ////        
         this.modOsc = this.audioContext.createOscillator();
         this.modOsc.connect(this.modFilterGain);
-//        
+
+        
+        
         
 //            this.biquadFilter.type = this.configs.filter.type;
 //            this.biquadFilter.Q.value = 1;
 //            this.biquadFilter.frequency.value = this.filters.lowpassFilter;
         
-        
-        
+    
 //
 //            this.gainNode.gain.setValueAtTime(0, time);
 //            this.gainNode.gain.linearRampToValueAtTime(1, time + this.configs.ampEnv.attack); //attack
@@ -198,7 +196,8 @@ class Instrument{
     }
     
     changeAxis(x, y, z){
-        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
+//        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
+        this.filters[this.configs['X-Axis']] = (100 / 127) * x;
         this.filters[this.configs['Y-Axis']] = (1 / 127) * y;
 //        this.filters[this.configs['Y-Axis']] = Math.round( y / 12.7);
         this.filters[this.configs['Z-Axis']] = (1 / 127) * z;

@@ -34,7 +34,26 @@ class Drums{
     }
     
     changeAxis(x, y, z){
-        console.log(x);   
+        if(x == 0 && y == 0){
+            this.drums.forEach((drum) => {
+                drum.changeGain(0);
+            });
+            this.drums[0].changeGain(1);
+        } else if(x == 127 && y == 0){
+            this.drums.forEach((drum) => {
+                drum.changeGain(0); 
+            });
+            this.drums[1].changeGain(1);
+        } else if(x == 0 && y == 127){
+            this.drums.forEach((drum) => {
+                drum.changeGain(0); 
+            });
+            this.drums[2].changeGain(1);
+        } else if(x == 127 && y == 127){
+            this.drums.forEach((drum) => {
+                drum.changeGain(1); 
+            });
+        }        
     }
     
 }
