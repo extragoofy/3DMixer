@@ -26,7 +26,6 @@ h1{
 }
 
 #knobs1{
-    position: absolute;
     box-shadow:
         inset 0 0 50px #fff,      /* inner white */
         inset 20px 0 50px #B90C0C,   /* inner left magenta short */
@@ -39,7 +38,6 @@ h1{
 }
 
 #knobs2{
-    position: absolute;
     box-shadow:
         inset 0 0 50px #fff,      /* inner white */
         inset 20px 0 50px #009A17,   /* inner left magenta short */

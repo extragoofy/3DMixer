@@ -11,6 +11,13 @@ if(localStorage.getItem('song') === '1'){
 // fill the select boxes with the selection of instruments in the song
 let selectBoxes = document.getElementsByClassName('instruments');
 
+let glowKnobs = document.getElementsByClassName('knob'); 
+
+//let knob1 = document.getElementById('knobs1');
+//let knob2 = document.getElementById('knobs2');
+//let knob3 = document.getElementById('knobs3');
+//let knob4 = document.getElementById('knobs4');
+
 song.loadSong().then(() => {
     song.getInstrumentList.forEach((instrument, i) => {
         Array.prototype.forEach.call(selectBoxes, (selectBox) =>{
@@ -38,65 +45,82 @@ document.getElementById('start').addEventListener('click', function(){
         }
     });
     
+    Array.prototype.forEach.call(selectBoxes, (selectBox) => {
+        selectBox.style.display = 'none';
+    });
+    
+    knobs.forEach((knob, i) => {
+        if(knob == null){
+            glowKnobs[i].style.display = 'none';
+        } else {
+            glowKnobs[i].style.position = 'absolute';
+        }
+    });
+    
     console.log(knobs);
     song.playSong();
 });
 
-let knob1 = document.getElementById('knobs1');
-let knob2 = document.getElementById('knobs2');
-let knob3 = document.getElementById('knobs3');
-let knob4 = document.getElementById('knobs4');
-
-
-function changeKnobPosition(knob, x, y, z){
-    if(knob == 0){
-        if(x == 0 && y == 0){
-            knob1.style.display = 'none';
-        } else {
-            x = (window.innerHeight / 127) * x;
-            y = (window.innerWidth / 127) * y;
-
-            knob1.style.top = x + 'px';
-            knob1.style.left = y + 'px'; 
-            knob1.style.display = 'block';
-        }
+function changeKnobPosition(knob, x, y){
+    if(x == 0 && y == 0){
+        glowKnobs[knob].style.display = 'none';
+    } else {
+        x = (window.innerHeight / 127) * x;
+        y = (window.innerWidth / 127) * y;
+        
+        glowKnobs[knob].style.display = 'block';
+        glowKnobs[knob].style.top = x + 'px';
+        glowKnobs[knob].style.left = y + 'px'; 
     }
-    if(knob == 1){
-        if(x == 0 && y == 0){
-            knob2.style.display = 'none';
-        } else {
-            x = (window.innerHeight / 127) * x;
-            y = (window.innerWidth / 127) * y;
-
-            knob2.style.top = x + 'px';
-            knob2.style.left = y + 'px'; 
-            knob2.style.display = 'block';
-        }
-    }
-    if(knob == 2){
-        if(x == 0 && y == 0){
-            knob3.style.display = 'none';
-        } else {
-            x = (window.innerHeight / 127) * x;
-            y = (window.innerWidth / 127) * y;
-
-            knob3.style.top = x + 'px';
-            knob3.style.left = y + 'px'; 
-            knob3.style.display = 'block';
-        }
-    }
-    if(knob == 3){
-        if(x == 0 && y == 0){
-            knob4.style.display = 'none';
-        } else {
-            x = (window.innerHeight / 127) * x;
-            y = (window.innerWidth / 127) * y;
-
-            knob4.style.top = x + 'px';
-            knob4.style.left = y + 'px'; 
-            knob4.style.display = 'block';
-        }
-    }
+    
+//    if(knob == 0){
+//        if(x == 0 && y == 0){
+//            knob1.style.display = 'none';
+//        } else {
+//            x = (window.innerHeight / 127) * x;
+//            y = (window.innerWidth / 127) * y;
+//
+//            knob1.style.top = x + 'px';
+//            knob1.style.left = y + 'px'; 
+//            knob1.style.display = 'block';
+//        }
+//    }
+//    if(knob == 1){
+//        if(x == 0 && y == 0){
+//            knob2.style.display = 'none';
+//        } else {
+//            x = (window.innerHeight / 127) * x;
+//            y = (window.innerWidth / 127) * y;
+//
+//            knob2.style.top = x + 'px';
+//            knob2.style.left = y + 'px'; 
+//            knob2.style.display = 'block';
+//        }
+//    }
+//    if(knob == 2){
+//        if(x == 0 && y == 0){
+//            knob3.style.display = 'none';
+//        } else {
+//            x = (window.innerHeight / 127) * x;
+//            y = (window.innerWidth / 127) * y;
+//
+//            knob3.style.top = x + 'px';
+//            knob3.style.left = y + 'px'; 
+//            knob3.style.display = 'block';
+//        }
+//    }
+//    if(knob == 3){
+//        if(x == 0 && y == 0){
+//            knob4.style.display = 'none';
+//        } else {
+//            x = (window.innerHeight / 127) * x;
+//            y = (window.innerWidth / 127) * y;
+//
+//            knob4.style.top = x + 'px';
+//            knob4.style.left = y + 'px'; 
+//            knob4.style.display = 'block';
+//        }
+//    }
 }
 
 // MIDIListener
@@ -131,7 +155,7 @@ function onMIDIMessage(event) {
         case 128:
             if(knobs[knob] !== null){
                 knobs[knob].instrumentValue.changeAxis(x, event.data[1], event.data[2]);   
-                changeKnobPosition(knob, event.data[1], event.data[2]);
+                changeKnobPosition(knob, event.data[1]);
             }
             break;
     }

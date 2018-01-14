@@ -73,8 +73,15 @@ class Song {
     }
     
     stopSong(){
-        this.context.close();
+        this.instruments.forEach((instrument) => {
+            console.log(instrument);
+            instrument.stopInstrument();
+        });
     }
+    
+//    stopSong(){
+//        this.context.close();
+//    }
     
     get getInstruments(){
         return this.instruments;

@@ -33,6 +33,12 @@ class Drums{
         });
     }
     
+    stopInstrument(){
+        this.drums.forEach((drum) => {
+            drum.stopInstrument(); 
+        });
+    }
+    
     changeAxis(x, y, z){
         console.log(this.drums);
         if(x > 63){
@@ -75,41 +81,7 @@ class Drums{
                     drum.changeGain(0);
                 }
             })
-        }
-        
-
-        
-        /*if(y > 63){
-            this.drums[1].changeGain(1);
-        } else {
-            this.drums[1].changeGain(0);
-        }
-        
-        if(z > 63){
-            this.drums[2].changeGain(1);
-        } else {
-            this.drums[2].changeGain(0);
-        }*/
-        /*if(x == 0 && y == 0){
-            this.drums.forEach((drum) => {
-                drum.changeGain(0);
-            });
-            this.drums[0].changeGain(1);
-        } else if(x == 127 && y == 0){
-            this.drums.forEach((drum) => {
-                drum.changeGain(0); 
-            });
-            this.drums[1].changeGain(1);
-        } else if(x == 0 && y == 127){
-            this.drums.forEach((drum) => {
-                drum.changeGain(0); 
-            });
-            this.drums[2].changeGain(1);
-        } else if(x == 127 && y == 127){
-            this.drums.forEach((drum) => {
-                drum.changeGain(1); 
-            });
-        }*/        
+        }      
     }
     
 }

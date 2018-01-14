@@ -53,6 +53,10 @@ class Drum {
         this.volume = value;
     }
     
+    stopInstrument(){
+        clearTimeout(this.timerID);
+    }
+    
     get getName(){
         return this.name;
     }
