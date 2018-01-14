@@ -10,8 +10,9 @@ if(localStorage.getItem('song') === '1'){
 
 // fill the select boxes with the selection of instruments in the song
 let selectBoxes = document.getElementsByClassName('instruments');
-
 let glowKnobs = document.getElementsByClassName('knob'); 
+let startButton = document.getElementById('start');
+let stopButton = document.getElementById('stop');
 
 //let knob1 = document.getElementById('knobs1');
 //let knob2 = document.getElementById('knobs2');
@@ -31,12 +32,29 @@ song.loadSong().then(() => {
 
 
 // stop the song
-document.getElementById('stop').addEventListener('click', function(){
-   song.stopSong(); 
+stopButton.addEventListener('click', function(){
+    knobs.forEach((knob, i) => {
+        knobs[i] = null;
+    });
+    
+    console.log(knobs);
+     Array.prototype.forEach.call(selectBoxes, (selectBox) => {
+        selectBox.style.display = 'block';
+    });
+    
+    Array.prototype.forEach.call(glowKnobs, (glowKnob) => {
+       glowKnob.style.position = 'relative'; 
+       glowKnob.style.display = 'block'; 
+    });
+   
+    
+    stopButton.style.display = 'none';
+    startButton.style.display = 'block';
+    song.stopSong(); 
 });
 
 // initalize a knob with the selected instrument when clicking start and play the song
-document.getElementById('start').addEventListener('click', function(){
+startButton.addEventListener('click', function(){
     knobs.forEach((knob, i) => {
         if(selectBoxes[i].options[selectBoxes[i].selectedIndex].text != 'Select an instrument'){
             console.log( selectBoxes[i].selectedIndex);
@@ -56,6 +74,9 @@ document.getElementById('start').addEventListener('click', function(){
             glowKnobs[i].style.position = 'absolute';
         }
     });
+    
+    stopButton.style.display = 'block';
+    startButton.style.display = 'none';
     
     console.log(knobs);
     song.playSong();
