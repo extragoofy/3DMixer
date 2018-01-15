@@ -7,15 +7,23 @@ body{
     background: #000;
     text-align: center;
     font-family: 'Lato', sans-serif;
-    padding-top: 60px;
     overflow: hidden;
+}
+
+#main{
+    height: 100%;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 h1{
     text-transform: uppercase;
     font-weight: 300;
-    margin-bottom: 50px;
     color: #E7E7E7;
+    flex: 0 1 auto;
 }
 
 .knob{
@@ -77,9 +85,8 @@ h1{
     display: flex;
     width: 100%;
     justify-content: space-around;
-    /*position: absolute;*/
-    top: 50%;
-    /*transform: translate(0%, -50%);*/
+    align-items: center;
+    flex: 1 1 auto;
 }
 
 #start, #stop{
@@ -101,12 +108,8 @@ h1{
 }
 
 footer{
-    position: absolute;
-    bottom: 0px;
+    flex: 0 1 40px;
     margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
 }
 
 .column{
