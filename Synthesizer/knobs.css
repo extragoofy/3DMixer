@@ -110,9 +110,34 @@ h1{
 footer{
     flex: 0 1 40px;
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .column{
     display: flex;
     flex-direction: column;
+}
+
+#back{
+    color: #fff;
+    margin-right: auto;
+    margin-left: 40px;
+}
+
+#back a{
+    color: #fff;
+    text-decoration: none;
+}
+
+#back a:hover{
+    text-decoration: underline;
+}
+
+#hiddenDiv{
+    margin-left: auto;
+    margin-right: 40px;
+    visibility: hidden;
 }

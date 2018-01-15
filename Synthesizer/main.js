@@ -3,11 +3,11 @@ let knobs = [null, null, null, null];
 
 // initalize a song based on the song selection
 if(localStorage.getItem('song') === '1'){
-    song = new Song('./song1/song1.mid');
+    song = new Song('./songs/song1.mid');
 } else if(localStorage.getItem('song') === '2'){
-    song = new Song('song2.mid');
+    song = new Song('./songs/song2.mid');
 } else if(localStorage.getItem('song') === '3'){
-    song = new Song('song3.mid');
+    song = new Song('./songs/song3.mid');
 } else{
     console.log('Song not found!')
 }
@@ -18,6 +18,7 @@ let glowKnobs = document.getElementsByClassName('knob');
 let startButton = document.getElementById('start');
 let stopButton = document.getElementById('stop');
 let headline = document.getElementById('headline');
+let backLink = document.getElementById('back');
 
 //let knob1 = document.getElementById('knobs1');
 //let knob2 = document.getElementById('knobs2');
@@ -55,6 +56,7 @@ stopButton.addEventListener('click', function(){
     headline.style.display = 'block';
     stopButton.style.display = 'none';
     startButton.style.display = 'block';
+    backLink.style.visibility = 'visible';
     song.stopSong(); 
 });
 
@@ -83,6 +85,8 @@ startButton.addEventListener('click', function(){
     headline.style.display = 'none';
     stopButton.style.display = 'block';
     startButton.style.display = 'none';
+    
+    backLink.style.visibility = 'hidden';
     
     console.log(knobs);
     song.playSong();

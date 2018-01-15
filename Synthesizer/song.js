@@ -20,7 +20,7 @@ class Song {
             let instrumentConfigs;
             var xobj = new XMLHttpRequest();
             xobj.overrideMimeType("application/json");
-            xobj.open('GET', './song1/song1.json', true);
+            xobj.open('GET', './songs/song.json', true);
             xobj.onreadystatechange = () => {
                 if (xobj.readyState == 4 && xobj.status == "200") {
                     this.drums = JSON.parse(xobj.responseText).drums;
