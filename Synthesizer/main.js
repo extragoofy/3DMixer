@@ -4,6 +4,10 @@ let knobs = [null, null, null, null];
 // initalize a song based on the song selection
 if(localStorage.getItem('song') === '1'){
     song = new Song('./song1/song1.mid');
+} else if(localStorage.getItem('song') === '2'){
+    song = new Song('song2.mid');
+} else if(localStorage.getItem('song') === '3'){
+    song = new Song('song3.mid');
 } else{
     console.log('Song not found!')
 }
@@ -13,6 +17,7 @@ let selectBoxes = document.getElementsByClassName('instruments');
 let glowKnobs = document.getElementsByClassName('knob'); 
 let startButton = document.getElementById('start');
 let stopButton = document.getElementById('stop');
+let headline = document.getElementById('headline');
 
 //let knob1 = document.getElementById('knobs1');
 //let knob2 = document.getElementById('knobs2');
@@ -47,7 +52,7 @@ stopButton.addEventListener('click', function(){
        glowKnob.style.display = 'block'; 
     });
    
-    
+    headline.style.display = 'block';
     stopButton.style.display = 'none';
     startButton.style.display = 'block';
     song.stopSong(); 
@@ -75,6 +80,7 @@ startButton.addEventListener('click', function(){
         }
     });
     
+    headline.style.display = 'none';
     stopButton.style.display = 'block';
     startButton.style.display = 'none';
     
