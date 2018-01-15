@@ -27,6 +27,7 @@ h1{
     position: absolute;
     top: 50%;
     transform: translate(0%, -50%);
+    align-items: center;
 }
 
 .song{
@@ -35,16 +36,24 @@ h1{
     box-shadow: 0 0 10px 0 #8686863d;
     cursor: pointer;
     background-size: cover;
+    position: absolute;
+    margin: 0 100px;
 }
 
 #song1{
     background-image: url(img/Song1Cover.png);
+    left: 0px;
 }
 
 #song2{
-    background-image: url(img/Song2Cover.png);
+    background-image: url(img/CoverNoSleep.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
 #song3{
-    background-image: url(img/Song3Cover.png);
+    background-image: url(img/CoverRetro.jpg);
+    right: 0px;
 }
