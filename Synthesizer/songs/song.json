@@ -22,14 +22,14 @@
         },
         "filter": {
             "type": "lowpass",
-            "cutoff": 1000,
+            "cutoff": 5.292,
             "resonance": 0
         },
         "X-Axis": "lowpassFilter",
         "Y-Axis": "filterQ",
         "Z-Axis": "volume",
         "filterQ": 0,
-        "volume": 1
+        "volume": 127
     },
     "synth": {
         "oscillatorA": {
@@ -53,14 +53,14 @@
         },
         "filter": {
             "type": "lowpass",
-            "cutoff": 1000,
+            "cutoff": 5.292,
             "resonance": 0
         },
         "X-Axis": "lowpassFilter",
         "Y-Axis": "volume",
         "Z-Axis": "empty",
         "filterQ": 0,
-        "volume": 0.6
+        "volume": 76.2
     }, 
     "flute": {
         "oscillatorA": {
@@ -84,13 +84,13 @@
         },
         "filter": {
             "type": "lowpass",
-            "cutoff": 1000,
+            "cutoff": 5.292,
             "resonance": 0
         },
         "X-Axis": "lowpassFilter",
         "Y-Axis": "volume",
         "Z-Axis": "empty",
         "filterQ": 0,
-         "volume": 1
+        "volume": 127
     }
 }

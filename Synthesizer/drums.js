@@ -13,7 +13,7 @@ class Drums{
     initializeDrums(){
         this.drumList.forEach((drum) => {
             let request = new XMLHttpRequest();
-            request.open('GET', `./song1/${drum}.wav`, true); 
+            request.open('GET', `./songs/${drum}.wav`, true); 
             request.responseType = 'arraybuffer';
             request.onload = () => {
                 let undecodedAudio = request.response; this.context.decodeAudioData(undecodedAudio, (buffer) => {

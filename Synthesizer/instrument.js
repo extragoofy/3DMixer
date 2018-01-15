@@ -70,16 +70,16 @@ class Instrument{
     
     playSound(time){
         this.filter1.type = this.configs.filter.type;
-        this.filter1.Q.value = this.filters.filterQ;
-        this.filter1.frequency.value = this.filters.lowpassFilter;
+        this.filter1.Q.value = (20 / 127) * this.filters.filterQ;
+        this.filter1.frequency.value = (24000 / 127) * this.filters.lowpassFilter;
         
         this.filter2.type = this.configs.filter.type;
-        this.filter2.Q.value = this.filters.filterQ;
-        this.filter2.frequency.value = this.filters.lowpassFilter;
+        this.filter2.Q.value = (20 / 127) * this.filters.filterQ;
+        this.filter2.frequency.value = (24000 / 127) * this.filters.lowpassFilter;
         
         
         this.gainNodeA.gain.setValueAtTime(0.0, time);
-        this.gainNodeA.gain.linearRampToValueAtTime(this.filters.volume, time + this.configs.ampEnv.attack); 
+        this.gainNodeA.gain.linearRampToValueAtTime(((1 / 127) * this.filters.volume), time + this.configs.ampEnv.attack); 
 
         for(let i = 0; i < this.filters.oscillatorAVoices; i++){
             this.oscillatorsA[i] = this.audioContext.createOscillator();
@@ -130,9 +130,12 @@ class Instrument{
     }
     
     changeAxis(x, y, z){
-        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
-        this.filters[this.configs['Y-Axis']] = (1 / 127) * y;
-        this.filters[this.configs['Z-Axis']] = (1 / 127) * z;
+        this.filters[this.configs['X-Axis']] = x;
+        this.filters[this.configs['Y-Axis']] = y;
+        this.filters[this.configs['Z-Axis']] = z;
+//        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
+//        this.filters[this.configs['Y-Axis']] = (1 / 127) * y;
+//        this.filters[this.configs['Z-Axis']] = (1 / 127) * z;
     }
     
     stopInstrument(){
