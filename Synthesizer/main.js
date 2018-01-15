@@ -4,14 +4,20 @@ let knobs = [null, null, null, null];
 // initalize a song based on the song selection
 if(localStorage.getItem('song') === '1'){
     song = new Song('./song1/song1.mid');
+} else if(localStorage.getItem('song') === '2'){
+    song = new Song('song2.mid');
+} else if(localStorage.getItem('song') === '3'){
+    song = new Song('song3.mid');
 } else{
     console.log('Song not found!')
 }
 
 // fill the select boxes with the selection of instruments in the song
 let selectBoxes = document.getElementsByClassName('instruments');
-
 let glowKnobs = document.getElementsByClassName('knob'); 
+let startButton = document.getElementById('start');
+let stopButton = document.getElementById('stop');
+let headline = document.getElementById('headline');
 
 //let knob1 = document.getElementById('knobs1');
 //let knob2 = document.getElementById('knobs2');
@@ -31,12 +37,29 @@ song.loadSong().then(() => {
 
 
 // stop the song
-document.getElementById('stop').addEventListener('click', function(){
-   song.stopSong(); 
+stopButton.addEventListener('click', function(){
+    knobs.forEach((knob, i) => {
+        knobs[i] = null;
+    });
+    
+    console.log(knobs);
+     Array.prototype.forEach.call(selectBoxes, (selectBox) => {
+        selectBox.style.display = 'block';
+    });
+    
+    Array.prototype.forEach.call(glowKnobs, (glowKnob) => {
+       glowKnob.style.position = 'relative'; 
+       glowKnob.style.display = 'block'; 
+    });
+   
+    headline.style.display = 'block';
+    stopButton.style.display = 'none';
+    startButton.style.display = 'block';
+    song.stopSong(); 
 });
 
 // initalize a knob with the selected instrument when clicking start and play the song
-document.getElementById('start').addEventListener('click', function(){
+startButton.addEventListener('click', function(){
     knobs.forEach((knob, i) => {
         if(selectBoxes[i].options[selectBoxes[i].selectedIndex].text != 'Select an instrument'){
             console.log( selectBoxes[i].selectedIndex);
@@ -56,6 +79,10 @@ document.getElementById('start').addEventListener('click', function(){
             glowKnobs[i].style.position = 'absolute';
         }
     });
+    
+    headline.style.display = 'none';
+    stopButton.style.display = 'block';
+    startButton.style.display = 'none';
     
     console.log(knobs);
     song.playSong();
