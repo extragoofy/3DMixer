@@ -92,8 +92,8 @@ Mat Tracker::colorKeying(int knobID, Mat& hsvFrame) {
 
             // Maskierung und Schwerpunktsberechnung
             bool isWhite = false;
-            if (knobs[knobID].color_minVal <= value <= knobs[knobID].color_maxVal) {
-                if (knobs[knobID].color_minSat <= saturation <= knobs[knobID].color_maxSat) {
+            if (knobs[knobID].color_minVal <= value && value <= knobs[knobID].color_maxVal) {
+                if (knobs[knobID].color_minSat <= saturation && saturation <= knobs[knobID].color_maxSat) {
                     if (knobs[knobID].color_minHue < knobs[knobID].color_maxHue) {
                         if (hue >= knobs[knobID].color_minHue && hue <= knobs[knobID].color_maxHue){
                             isWhite = true;
@@ -179,6 +179,57 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
             break;
         }
     }
+    /*
+    x = center.x + 1;
+    y = center.y + 1;
+    // Measure radius from center right down
+    while (x < image.cols && y < image.rows) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+            x++;
+            y++;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center right up
+    x = center.x + 1;
+    y = center.y - 1;
+    while (x < image.cols && y >= 0) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+            x++;
+            y--;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center left up
+    x = center.x - 1;
+    y = center.y - 1;
+    while (x >= 0 && y >= 0) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+            x--;
+            y--;
+        } else {
+            break;
+        }
+    }
+    // Measure radius from center left down
+    x = center.x - 1;
+    y = center.y + 1;
+    while (x >= 0 && y < image.rows) {
+        if (image.at<uchar>(y,x) == 255) {
+            sum++;
+            x--;
+            y++;
+        } else {
+            break;
+        }
+    }
+    */
+
     // Divide by 4 to get average radius in all directions
     radius = sum / 4;
     // Apply to knob record and break down to fit a 1-byte-value (up to 127)
