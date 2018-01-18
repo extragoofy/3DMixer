@@ -1,18 +1,33 @@
 #include "tracker.h"
-#include <QDebug>
 
 using namespace cv;
 using namespace std;
 
 Tracker::Tracker()
+    : useBlur(true)
+    , useErode(true)
+    , useDilate(true)
+    , activeView(0)
 {
     initializeKnobs();
     binaryFrames = QVector<cv::Mat>(5);
-    activeView = 0;
     radius = 0;
-    useBlur = true;
-    useErode = true;
-    useDilate = true;
+}
+
+void Tracker::initializeKnobs() {
+    knobs = QVector<knob>(4);
+    for (int i = 0; i < 4; i++) {
+        knobs[i].active = false;
+        knobs[i].color_minHue = 0;
+        knobs[i].color_maxHue = 0;
+        knobs[i].color_minSat = 0;
+        knobs[i].color_maxSat = 0;
+        knobs[i].color_minVal = 0;
+        knobs[i].color_maxVal = 0;
+        knobs[i].xCoords = 0;
+        knobs[i].yCoords = 0;
+        knobs[i].zCoords = 0;
+    }
 }
 
 Mat Tracker::process(const Mat &input) {
@@ -52,12 +67,12 @@ Mat Tracker::process(const Mat &input) {
 void Tracker::updateKnobParameters(const QVector<int> &paramData) {
     for (int i = 0; i < 4; i++) {
         knobs[i].active = paramData[i*7];
-        knobs[i].color_minHue = paramData[i*7+1] / 2;
-        knobs[i].color_maxHue = paramData[i*7+2] / 2;
-        knobs[i].color_minSat = paramData[i*7+3] * 2.55;
-        knobs[i].color_maxSat = paramData[i*7+4] * 2.55;
-        knobs[i].color_minVal = paramData[i*7+5] * 2.55;
-        knobs[i].color_maxVal = paramData[i*7+6] * 2.55;
+        knobs[i].color_minHue = paramData[i*7+1];
+        knobs[i].color_maxHue = paramData[i*7+2];
+        knobs[i].color_minSat = paramData[i*7+3];
+        knobs[i].color_maxSat = paramData[i*7+4];
+        knobs[i].color_minVal = paramData[i*7+5];
+        knobs[i].color_maxVal = paramData[i*7+6];
     }
 }
 
@@ -67,10 +82,6 @@ void Tracker::updateCoordData(QVector<int> &data) {
         data[i*3+1] = knobs[i].yCoords;
         data[i*3+2] = knobs[i].zCoords;
     }
-}
-
-void Tracker::setView(int id) {
-    activeView = id;
 }
 
 void Tracker::getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z) {
@@ -89,7 +100,6 @@ Mat Tracker::colorKeying(int knobID, Mat& hsvFrame) {
             int hue = hsvPixel[0];
             int saturation = hsvPixel[1];
             int value = hsvPixel[2];
-
             // Maskierung und Schwerpunktsberechnung
             bool isWhite = false;
             if (knobs[knobID].color_minVal <= value && value <= knobs[knobID].color_maxVal) {
@@ -237,20 +247,4 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
     knobs[knobID].yCoords = center.y / 3.76;
     knobs[knobID].zCoords = radius / 2.2;
     if (knobs[knobID].zCoords > 127) knobs[knobID].zCoords = 127;
-}
-
-void Tracker::initializeKnobs() {
-    knobs = QVector<knob>(4);
-    for (int i = 0; i < 4; i++) {
-        knobs[i].active = false;
-        knobs[i].color_minHue = 0;
-        knobs[i].color_maxHue = 0;
-        knobs[i].color_minSat = 0;
-        knobs[i].color_maxSat = 0;
-        knobs[i].color_minVal = 0;
-        knobs[i].color_maxVal = 0;
-        knobs[i].xCoords = 0;
-        knobs[i].yCoords = 0;
-        knobs[i].zCoords = 0;
-    }
 }

@@ -16,7 +16,17 @@ class Output : public QObject
     Q_OBJECT
 
 public:
-    Output(Tracker * trackerInstance);
+    struct knobCoordData {
+        knobCoordData()
+            : x(0)
+            , y(0)
+            , z(0)
+        {}
+        uchar x;
+        uchar y;
+        uchar z;
+    };
+    Output(Tracker* trackerInstance);
     ~Output();
     int interval;
     void setMidiDeviceID(int id);

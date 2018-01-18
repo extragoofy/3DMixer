@@ -36,8 +36,9 @@ private:
     Tracker * tracker;
     Output * output;
     QTimer * updateTimer;
-    QVector<int> knobParams;
-    QVector<int> knobCoords;
+    QVector<Output::knobCoordData> knobCoords;
+    QVector<uchar> knobParams;
+    QVector<uchar> knobCoords;
     void setUpVideo();
     void setUpValidators();
     void setUpUiEvents();

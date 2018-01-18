@@ -1,3 +1,8 @@
+/*
+ * by Prof. Andreas Plaß
+ * HAW Hamburg
+ */
+
 #ifndef VIDEOWIDGET_H
 #define VIDEOWIDGET_H
 #include <QLabel>

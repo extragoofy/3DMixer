@@ -49,8 +49,10 @@ stopButton.addEventListener('click', function(){
     });
     
     Array.prototype.forEach.call(glowKnobs, (glowKnob) => {
-       glowKnob.style.position = 'relative'; 
-       glowKnob.style.display = 'block'; 
+        glowKnob.style.position = 'relative'; 
+        glowKnob.style.display = 'block';
+        glowKnob.style.top = '0px'; 
+        glowKnob.style.right = '0px'; 
     });
    
     headline.style.display = 'block';
@@ -96,12 +98,12 @@ function changeKnobPosition(knob, x, y){
     if(x == 0 && y == 0){
         glowKnobs[knob].style.display = 'none';
     } else {
-        x = (window.innerHeight / 127) * x;
-        y = (window.innerWidth / 127) * y;
+        x = (window.innerWidth / 127) * x;
+        y = (window.innerHeight / 127) * y;
         
         glowKnobs[knob].style.display = 'block';
-        glowKnobs[knob].style.top = x + 'px';
-        glowKnobs[knob].style.left = y + 'px'; 
+        glowKnobs[knob].style.top = y + 'px';
+        glowKnobs[knob].style.right = x + 'px'; 
     }
     
 //    if(knob == 0){
@@ -186,7 +188,7 @@ function onMIDIMessage(event) {
         case 128:
             if(knobs[knob] !== null){
                 knobs[knob].instrumentValue.changeAxis(x, event.data[1], event.data[2]);   
-                changeKnobPosition(knob, event.data[1]);
+                changeKnobPosition(knob, x, event.data[1]);
             }
             break;
     }

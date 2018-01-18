@@ -1,3 +1,8 @@
+/*
+ * by Prof. Andreas Plaß
+ * HAW Hamburg
+ */
+
 #include "videoformat.h"
 #include <sstream>
 VideoFormat::VideoFormat()

@@ -4,49 +4,71 @@
 #include <QLabel>
 #include <QVector>
 #include <stdio.h>     /* for printf() function */
-#include "videoprocessor.h"
 
-class Tracker : public VideoProcessor
+class Tracker
 {
 
+public:
+    Tracker();
+
+    // Main struct for knobs
     struct knob {
+        knob()
+            : active(false)
+            , color_minHue(0)
+            , color_maxHue(0)
+            , color_minSat(0)
+            , color_maxSat(0)
+            , color_minVal(0)
+            , color_maxVal(0)
+            , xCoords(0)
+            , yCoords(0)
+            , zCoords(0)
+        {}
         bool active;
-        int color_minHue;
-        int color_maxHue;
-        int color_minSat;
-        int color_maxSat;
-        int color_minVal;
-        int color_maxVal;
-        int xCoords;
-        int yCoords;
-        int zCoords;
+        uchar color_minHue;
+        uchar color_maxHue;
+        uchar color_minSat;
+        uchar color_maxSat;
+        uchar color_minVal;
+        uchar color_maxVal;
+        uchar xCoords;
+        uchar yCoords;
+        uchar zCoords;
     };
 
-public:
-    // SETTINGS
-    int maxDistance;    // Maximum distance the tracker should track on the z axis
-    Tracker();
-    void startProcessing(const VideoFormat& format){}
+    // Main processing function
     cv::Mat process(const cv::Mat& source);
+
+    // Data handling
     void updateKnobParameters(const QVector<int> &paramData);
     void updateCoordData(QVector<int>& target);
-    void setView(int id);
     void getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z);
+
+    // Options
     bool useBlur;
     bool useErode;
     bool useDilate;
+    uchar activeView;
 
 private:
+    // Initialization
+    void initializeKnobs();
+
+    // Processing algorithms
+    cv::Mat colorKeying(int knobID, cv::Mat& hsvFrame);
+    void centerOfMass(int knobID, cv::Mat& image);
+    void getRadius(int knobID, cv::Mat& image);
+
+    // Drawing functions
+    void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
+
+    // Data storage for each knob
     QVector<knob> knobs;
     QVector<cv::Mat> binaryFrames;
-    int activeView;
-    cv::Point center;
-    int radius;
-    void initializeKnobs();
-    void centerOfMass(int knobID, cv::Mat& image);
-    cv::Mat colorKeying(int knobID, cv::Mat& hsvFrame);
-    void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
-    void getRadius(int knobID, cv::Mat& image);
+    QVector<cv::Point> center;
+    QVector<int> radius;
+
 };
 
 #endif // TRACKER_H

@@ -1,3 +1,8 @@
+/*
+ * by Prof. Andreas Plaß
+ * HAW Hamburg
+ */
+
 #include "videowidget.h"
 #include <QPalette>
 VideoWidget::VideoWidget(QWidget *parent)

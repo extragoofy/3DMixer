@@ -1,3 +1,8 @@
+/*
+ * by Prof. Andreas Plaß
+ * HAW Hamburg
+ */
+
 #ifndef VIDEOFORMAT_H
 #define VIDEOFORMAT_H
 #include <opencv2/opencv.hpp>

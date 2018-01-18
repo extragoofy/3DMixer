@@ -14,8 +14,8 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    videoEngine(new VideoEngine),
     tracker(new Tracker),
+    videoEngine(new VideoEngine(tracker)),
     output(new Output(tracker)),
     updateTimer(new QTimer(this))
 {
@@ -135,33 +135,33 @@ void MainWindow::updateParameters() {
 
     // Update knobParams vector containing all parameter data
     knobParams[0] = ui->knobA_isActive->isChecked();
-    knobParams[1] = ui->knobA_colorHueMin->text().toInt();
-    knobParams[2] = ui->knobA_colorHueMax->text().toInt();
-    knobParams[3] = ui->knobA_colorSatMin->text().toInt();
-    knobParams[4] = ui->knobA_colorSatMax->text().toInt();
-    knobParams[5] = ui->knobA_colorValMin->text().toInt();
-    knobParams[6] = ui->knobA_colorValMax->text().toInt();
+    knobParams[1] = ui->knobA_colorHueMin->text().toInt() / 2;
+    knobParams[2] = ui->knobA_colorHueMax->text().toInt() / 2;
+    knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 2.55;
+    knobParams[4] = ui->knobA_colorSatMax->text().toInt() * 2.55;
+    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 2.55;
+    knobParams[6] = ui->knobA_colorValMax->text().toInt() * 2.55;
     knobParams[7] = ui->knobB_isActive->isChecked();
-    knobParams[8] = ui->knobB_colorHueMin->text().toInt();
-    knobParams[9] = ui->knobB_colorHueMax->text().toInt();
-    knobParams[10] = ui->knobB_colorSatMin->text().toInt();
-    knobParams[11] = ui->knobB_colorSatMax->text().toInt();
-    knobParams[12] = ui->knobB_colorValMin->text().toInt();
-    knobParams[13] = ui->knobB_colorValMax->text().toInt();
+    knobParams[8] = ui->knobB_colorHueMin->text().toInt() / 2;
+    knobParams[9] = ui->knobB_colorHueMax->text().toInt() / 2;
+    knobParams[10] = ui->knobB_colorSatMin->text().toInt() * 2.55;
+    knobParams[11] = ui->knobB_colorSatMax->text().toInt() * 2.55;
+    knobParams[12] = ui->knobB_colorValMin->text().toInt() * 2.55;
+    knobParams[13] = ui->knobB_colorValMax->text().toInt() * 2.55;
     knobParams[14] = ui->knobC_isActive->isChecked();
-    knobParams[15] = ui->knobC_colorHueMin->text().toInt();
-    knobParams[16] = ui->knobC_colorHueMax->text().toInt();
-    knobParams[17] = ui->knobC_colorSatMin->text().toInt();
-    knobParams[18] = ui->knobC_colorSatMax->text().toInt();
-    knobParams[19] = ui->knobC_colorValMin->text().toInt();
-    knobParams[20] = ui->knobC_colorValMax->text().toInt();
+    knobParams[15] = ui->knobC_colorHueMin->text().toInt() / 2;
+    knobParams[16] = ui->knobC_colorHueMax->text().toInt() / 2;
+    knobParams[17] = ui->knobC_colorSatMin->text().toInt() * 2.55;
+    knobParams[18] = ui->knobC_colorSatMax->text().toInt() * 2.55;
+    knobParams[19] = ui->knobC_colorValMin->text().toInt() * 2.55;
+    knobParams[20] = ui->knobC_colorValMax->text().toInt() * 2.55;
     knobParams[21] = ui->knobD_isActive->isChecked();
-    knobParams[22] = ui->knobD_colorHueMin->text().toInt();
-    knobParams[23] = ui->knobD_colorHueMax->text().toInt();
-    knobParams[24] = ui->knobD_colorSatMin->text().toInt();
-    knobParams[25] = ui->knobD_colorSatMax->text().toInt();
-    knobParams[26] = ui->knobD_colorValMin->text().toInt();
-    knobParams[27] = ui->knobD_colorValMax->text().toInt();
+    knobParams[22] = ui->knobD_colorHueMin->text().toInt() / 2;
+    knobParams[23] = ui->knobD_colorHueMax->text().toInt() / 2;
+    knobParams[24] = ui->knobD_colorSatMin->text().toInt() * 2.55;
+    knobParams[25] = ui->knobD_colorSatMax->text().toInt() * 2.55;
+    knobParams[26] = ui->knobD_colorValMin->text().toInt() * 2.55;
+    knobParams[27] = ui->knobD_colorValMax->text().toInt() * 2.55;
 
     // Call tracker to update its parameters using this data
     tracker->updateKnobParameters(knobParams);
@@ -224,7 +224,7 @@ void MainWindow::on_knobA_isView_clicked()
     if (ui->knobA_isView->isCheckable()) {
         resetRadioButtons();
         ui->knobA_isView->setChecked(true);
-        tracker->setView(0);
+        tracker->activeView = 0;
     }
 }
 
@@ -233,7 +233,7 @@ void MainWindow::on_knobB_isView_clicked()
     if (ui->knobB_isView->isCheckable()) {
         resetRadioButtons();
         ui->knobB_isView->setChecked(true);
-        tracker->setView(1);
+        tracker->activeView = 1;
     }
 }
 
@@ -242,7 +242,7 @@ void MainWindow::on_knobC_isView_clicked()
     if (ui->knobC_isView->isCheckable()) {
         resetRadioButtons();
         ui->knobC_isView->setChecked(true);
-        tracker->setView(2);
+        tracker->activeView = 2;
     }
 }
 
@@ -251,7 +251,7 @@ void MainWindow::on_knobD_isView_clicked()
     if (ui->knobD_isView->isCheckable()) {
         resetRadioButtons();
         ui->knobD_isView->setChecked(true);
-        tracker->setView(3);
+        tracker->activeView = 3;
     }
 }
 

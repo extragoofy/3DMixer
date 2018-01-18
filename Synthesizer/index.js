@@ -1,22 +1,11 @@
 let context = new AudioContext();
 let request = new XMLHttpRequest();
 let sourceBuffer;
+let hover = false;
 
 function handleMouseOver(song){
-    sourceBuffer = context.createBufferSource();
-    request.open('GET', `./songs/${song}.wav`, true);
-    request.responseType = 'arraybuffer';
-    request.onload = function () {
-        var undecodedAudio = request.response;
-        context.decodeAudioData(undecodedAudio, function (buffer) {
-            sourceBuffer.buffer = buffer;
-            sourceBuffer.loop = true;
-            sourceBuffer.connect(context.destination);
-            sourceBuffer.start(context.currentTime);
-        }); 
-    };
-    request.send();
-    document.getElementById(song).animate([
+    hover = true;
+     document.getElementById(song).animate([
     // keyframes
         { width: '300px', height: '300px' }, 
         { width: '350px', height: '350px' }
@@ -26,11 +15,27 @@ function handleMouseOver(song){
     });
     document.getElementById(song).style.width = '350px';
     document.getElementById(song).style.height = '350px';
+    sourceBuffer = context.createBufferSource();
+    request.open('GET', `./songs/${song}.wav`, true);
+    request.responseType = 'arraybuffer';
+    request.onload = function () {
+        var undecodedAudio = request.response;
+        context.decodeAudioData(undecodedAudio, function (buffer) {
+            sourceBuffer.buffer = buffer;
+            sourceBuffer.loop = true;
+            sourceBuffer.connect(context.destination);
+            if(hover == true){
+                sourceBuffer.start(context.currentTime);
+            }
+        }); 
+    };
+    request.send();
 }
 
 function handleMouseOut(song){
-    sourceBuffer.stop(context.currentTime);
-    document.getElementById(song).animate([
+    hover = false;
+    request.abort();
+     document.getElementById(song).animate([
     // keyframes
         { width: '350px', height: '350px' }, 
         { width: '300px', height: '300px' }
@@ -40,6 +45,7 @@ function handleMouseOut(song){
     });
     document.getElementById(song).style.width = '300px';
     document.getElementById(song).style.height = '300px';
+    sourceBuffer.stop(context.currentTime);
 }
 
 document.getElementById('song1').addEventListener('click', function(){

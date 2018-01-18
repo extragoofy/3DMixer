@@ -10,34 +10,17 @@
 
 VideoEngine::VideoEngine()
     : stopped(false)
-    , processor(0)
-    , usingCamera(false)
-{
+    , tracker(trackerInstance)
+{ 
 }
+
 VideoEngine::~VideoEngine(){
     stop();
     wait();
 }
+
 const VideoFormat& VideoEngine::videoFormat() const{
     return _videoFormat;
-}
-void VideoEngine::setProcessor(VideoProcessor *processor){
-    this->processor = processor;
-}
-
-void VideoEngine::openFile(const QString& file){
-    try {
-        bool success = videoCapture.open(file.toStdString());
-        if (!success){
-            qDebug() << "Error: cannot open File: " << file;
-        }
-        else{
-            _videoFormat.setFormat(videoCapture);
-            qDebug() << _videoFormat.toString().c_str();
-        }
-    } catch (cv::Exception e) {
-        qDebug() << e.err.c_str();
-    }
 }
 
 void VideoEngine::openCamera(int device){
@@ -64,18 +47,17 @@ void VideoEngine::stop()
 void VideoEngine::run()
 {
     if (videoCapture.isOpened()){
-        int milliSeconds = 1000/_videoFormat.framesPerSecond();
         int frameNumber = 0;
         while(!stopped)
         {
             cv::Mat cvFrame;
-            if (false == videoCapture.grab()){
+            if (!videoCapture.grab()){
                 qDebug() << "grab() failed";
                 break;
             }
-            if (false == videoCapture.retrieve(cvFrame, 0)){
+            if (!videoCapture.retrieve(cvFrame, 0)){
                 qDebug() << "retrieve() failed (1)";
-                if (false == videoCapture.retrieve(cvFrame, 0)){
+                if (!videoCapture.retrieve(cvFrame, 0)){
                     qDebug() << "retrieve() failed (2)";
                     break;
                 }
@@ -84,18 +66,13 @@ void VideoEngine::run()
             frameNumber++;
             if (frameNumber == 1){
                 _videoFormat.setType(cvFrame.type());
-                if (processor != 0){
-                    processor->startProcessing(_videoFormat);
-                }
             }
 
             // queue the image to the gui
             emit sendInputImage(cvMatToQImage(cvFrame));
 
             // Process Video Frame
-            if (processor != 0){
-                cvFrame = processor->process(cvFrame);
-            }
+            cvFrame = tracker->process(cvFrame);
 
             emit sendProcessedImage(cvMatToQImage(cvFrame));
 
@@ -104,14 +81,6 @@ void VideoEngine::run()
             if (stopped) {
                 break;
             }
-
-            if (usingCamera == false){
-                msleep(milliSeconds);
-            }
         }
     }
-}
-
-int VideoEngine::framePosition(){
-    return videoCapture.get(CV_CAP_PROP_POS_FRAMES);
 }
