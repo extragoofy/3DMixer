@@ -2,9 +2,8 @@
 #define TRACKER_H
 
 #include <opencv2/opencv.hpp>
-//#include <QLabel>
-//#include <QVector>
-#include <vector>
+#include <QLabel>
+#include <QVector>
 #include <stdio.h>     /* for printf() function */
 
 /*
@@ -12,7 +11,7 @@
  * It does all image tracking, calculation of knob positions and so on.
  */
 
-class Tracker
+class Tracker : public QObject
 {
 
 public:
@@ -44,7 +43,7 @@ public:
     struct KnobData {
         KnobData()
             : rgbColor(0)
-            , binaryFrame(0)        // Größe setzen?
+            //, binaryFrame(0)        // Größe setzen?
             , center(cv::Point())
             , radius(0)
         {}
@@ -70,9 +69,8 @@ public:
     cv::Mat process(const cv::Mat& source);
 
     // Data handling
-    vector<KnobCoords>& getKnobParams();
-    //void updateKnobParams(const vector<ushort> &paramData);
-    const vector<KnobCoords>& getKnobCoords();
+    void updateKnobParams(const QVector<uchar>& paramData);
+    const QVector<KnobCoords>& getKnobCoords();
     //void updateCoordData(QVector<int>& target);
     //void getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z);
 
@@ -93,12 +91,12 @@ private:
     void drawCross(cv::Mat& mat, const cv::Point& center, const int& length, const cv::Scalar& color);
 
     // Helper functions
-    void hueToRGB(const ushort& hue, cv::Scalar& bgr);
+    void hueToRGB(const uchar& hue, cv::Scalar& bgr);
 
     // Data storage for each knob
-    vector<KnobParams> knobParams;
-    vector<KnobData> knobData;
-    vector<KnobCoords> knobCoords;
+    QVector<KnobParams> knobParams;
+    QVector<KnobData> knobData;
+    QVector<KnobCoords> knobCoords;
 
 };
 

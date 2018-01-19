@@ -6,21 +6,21 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <QIntValidator>
-#include <QVector>
 
 using namespace cv;
 using namespace std;
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    tracker(new Tracker),
-    videoEngine(new VideoEngine(tracker)),
-    output(new Output(tracker)),
-    updateTimer(new QTimer(this))
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+    , tracker(new Tracker)
+    , videoEngine(new VideoEngine(tracker))
+    , output(new Output(tracker))
+    , updateTimer(new QTimer(this))
+    , knobParams(QVector<uchar>(28))
+
 {
-    knobParams = QVector<int>(28);
-    knobCoords = QVector<int>(12);
+    //knobCoords = QVector<int>(12);
     ui->setupUi(this);
     setUpVideo();
     setUpValidators();
@@ -39,7 +39,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::setUpVideo() {
-    videoEngine->setProcessor(tracker);
     connect(videoEngine, &VideoEngine::sendInputImage, ui->inputFrame, &VideoWidget::setImage);
     connect(videoEngine, &VideoEngine::sendProcessedImage, ui->outputFrame, &VideoWidget::setImage);
     videoEngine->openCamera(0);
@@ -164,7 +163,7 @@ void MainWindow::updateParameters() {
     knobParams[27] = ui->knobD_colorValMax->text().toInt() * 2.55;
 
     // Call tracker to update its parameters using this data
-    tracker->updateKnobParameters(knobParams);
+    tracker->updateKnobParams(knobParams);
 
     // Update color labels
     ui->knobA_colorLabel->setStyleSheet(createStylesheetColorString(0));
@@ -175,30 +174,11 @@ void MainWindow::updateParameters() {
     tracker->useBlur = ui->options_blur->isChecked();
     tracker->useErode = ui->options_erode->isChecked();
     tracker->useDilate = ui->options_dilate->isChecked();
-/*
-    // Enable/Disable radio buttons for views
-    ui->knobA_isView->setCheckable(knobParams[0]);
-    ui->knobB_isView->setCheckable(knobParams[7]);
-    ui->knobC_isView->setCheckable(knobParams[14]);
-    ui->knobD_isView->setCheckable(knobParams[21]);
-    if (!knobParams[0] && ui->knobA_isView->isChecked()) {
-        on_all_isView_clicked();
-    }
-    cout << knobParams[7];
-    if (!knobParams[7] && ui->knobB_isView->isChecked()) {
-        on_all_isView_clicked();
-        cout << "Happened";
-    }
-    if (!knobParams[14] && ui->knobC_isView->isChecked()) {
-        on_all_isView_clicked();
-    }
-    if (!knobParams[21] && ui->knobD_isView->isChecked()) {
-        on_all_isView_clicked();
-    }
-*/
+
 }
 
 void MainWindow::updateCoordLabels() {
+    /*
     tracker->updateCoordData(knobCoords);
     ui->knobA_xCoordsLabel->setText(QString::number(knobCoords[0]));
     ui->knobA_yCoordsLabel->setText(QString::number(knobCoords[1]));
@@ -213,6 +193,7 @@ void MainWindow::updateCoordLabels() {
     ui->knobD_yCoordsLabel->setText(QString::number(knobCoords[10]));
     ui->knobD_zCoordsLabel->setText(QString::number(knobCoords[11]));
     updateTimer->start(500);
+    */
 }
 
 void MainWindow::updateMidiOutputDeviceID() {

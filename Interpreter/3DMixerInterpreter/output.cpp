@@ -27,7 +27,7 @@ void Output::sendTrackerData() {
 
     for (int i = 0; i < 4; i++) {
         trackData[0] = i;
-        tracker->getCoordDataToSend(trackData[0], trackData[1], trackData[2], trackData[3]);
+        tracker->getKnobCoords();
         //printf("Knob: %d, x: %d, y: %d, z: %d \n", trackData[0], trackData[1], trackData[2], trackData[3]);
         message.data[0] = 0x90;
         message.data[1] = trackData[0];

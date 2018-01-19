@@ -19,10 +19,6 @@ VideoEngine::~VideoEngine(){
     wait();
 }
 
-const VideoFormat& VideoEngine::videoFormat() const{
-    return _videoFormat;
-}
-
 void VideoEngine::openCamera(int device){
     try {
         bool success = videoCapture.open(0  + device);

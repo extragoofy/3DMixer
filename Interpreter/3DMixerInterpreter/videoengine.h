@@ -26,6 +26,7 @@ signals:
     void sendInputImage(const QImage&);
     void sendProcessedImage(const QImage&);
 private:
+    Tracker* tracker;
     cv::VideoCapture videoCapture;
     VideoFormat _videoFormat;
     bool stopped;

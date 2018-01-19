@@ -1,15 +1,15 @@
 #include "tracker.h"
 
-//using namespace std;
+using namespace std;
 
 Tracker::Tracker()
     : useBlur(true)
     , useErode(true)
     , useDilate(true)
     , activeView(0)
-    , knobParams(vector<KnobParams>(4))
-    , knobData(vector<KnobData>(4))
-    , knobCoords(vector<KnobCoords>(4))
+    , knobParams(QVector<KnobParams>(4))
+    , knobData(QVector<KnobData>(4))
+    , knobCoords(QVector<KnobCoords>(4))
 {
 }
 
@@ -45,14 +45,11 @@ Mat Tracker::process(const Mat& input) {
     circle(output, knobData[i].center, knobData[i].radius, knobData[i].rgbColors);
 
     return output;
+
 }
 
-vector<KnobParams>& getKnobParams() {
-    return knobParams;
-}
+void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
 
-/*
-void Tracker::updateKnobParameters(const vector<int> &paramData) {
     for (int i = 0; i < 4; i++) {
         knobParams[i].active = paramData[i*7];
         knobParams[i].minHue = paramData[i*7+1];
@@ -62,7 +59,7 @@ void Tracker::updateKnobParameters(const vector<int> &paramData) {
         knobParams[i].minVal = paramData[i*7+5];
         knobParams[i].maxVal = paramData[i*7+6];
 
-        ushort averageHue = 0;
+        uchar averageHue = 0;
         if (knobParams[i].minHue < knobParams[i].maxHue) {
             averageHue = (knobParams[i].minHue + knobParams[i].maxHue) / 2;
         } else {
@@ -70,10 +67,10 @@ void Tracker::updateKnobParameters(const vector<int> &paramData) {
         }
         hueToRGB(averageHue, knobData[i].rgbColor);
     }
-}
-*/
 
-const vector<KnobCoords>& getKnobCoords() {
+}
+
+const QVector<KnobCoords>& getKnobCoords() {
     return knobCoords;
 }
 
@@ -224,29 +221,29 @@ void Tracker::drawCross(Mat& image, const Point& center, const int& length, cons
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
 }
 
-void Tracker::hueToRGB(const ushort hue, Scalar& bgr) {
+void Tracker::hueToRGB(const uchar hue, Scalar& bgr) {
     if (hue <= 30) {
         bgr[0] = 0;                         // 0
-        bgr[1] = 255 - (30 - hue) * 8,5;    // Rising
+        bgr[1] = 255 - (30 - hue) * 8.5;    // Rising
         bgr[2] = 255;                       // 255
     } else if (hue <= 60) {
         bgr[0] = 0;                         // 0
         bgr[1] = 255;                       // 255
-        bgr[2] = (60 - hue) * 8,5;          // Falling
+        bgr[2] = (60 - hue) * 8.5;          // Falling
     } else if (hue <= 90) {
-        bgr[0] = 255 - (90 - hue) * 8,5;    // Rising
+        bgr[0] = 255 - (90 - hue) * 8.5;    // Rising
         bgr[1] = 255;                       // 255
         bgr[2] = 0;                         // 0
     } else if (hue <= 120) {
         bgr[0] = 255;                       // 255
-        bgr[1] = (120 - hue) * 8,5;         // Falling
+        bgr[1] = (120 - hue) * 8.5;         // Falling
         bgr[2] = 0;                         // 0
     } else if (hue <= 150) {
         bgr[0] = 255;                       // 255
         bgr[1] = 0;                         // 0
-        bgr[2] = 255 - (150 - hue) * 8,5;   // Rising
+        bgr[2] = 255 - (150 - hue) * 8.5;   // Rising
     } else if (hue <= 180) {
-        bgr[0] = (180 - hue) * 8,5;         // Falling
+        bgr[0] = (180 - hue) * 8.5;         // Falling
         bgr[1] = 0;                         // 0
         bgr[2] = 255;                       // 255
     }
