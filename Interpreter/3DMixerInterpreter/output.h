@@ -16,16 +16,6 @@ class Output : public QObject
     Q_OBJECT
 
 public:
-    struct knobCoordData {
-        knobCoordData()
-            : x(0)
-            , y(0)
-            , z(0)
-        {}
-        uchar x;
-        uchar y;
-        uchar z;
-    };
     Output(Tracker* trackerInstance);
     ~Output();
     int interval;

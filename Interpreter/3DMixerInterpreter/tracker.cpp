@@ -1,81 +1,83 @@
 #include "tracker.h"
 
-using namespace cv;
-using namespace std;
+//using namespace std;
 
 Tracker::Tracker()
     : useBlur(true)
     , useErode(true)
     , useDilate(true)
     , activeView(0)
+    , knobParams(vector<KnobParams>(4))
+    , knobData(vector<KnobData>(4))
+    , knobCoords(vector<KnobCoords>(4))
 {
-    initializeKnobs();
-    binaryFrames = QVector<cv::Mat>(5);
-    radius = 0;
 }
 
-void Tracker::initializeKnobs() {
-    knobs = QVector<knob>(4);
-    for (int i = 0; i < 4; i++) {
-        knobs[i].active = false;
-        knobs[i].color_minHue = 0;
-        knobs[i].color_maxHue = 0;
-        knobs[i].color_minSat = 0;
-        knobs[i].color_maxSat = 0;
-        knobs[i].color_minVal = 0;
-        knobs[i].color_maxVal = 0;
-        knobs[i].xCoords = 0;
-        knobs[i].yCoords = 0;
-        knobs[i].zCoords = 0;
-    }
-}
-
-Mat Tracker::process(const Mat &input) {
+Mat Tracker::process(const Mat& input) {
 
     // convert BGR -> HSV
     Mat hsvFrame;
     cvtColor(input, hsvFrame, CV_BGR2HSV);
 
     for (int i = 0; i < 4; i++) {
-        if (knobs[i].active) {
-            binaryFrames[i] = colorKeying(i, hsvFrame);
-            if (useBlur) medianBlur(binaryFrames[i], binaryFrames[i], 5);
-            if (useErode) erode(binaryFrames[i], binaryFrames[i], Mat());
-            if (useDilate) dilate(binaryFrames[i], binaryFrames[i], Mat());
-            centerOfMass(i, binaryFrames[i]);
-            getRadius(i, binaryFrames[i]);
+        if (knobParams[i].active) {
+            knobData[i].binaryFrame = colorKeying(i, hsvFrame);
+            if (useBlur) medianBlur(knobData[i].binaryFrame, knobData[i].binaryFrame, 5);
+            if (useErode) erode(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
+            if (useDilate) dilate(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
+            centerOfMass(i, knobData[i].binaryFrame);
+            radius(i, knobData[i].binaryFrame);
         }
         // Reset knob data if knob is turned off.
         // This is done here since blur, erode and dilate may take up to a second to calculate
         // and state might have changed during that
-        if (!knobs[i].active) {
-            knobs[i].xCoords = 0;
-            knobs[i].yCoords = 0;
-            knobs[i].zCoords = 0;
+        if (!knobParams[i].active) {
+            knobCoords[i].x = 0;
+            knobCoords[i].y = 0;
+            knobCoords[i].z = 0;
         }
     }
 
     // convert binary Image to 3 channel image
     Mat output;
-    cvtColor(binaryFrames[activeView], output, CV_GRAY2BGR);
-    drawCross(output, center, 5, Scalar(0, 0, 255));
-    circle(output, center, radius, Scalar(0, 0, 255));
+    cvtColor(knobData[activeView].binaryFrame, output, CV_GRAY2BGR);
+    drawCross(output, knobData[i].center, 5, knobData[i].rgbColors);
+    circle(output, knobData[i].center, knobData[i].radius, knobData[i].rgbColors);
 
     return output;
 }
 
-void Tracker::updateKnobParameters(const QVector<int> &paramData) {
-    for (int i = 0; i < 4; i++) {
-        knobs[i].active = paramData[i*7];
-        knobs[i].color_minHue = paramData[i*7+1];
-        knobs[i].color_maxHue = paramData[i*7+2];
-        knobs[i].color_minSat = paramData[i*7+3];
-        knobs[i].color_maxSat = paramData[i*7+4];
-        knobs[i].color_minVal = paramData[i*7+5];
-        knobs[i].color_maxVal = paramData[i*7+6];
-    }
+vector<KnobParams>& getKnobParams() {
+    return knobParams;
 }
 
+/*
+void Tracker::updateKnobParameters(const vector<int> &paramData) {
+    for (int i = 0; i < 4; i++) {
+        knobParams[i].active = paramData[i*7];
+        knobParams[i].minHue = paramData[i*7+1];
+        knobParams[i].maxHue = paramData[i*7+2];
+        knobParams[i].minSat = paramData[i*7+3];
+        knobParams[i].maxSat = paramData[i*7+4];
+        knobParams[i].minVal = paramData[i*7+5];
+        knobParams[i].maxVal = paramData[i*7+6];
+
+        ushort averageHue = 0;
+        if (knobParams[i].minHue < knobParams[i].maxHue) {
+            averageHue = (knobParams[i].minHue + knobParams[i].maxHue) / 2;
+        } else {
+            averageHue = (knobParams[i].minHue + knobParams[i].maxHue + 180) / 2 - 180;
+        }
+        hueToRGB(averageHue, knobData[i].rgbColor);
+    }
+}
+*/
+
+const vector<KnobCoords>& getKnobCoords() {
+    return knobCoords;
+}
+
+/*
 void Tracker::updateCoordData(QVector<int> &data) {
     for (int i = 0; i < 4; i++) {
         data[i*3] = knobs[i].xCoords;
@@ -83,42 +85,52 @@ void Tracker::updateCoordData(QVector<int> &data) {
         data[i*3+2] = knobs[i].zCoords;
     }
 }
+*/
 
-void Tracker::getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z) {
+/*
+void Tracker::getCoordDataToSend(const int& knobID, uchar& x, uchar& y, uchar& z) {
     x = knobs[knobID].xCoords;
     y = knobs[knobID].yCoords;
     z = knobs[knobID].zCoords;
 }
+*/
 
-Mat Tracker::colorKeying(int knobID, Mat& hsvFrame) {
-    // initialize Mat object for output
+Mat Tracker::colorKeying(const int& knobID, const Mat& hsvFrame) {
+
+    // Initialize Mat object for output
     Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
+
+    Vec3b hsvPixel;
+    int hue;
+    int sat;
+    int val;
+    bool drawWhite;
 
     for(int x = 0; x < hsvFrame.cols; x++){
         for(int y = 0; y < hsvFrame.rows; y++){
-            Vec3b hsvPixel = hsvFrame.at<Vec3b>(y,x);
-            int hue = hsvPixel[0];
-            int saturation = hsvPixel[1];
-            int value = hsvPixel[2];
-            // Maskierung und Schwerpunktsberechnung
-            bool isWhite = false;
-            if (knobs[knobID].color_minVal <= value && value <= knobs[knobID].color_maxVal) {
-                if (knobs[knobID].color_minSat <= saturation && saturation <= knobs[knobID].color_maxSat) {
-                    if (knobs[knobID].color_minHue < knobs[knobID].color_maxHue) {
-                        if (hue >= knobs[knobID].color_minHue && hue <= knobs[knobID].color_maxHue){
-                            isWhite = true;
+            hsvPixel = hsvFrame.at<Vec3b>(y,x);
+            hue = hsvPixel[0];
+            sat = hsvPixel[1];
+            val = hsvPixel[2];
+            drawWhite = false;
+            if (knobParams[knobID].minVal <= val && val <= knobParams[knobID].maxVal) {
+                if (knobParams[knobID].minSat <= sat && sat <= knobParams[knobID].maxSat) {
+                    if (knobParams[knobID].minHue < knobParams[knobID].maxHue) {
+                        if (knobParams[knobID].minHue <= hue && hue <= knobParams[knobID].maxHue){
+                            drawWhite = true;
                         }
                     }
                     else {
-                        if (hue >= knobs[knobID].color_minHue || hue <= knobs[knobID].color_maxHue){
-                            isWhite = true;
+                        if (hue >= knobParams[knobID].minHue || hue <= knobParams[knobID].maxHue){
+                            drawWhite = true;
                         }
                     }
                 }
             }
-            if (isWhite){
+            if (drawWhite){
                 output.at<uchar>(y,x) = 255;
             }
+            // NÖTIG?
             else{
                 output.at<uchar>(y,x) = 0;
             }
@@ -126,12 +138,15 @@ Mat Tracker::colorKeying(int knobID, Mat& hsvFrame) {
     }
 
     return output;
+
 }
 
-void Tracker::centerOfMass(int knobID, Mat& image){
+void Tracker::centerOfMass(const int& knobID, const Mat& image) {
+
     int sumx = 0;
     int sumy = 0;
     int count = 0;
+
     for(int x = 0; x < image.cols; x++){
         for (int y = 0; y < image.rows; y++){
             if (image.at<uchar>(y,x) == 255){
@@ -141,23 +156,23 @@ void Tracker::centerOfMass(int knobID, Mat& image){
             }
         }
     }
+
     if (count > 0){
-        center = Point(sumx/count, sumy/count);
+        knobData[knobID].center = Point(sumx/count, sumy/count);
     } else {
-        center = Point(0,0);
+        knobData[knobID].center = Point(0,0);
     }
 }
 
-void Tracker::drawCross(Mat& image, Point center, int length, Scalar color){
-    line(image, center-Point(0, length), center+Point(0,length), color, 1);
-    line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
-}
+void Tracker::radius(const int& knobID, const Mat& image) {
 
-void Tracker::getRadius(int knobID, cv::Mat& image) {
     int sum = 0;
+    int x = 0;
+    int y = 0;
+
     // Measure radius from center right
-    int y = center.y;
-    for (int x = center.x + 1; x < image.cols; x++) {
+    y = knobData[knobID].center.y;
+    for (x = knobData[knobID].center.x + 1; x < image.cols; x++) {
         if (image.at<uchar>(y,x) == 255) {
             sum++;
         } else {
@@ -165,16 +180,17 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
         }
     }
     // Measure radius from center left
-    for (int x = center.x - 1; x >= 0; x--) {
+    for (x = knobData[knobID].center.x - 1; x >= 0; x--) {
         if (image.at<uchar>(y,x) == 255) {
             sum++;
         } else {
             break;
         }
     }
+
     // Measure radius from center down
-    int x = center.x;
-    for (int y = center.y + 1; y < image.rows; y++) {
+    x = knobData[knobID].center.x;
+    for (y = knobData[knobID].center.y + 1; y < image.rows; y++) {
         if (image.at<uchar>(y,x) == 255) {
             sum++;
         } else {
@@ -182,69 +198,56 @@ void Tracker::getRadius(int knobID, cv::Mat& image) {
         }
     }
     // Measure radius from center up
-    for (int y = center.y - 1; y >= 0; y--) {
+    for (y = knobData[knobID].center.y - 1; y >= 0; y--) {
         if (image.at<uchar>(y,x) == 255) {
             sum++;
         } else {
             break;
         }
     }
-    /*
-    x = center.x + 1;
-    y = center.y + 1;
-    // Measure radius from center right down
-    while (x < image.cols && y < image.rows) {
-        if (image.at<uchar>(y,x) == 255) {
-            sum++;
-            x++;
-            y++;
-        } else {
-            break;
-        }
-    }
-    // Measure radius from center right up
-    x = center.x + 1;
-    y = center.y - 1;
-    while (x < image.cols && y >= 0) {
-        if (image.at<uchar>(y,x) == 255) {
-            sum++;
-            x++;
-            y--;
-        } else {
-            break;
-        }
-    }
-    // Measure radius from center left up
-    x = center.x - 1;
-    y = center.y - 1;
-    while (x >= 0 && y >= 0) {
-        if (image.at<uchar>(y,x) == 255) {
-            sum++;
-            x--;
-            y--;
-        } else {
-            break;
-        }
-    }
-    // Measure radius from center left down
-    x = center.x - 1;
-    y = center.y + 1;
-    while (x >= 0 && y < image.rows) {
-        if (image.at<uchar>(y,x) == 255) {
-            sum++;
-            x--;
-            y++;
-        } else {
-            break;
-        }
-    }
-    */
 
     // Divide by 4 to get average radius in all directions
-    radius = sum / 4;
-    // Apply to knob record and break down to fit a 1-byte-value (up to 127)
-    knobs[knobID].xCoords = center.x / 5;
-    knobs[knobID].yCoords = center.y / 3.76;
-    knobs[knobID].zCoords = radius / 2.2;
-    if (knobs[knobID].zCoords > 127) knobs[knobID].zCoords = 127;
+    knobData[knobID].radius = sum / 4;
+
+}
+
+// Convert data to knob coords and break down to fit a 7-bit-value (up to 127)
+void Tracker::calculateCoords(const int& knobID) {
+    knobCoords[knobID].x = knobData[knobID].center.x / 5;
+    knobCoords[knobID].y = knobData[knobID].center.y / 3.76;
+    knobCoords[knobID].z = knobData[knobID].radius / 2.2;           // DYNAMISCH!?
+    if (knobCoords[knobID].z > 127) knobCoords[knobID].z = 127;     // Catch rare case where radius might be too big
+}
+
+void Tracker::drawCross(Mat& image, const Point& center, const int& length, const Scalar& color){
+    line(image, center-Point(0, length), center+Point(0,length), color, 1);
+    line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
+}
+
+void Tracker::hueToRGB(const ushort hue, Scalar& bgr) {
+    if (hue <= 30) {
+        bgr[0] = 0;                         // 0
+        bgr[1] = 255 - (30 - hue) * 8,5;    // Rising
+        bgr[2] = 255;                       // 255
+    } else if (hue <= 60) {
+        bgr[0] = 0;                         // 0
+        bgr[1] = 255;                       // 255
+        bgr[2] = (60 - hue) * 8,5;          // Falling
+    } else if (hue <= 90) {
+        bgr[0] = 255 - (90 - hue) * 8,5;    // Rising
+        bgr[1] = 255;                       // 255
+        bgr[2] = 0;                         // 0
+    } else if (hue <= 120) {
+        bgr[0] = 255;                       // 255
+        bgr[1] = (120 - hue) * 8,5;         // Falling
+        bgr[2] = 0;                         // 0
+    } else if (hue <= 150) {
+        bgr[0] = 255;                       // 255
+        bgr[1] = 0;                         // 0
+        bgr[2] = 255 - (150 - hue) * 8,5;   // Rising
+    } else if (hue <= 180) {
+        bgr[0] = (180 - hue) * 8,5;         // Falling
+        bgr[1] = 0;                         // 0
+        bgr[2] = 255;                       // 255
+    }
 }

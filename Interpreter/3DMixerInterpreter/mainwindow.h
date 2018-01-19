@@ -31,11 +31,11 @@ private slots:
     void on_knobD_isView_clicked();
 
 private:
-    Ui::MainWindow * ui;
-    VideoEngine * videoEngine;
-    Tracker * tracker;
-    Output * output;
-    QTimer * updateTimer;
+    Ui::MainWindow* ui;
+    VideoEngine* videoEngine;
+    Tracker* tracker;
+    Output* output;
+    QTimer* updateTimer;
     QVector<Output::knobCoordData> knobCoords;
     QVector<uchar> knobParams;
     QVector<uchar> knobCoords;

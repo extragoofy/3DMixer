@@ -517,6 +517,29 @@ debug\moc_videoengine.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThrea
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qvariant.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qset.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcontiguouscache.h \
+		..\3DMixerInterpreter\tracker.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qwidget.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpalette.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qbrush.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfont.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfontmetrics.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfontinfo.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qsizepolicy.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qcursor.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qkeysequence.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qevent.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qurl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qurlquery.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfile.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfiledevice.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		..\3DMixerInterpreter\videoengine.h \
 		debug\moc_predefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe
@@ -738,58 +761,6 @@ debug\moc_output.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
-		..\3DMixerInterpreter\videoprocessor.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\opencv.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvdef.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\hal\interface.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\version.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\base.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvstd.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\ptr.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\neon_utils.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\traits.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\matx.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\saturate.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\fast_math.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\types.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\mat.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\bufferpool.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\mat.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\persistence.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\operations.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvstd.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\utility.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\core_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\types_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\optim.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\imgproc_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\types_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\photo.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\photo\photo_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\tracking.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\background_segm.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\tracking_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\features2d.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\miniflann.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\defines.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\config.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect\detection_based_tracker.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect\objdetect_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\calib3d.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\affine.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\calib3d\calib3d_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgcodecs.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui\highgui_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgcodecs\imgcodecs_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio\videoio_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\ml.hpp \
-		..\3DMixerInterpreter\videoformat.h \
 		..\3DMixerInterpreter\output.h \
 		debug\moc_predefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe
@@ -1479,7 +1450,28 @@ debug\videoengine.obj: ..\3DMixerInterpreter\videoengine.cpp C:\opencv\opencv-3.
 		../3DMixerInterpreter/videoformat.h \
 		../3DMixerInterpreter/cvmattoqimage.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QPixmap \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpixmap.h
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpixmap.h \
+		../3DMixerInterpreter/tracker.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtwidgets-config.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qwidget.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpalette.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qbrush.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfont.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfontmetrics.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qfontinfo.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qsizepolicy.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qcursor.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qkeysequence.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qevent.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qurl.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qurlquery.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector
 
 debug\videoformat.obj: ..\3DMixerInterpreter\videoformat.cpp ../3DMixerInterpreter/videoformat.h \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\opencv.hpp \
@@ -1742,60 +1734,7 @@ debug\tracker.obj: ..\3DMixerInterpreter\tracker.cpp ../3DMixerInterpreter/track
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfiledevice.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
-		../3DMixerInterpreter/videoprocessor.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\opencv.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvdef.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\hal\interface.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\version.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\base.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvstd.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\ptr.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\neon_utils.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\traits.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\matx.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\saturate.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\fast_math.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\types.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\mat.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\bufferpool.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\mat.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\persistence.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\operations.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvstd.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\utility.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\core_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\types_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\optim.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\imgproc_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\types_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\photo.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\photo\photo_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\tracking.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\background_segm.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\tracking_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\features2d.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\miniflann.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\defines.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\config.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect\detection_based_tracker.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect\objdetect_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\calib3d.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\affine.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\calib3d\calib3d_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgcodecs.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui\highgui_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgcodecs\imgcodecs_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio\videoio_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\ml.hpp \
-		../3DMixerInterpreter/videoformat.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QDebug
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector
 
 debug\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/output.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
@@ -1905,59 +1844,7 @@ debug\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/output.
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfiledevice.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
-		../3DMixerInterpreter/videoprocessor.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\opencv.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvdef.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\hal\interface.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\version.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\base.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvstd.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\ptr.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\neon_utils.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\traits.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\matx.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\saturate.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\fast_math.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\types.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\mat.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\bufferpool.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\mat.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\persistence.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\operations.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\cvstd.inl.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\utility.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\core_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\types_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\optim.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\imgproc_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\types_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\photo.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\photo\photo_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\tracking.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\background_segm.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\video\tracking_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\features2d.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\miniflann.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\defines.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\flann\config.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect\detection_based_tracker.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\objdetect\objdetect_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\calib3d.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\core\affine.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\calib3d\calib3d_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgcodecs.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui.hpp \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui\highgui_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\imgcodecs\imgcodecs_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\videoio\videoio_c.h \
-		C:\opencv\opencv-3.1.0\build\include\opencv2\ml.hpp \
-		../3DMixerInterpreter/videoformat.h
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector
 
 debug\moc_mainwindow.obj: debug\moc_mainwindow.cpp 
 
