@@ -8,15 +8,19 @@
 
 // http://stackoverflow.com/questions/7801522/integrating-opencv-with-larger-programs
 
-VideoEngine::VideoEngine(Tracker* trackerInstance)
-    : stopped(false)
-    , tracker(trackerInstance)
+VideoEngine::VideoEngine()
+    : tracker(0)
+    , stopped(false)
 { 
 }
 
 VideoEngine::~VideoEngine(){
     stop();
     wait();
+}
+
+void VideoEngine::setTracker(Tracker* trackerInstance) {
+    tracker = trackerInstance;
 }
 
 void VideoEngine::openCamera(int device){

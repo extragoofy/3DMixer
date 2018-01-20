@@ -14,8 +14,9 @@ class VideoEngine : public QThread
 {
     Q_OBJECT
 public:
-    VideoEngine(Tracker* trackerInstance);
+    VideoEngine();
     ~VideoEngine();
+    void setTracker(Tracker* trackerInstance);
     void openCamera(int device = 0);
     int framePosition();
 protected:

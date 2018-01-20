@@ -14,13 +14,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , tracker(new Tracker)
-    , videoEngine(new VideoEngine(tracker))
+    , videoEngine(new VideoEngine)
     , output(new Output(tracker))
     , updateTimer(new QTimer(this))
     , knobParams(QVector<uchar>(28))
 
 {
-    //knobCoords = QVector<int>(12);
     ui->setupUi(this);
     setUpVideo();
     setUpValidators();
@@ -40,6 +39,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::setUpVideo() {
+    videoEngine->setTracker(tracker);
     connect(videoEngine, &VideoEngine::sendInputImage, ui->inputFrame, &VideoWidget::setImage);
     connect(videoEngine, &VideoEngine::sendProcessedImage, ui->outputFrame, &VideoWidget::setImage);
     videoEngine->openCamera(0);
