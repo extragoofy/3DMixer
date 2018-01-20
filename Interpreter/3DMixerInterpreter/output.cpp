@@ -19,7 +19,7 @@ Output::~Output() {
 }
 
 void Output::sendTrackerData() {
-    int flag = midiOutOpen(&device, 2, 0, 0, CALLBACK_NULL);
+    int flag = midiOutOpen(&device, midiDeviceID, 0, 0, CALLBACK_NULL);
     if (flag != MMSYSERR_NOERROR) {
         printf("Error opening MIDI Output: %d \n", flag);
         printf("Number of devices: %d \n", midiOutGetNumDevs());

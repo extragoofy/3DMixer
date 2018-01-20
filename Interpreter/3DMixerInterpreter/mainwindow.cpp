@@ -32,9 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete videoEngine;
-    delete tracker;
     delete ui;
+    delete tracker;
+    delete videoEngine;
+    delete output;
     delete updateTimer;
 }
 
@@ -172,6 +173,7 @@ void MainWindow::updateParameters() {
 
     // Call tracker to update its parameters using this data
     tracker->updateKnobParams(knobParams);
+    printf("Setting useBlur to: %d\n", ui->options_blur->isChecked());
     tracker->useBlur = ui->options_blur->isChecked();
     tracker->useErode = ui->options_erode->isChecked();
     tracker->useDilate = ui->options_dilate->isChecked();
@@ -198,7 +200,7 @@ void MainWindow::updateCoordLabels() {
 }
 
 void MainWindow::updateMidiOutputDeviceID() {
-    output->setMidiDeviceID(ui->knobA_colorHueMin->text().toInt());
+    output->setMidiDeviceID(ui->midiDeviceID->text().toInt());
 }
 
 void MainWindow::on_knobA_isView_clicked()

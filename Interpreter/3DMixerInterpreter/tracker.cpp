@@ -12,39 +12,39 @@ Tracker::Tracker()
     , knobData(QVector<KnobData>(4))
     , knobCoords(QVector<KnobCoords>(4))
 {
+    printf("Use blur initial:: %d\n", useBlur);
 }
 
 Mat Tracker::process(const Mat& input) {
 
+    printf("useBlur: %d\n", useBlur);
+
     // convert BGR -> HSV
     Mat hsvFrame;
     cvtColor(input, hsvFrame, CV_BGR2HSV);
-/*
+
     for (int i = 0; i < 4; i++) {
-        if (knobParams[i].active) {
-            knobData[i].binaryFrame = colorKeying(i, hsvFrame);
-            if (useBlur) medianBlur(knobData[i].binaryFrame, knobData[i].binaryFrame, 5);
-            if (useErode) erode(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
-            if (useDilate) dilate(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
-            centerOfMass(i, knobData[i].binaryFrame);
-            radius(i, knobData[i].binaryFrame);
+        //if (knobParams[i].active) {
+            //knobData[i].binaryFrame = colorKeying(i, hsvFrame);
+            //if (useBlur) medianBlur(knobData[i].binaryFrame, knobData[i].binaryFrame, 5);
+            //if (useErode) erode(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
+            //if (useDilate) dilate(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
+            //centerOfMass(i, knobData[i].binaryFrame);
+            //radius(i, knobData[i].binaryFrame);
             // convert binary Image to 3 channel image
-            cvtColor(knobData[activeView].binaryFrame, knobData[activeView].binaryFrame, CV_GRAY2BGR);
-            drawCross(knobData[activeView].binaryFrame, knobData[i].center, 5, knobData[i].rgbColor);
-            circle(knobData[activeView].binaryFrame, knobData[i].center, knobData[i].radius, knobData[i].rgbColor);
-        }
+            //cvtColor(knobData[activeView].binaryFrame, knobData[activeView].binaryFrame, CV_GRAY2BGR);
+            //drawCross(knobData[activeView].binaryFrame, knobData[i].center, 5, knobData[i].rgbColor);
+            //circle(knobData[activeView].binaryFrame, knobData[i].center, knobData[i].radius, knobData[i].rgbColor);
+        //}
         // Reset knob data if knob is turned off.
         // This is done here since blur, erode and dilate may take up to a second to calculate
         // and state might have changed during that
-        if (!knobParams[i].active) {
-            knobCoords[i].x = 0;
-            knobCoords[i].y = 0;
-            knobCoords[i].z = 0;
-        }
+        //if (!knobParams[i].active) {
+        //    knobCoords[i].x = 0;
+        //    knobCoords[i].y = 0;
+        //    knobCoords[i].z = 0;
+        //}
     }
-
-    return knobData[activeView].binaryFrame;
-*/
     return input;
 
 }
@@ -74,24 +74,6 @@ void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
 const QVector<Tracker::KnobCoords>& Tracker::getKnobCoords() {
     return knobCoords;
 }
-
-/*
-void Tracker::updateCoordData(QVector<int> &data) {
-    for (int i = 0; i < 4; i++) {
-        data[i*3] = knobs[i].xCoords;
-        data[i*3+1] = knobs[i].yCoords;
-        data[i*3+2] = knobs[i].zCoords;
-    }
-}
-*/
-
-/*
-void Tracker::getCoordDataToSend(const int& knobID, uchar& x, uchar& y, uchar& z) {
-    x = knobs[knobID].xCoords;
-    y = knobs[knobID].yCoords;
-    z = knobs[knobID].zCoords;
-}
-*/
 
 Mat Tracker::colorKeying(const int& knobID, const Mat& hsvFrame) {
 

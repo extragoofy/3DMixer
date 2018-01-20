@@ -72,8 +72,6 @@ public:
     // Data handling
     void updateKnobParams(const QVector<uchar>& paramData);
     const QVector<KnobCoords>& getKnobCoords();
-    //void updateCoordData(QVector<int>& target);
-    //void getCoordDataToSend(int knobID, uchar &x, uchar &y, uchar &z);
 
     // Options
     bool useBlur;       // Shall median blur be used to improve tracking? (Expensive!)
