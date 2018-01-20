@@ -43,13 +43,13 @@ public:
     // Struct that holds knob data used for processing
     struct KnobData {
         KnobData()
-            : rgbColor(0)
+            : bgrColor(cv::Vec3b(255,255,255))
             //, binaryFrame(0)        // Größe setzen?
             , center(cv::Point())
             , radius(0)
         {}
-        cv::Scalar rgbColor;
-        cv::Mat binaryFrame;    // Latest binary frame of knob
+        cv::Vec3b bgrColor;    // Average hue of knob
+        cv::Mat frame;          // Latest frame of knob
         cv::Point center;       // Center coordinates of knob
         int radius;             // Radius of knob (from center)
     };
@@ -88,10 +88,10 @@ private:
     void calculateCoords(const int& knobID);
 
     // Drawing functions
-    void drawCross(cv::Mat& mat, const cv::Point& center, const int& length, const cv::Scalar& color);
+    void drawCross(cv::Mat& mat, const cv::Point& center, const int& length, const cv::Vec3b& color);
 
     // Helper functions
-    void hueToBGR(const uchar& hue, cv::Scalar& bgr);
+    void hueToBGR(const uchar& hue, cv::Vec3b& bgr);
 
     // Data storage for each knob
     QVector<KnobParams> knobParams;

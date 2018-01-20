@@ -31,11 +31,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    delete tracker;
-    delete videoEngine;
-    delete output;
+    updateTimer->stop();
     delete updateTimer;
+    delete output;
+    delete videoEngine;
+    delete tracker;
+    delete ui;
 }
 
 void MainWindow::setUpVideo() {

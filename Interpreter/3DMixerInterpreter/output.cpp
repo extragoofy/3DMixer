@@ -15,6 +15,7 @@ Output::Output(Tracker * trackerInstance):
 }
 
 Output::~Output() {
+    outputTimer->stop();
     delete outputTimer;
 }
 

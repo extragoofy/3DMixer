@@ -12,7 +12,6 @@ Tracker::Tracker()
     , knobData(QVector<KnobData>(4))
     , knobCoords(QVector<KnobCoords>(4))
 {
-    printf("Use blur initial:: %d\n", useBlur);
 }
 
 Mat Tracker::process(const Mat& input) {
@@ -25,16 +24,16 @@ Mat Tracker::process(const Mat& input) {
 
     for (int i = 0; i < 4; i++) {
         if (knobParams[i].active) {
-            knobData[i].binaryFrame = colorKeying(i, hsvFrame);
-            if (useBlur) medianBlur(knobData[i].binaryFrame, knobData[i].binaryFrame, 5);
-            if (useErode) erode(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
-            if (useDilate) dilate(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
-            centerOfMass(i, knobData[i].binaryFrame);
-            radius(i, knobData[i].binaryFrame);
+            knobData[i].frame = colorKeying(i, hsvFrame);
+            if (useBlur) medianBlur(knobData[i].frame, knobData[i].frame, 5);
+            if (useErode) erode(knobData[i].frame, knobData[i].frame, Mat());
+            if (useDilate) dilate(knobData[i].frame, knobData[i].frame, Mat());
+            centerOfMass(i, knobData[i].frame);
+            radius(i, knobData[i].frame);
             // convert binary Image to 3 channel image
-            cvtColor(knobData[activeView].binaryFrame, knobData[activeView].binaryFrame, CV_GRAY2BGR);
-            drawCross(knobData[activeView].binaryFrame, knobData[i].center, 5, knobData[i].rgbColor);
-            circle(knobData[activeView].binaryFrame, knobData[i].center, knobData[i].radius, knobData[i].rgbColor);
+            cvtColor(knobData[activeView].frame, knobData[activeView].frame, CV_GRAY2BGR);
+            drawCross(knobData[activeView].frame, knobData[i].center, 5, knobData[i].bgrColor);
+            circle(knobData[activeView].frame, knobData[i].center, knobData[i].radius, knobData[i].bgrColor);
         }
         // Reset knob data if knob is turned off.
         // This is done here since blur, erode and dilate may take up to a second to calculate
@@ -46,7 +45,7 @@ Mat Tracker::process(const Mat& input) {
         }
     }
 
-    return knobData[activeView].binaryFrame;
+    return knobData[activeView].frame;
 
 }
 
@@ -67,7 +66,7 @@ void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
         } else {
             averageHue = (knobParams[i].minHue + knobParams[i].maxHue + 180) / 2 - 180;
         }
-        hueToBGR(averageHue, knobData[i].rgbColor);
+        hueToBGR(averageHue, knobData[i].bgrColor);
     }
 
 }
@@ -194,18 +193,18 @@ void Tracker::radius(const int& knobID, const Mat& image) {
 
 // Convert data to knob coords and break down to fit a 7-bit-value (up to 127)
 void Tracker::calculateCoords(const int& knobID) {
-    knobCoords[knobID].x = knobData[knobID].center.x / 5;
-    knobCoords[knobID].y = knobData[knobID].center.y / 3.76;
-    knobCoords[knobID].z = knobData[knobID].radius / 2.2;           // DYNAMISCH!?
+    knobCoords[knobID].x = knobData[knobID].center.x / knobData[knobID].frame.cols * 127;
+    knobCoords[knobID].y = knobData[knobID].center.y / knobData[knobID].frame.rows * 127;
+    knobCoords[knobID].z = knobData[knobID].radius;           // #TODO: DYNAMISCH!?
     if (knobCoords[knobID].z > 127) knobCoords[knobID].z = 127;     // Catch rare case where radius might be too big
 }
 
-void Tracker::drawCross(Mat& image, const Point& center, const int& length, const Scalar& color){
+void Tracker::drawCross(Mat& image, const Point& center, const int& length, const Vec3b& color){
     line(image, center-Point(0, length), center+Point(0,length), color, 1);
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
 }
 
-void Tracker::hueToBGR(const uchar& hue, Scalar& bgr) {
+void Tracker::hueToBGR(const uchar& hue, Vec3b& bgr) {
     if (hue <= 30) {
         bgr[0] = 0;                         // 0
         bgr[1] = 255 - (30 - hue) * 8.5;    // Rising
@@ -231,4 +230,8 @@ void Tracker::hueToBGR(const uchar& hue, Scalar& bgr) {
         bgr[1] = 0;                         // 0
         bgr[2] = 255;                       // 255
     }
+    printf("\nHue: %d\n", hue);
+    printf("Blue: %d\n", bgr[0]);
+    printf("Green: %d\n", bgr[1]);
+    printf("Red: %d\n", bgr[2]);
 }
