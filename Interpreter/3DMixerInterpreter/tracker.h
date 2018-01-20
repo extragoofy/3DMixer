@@ -5,13 +5,14 @@
 #include <QLabel>
 #include <QVector>
 #include <stdio.h>     /* for printf() function */
+#include "videoformat.h"
 
 /*
  * This is the core class of the interepreter.
  * It does all image tracking, calculation of knob positions and so on.
  */
 
-class Tracker : public QObject
+class Tracker
 {
 
 public:
@@ -86,12 +87,13 @@ private:
     cv::Mat colorKeying(const int& knobID, const cv::Mat& hsvFrame);
     void centerOfMass(const int& knobID, const cv::Mat& image);
     void radius(const int& knobID, const cv::Mat& image);
+    void calculateCoords(const int& knobID);
 
     // Drawing functions
     void drawCross(cv::Mat& mat, const cv::Point& center, const int& length, const cv::Scalar& color);
 
     // Helper functions
-    void hueToRGB(const uchar& hue, cv::Scalar& bgr);
+    void hueToBGR(const uchar& hue, cv::Scalar& bgr);
 
     // Data storage for each knob
     QVector<KnobParams> knobParams;

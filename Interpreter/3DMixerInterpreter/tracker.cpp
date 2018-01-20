@@ -1,6 +1,7 @@
 #include "tracker.h"
 
 using namespace std;
+using namespace cv;
 
 Tracker::Tracker()
     : useBlur(true)
@@ -18,7 +19,7 @@ Mat Tracker::process(const Mat& input) {
     // convert BGR -> HSV
     Mat hsvFrame;
     cvtColor(input, hsvFrame, CV_BGR2HSV);
-
+/*
     for (int i = 0; i < 4; i++) {
         if (knobParams[i].active) {
             knobData[i].binaryFrame = colorKeying(i, hsvFrame);
@@ -27,6 +28,10 @@ Mat Tracker::process(const Mat& input) {
             if (useDilate) dilate(knobData[i].binaryFrame, knobData[i].binaryFrame, Mat());
             centerOfMass(i, knobData[i].binaryFrame);
             radius(i, knobData[i].binaryFrame);
+            // convert binary Image to 3 channel image
+            cvtColor(knobData[activeView].binaryFrame, knobData[activeView].binaryFrame, CV_GRAY2BGR);
+            drawCross(knobData[activeView].binaryFrame, knobData[i].center, 5, knobData[i].rgbColor);
+            circle(knobData[activeView].binaryFrame, knobData[i].center, knobData[i].radius, knobData[i].rgbColor);
         }
         // Reset knob data if knob is turned off.
         // This is done here since blur, erode and dilate may take up to a second to calculate
@@ -38,13 +43,9 @@ Mat Tracker::process(const Mat& input) {
         }
     }
 
-    // convert binary Image to 3 channel image
-    Mat output;
-    cvtColor(knobData[activeView].binaryFrame, output, CV_GRAY2BGR);
-    drawCross(output, knobData[i].center, 5, knobData[i].rgbColors);
-    circle(output, knobData[i].center, knobData[i].radius, knobData[i].rgbColors);
-
-    return output;
+    return knobData[activeView].binaryFrame;
+*/
+    return input;
 
 }
 
@@ -65,12 +66,12 @@ void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
         } else {
             averageHue = (knobParams[i].minHue + knobParams[i].maxHue + 180) / 2 - 180;
         }
-        hueToRGB(averageHue, knobData[i].rgbColor);
+        hueToBGR(averageHue, knobData[i].rgbColor);
     }
 
 }
 
-const QVector<KnobCoords>& getKnobCoords() {
+const QVector<Tracker::KnobCoords>& Tracker::getKnobCoords() {
     return knobCoords;
 }
 
@@ -221,7 +222,7 @@ void Tracker::drawCross(Mat& image, const Point& center, const int& length, cons
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
 }
 
-void Tracker::hueToRGB(const uchar hue, Scalar& bgr) {
+void Tracker::hueToBGR(const uchar& hue, Scalar& bgr) {
     if (hue <= 30) {
         bgr[0] = 0;                         // 0
         bgr[1] = 255 - (30 - hue) * 8.5;    // Rising
