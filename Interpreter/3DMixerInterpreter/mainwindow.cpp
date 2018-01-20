@@ -133,54 +133,42 @@ void MainWindow::resetRadioButtons() {
 void MainWindow::updateParameters() {
 
     // Update knobParams vector containing all parameter data
+    // Convert 360 degree hue values to 180 degrees for opencv
+    // Convert 0-100 hue values to 0-255 8bit values for opencv
     knobParams[0] = ui->knobA_isActive->isChecked();
-    knobParams[1] = ui->knobA_colorHueMin->text().toInt();
-    knobParams[2] = ui->knobA_colorHueMax->text().toInt();
-    knobParams[3] = ui->knobA_colorSatMin->text().toInt();
-    knobParams[4] = ui->knobA_colorSatMax->text().toInt();
-    knobParams[5] = ui->knobA_colorValMin->text().toInt();
-    knobParams[6] = ui->knobA_colorValMax->text().toInt();
+    knobParams[1] = ui->knobA_colorHueMin->text().toInt() / 2;
+    knobParams[2] = ui->knobA_colorHueMax->text().toInt() / 2;
+    knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 2.55;
+    knobParams[4] = ui->knobA_colorSatMax->text().toInt() * 2.55;
+    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 2.55;
+    knobParams[6] = ui->knobA_colorValMax->text().toInt() * 2.55;
     knobParams[7] = ui->knobB_isActive->isChecked();
-    knobParams[8] = ui->knobB_colorHueMin->text().toInt();
-    knobParams[9] = ui->knobB_colorHueMax->text().toInt();
-    knobParams[10] = ui->knobB_colorSatMin->text().toInt();
-    knobParams[11] = ui->knobB_colorSatMax->text().toInt();
-    knobParams[12] = ui->knobB_colorValMin->text().toInt();
-    knobParams[13] = ui->knobB_colorValMax->text().toInt();
+    knobParams[8] = ui->knobB_colorHueMin->text().toInt() / 2;
+    knobParams[9] = ui->knobB_colorHueMax->text().toInt() / 2;
+    knobParams[10] = ui->knobB_colorSatMin->text().toInt() * 2.55;
+    knobParams[11] = ui->knobB_colorSatMax->text().toInt() * 2.55;
+    knobParams[12] = ui->knobB_colorValMin->text().toInt() * 2.55;
+    knobParams[13] = ui->knobB_colorValMax->text().toInt() * 2.55;
     knobParams[14] = ui->knobC_isActive->isChecked();
-    knobParams[15] = ui->knobC_colorHueMin->text().toInt();
-    knobParams[16] = ui->knobC_colorHueMax->text().toInt();
-    knobParams[17] = ui->knobC_colorSatMin->text().toInt();
-    knobParams[18] = ui->knobC_colorSatMax->text().toInt();
-    knobParams[19] = ui->knobC_colorValMin->text().toInt();
-    knobParams[20] = ui->knobC_colorValMax->text().toInt();
+    knobParams[15] = ui->knobC_colorHueMin->text().toInt() / 2;
+    knobParams[16] = ui->knobC_colorHueMax->text().toInt() / 2;
+    knobParams[17] = ui->knobC_colorSatMin->text().toInt() * 2.55;
+    knobParams[18] = ui->knobC_colorSatMax->text().toInt() * 2.55;
+    knobParams[19] = ui->knobC_colorValMin->text().toInt() * 2.55;
+    knobParams[20] = ui->knobC_colorValMax->text().toInt() * 2.55;
     knobParams[21] = ui->knobD_isActive->isChecked();
-    knobParams[22] = ui->knobD_colorHueMin->text().toInt();
-    knobParams[23] = ui->knobD_colorHueMax->text().toInt();
-    knobParams[24] = ui->knobD_colorSatMin->text().toInt();
-    knobParams[25] = ui->knobD_colorSatMax->text().toInt();
-    knobParams[26] = ui->knobD_colorValMin->text().toInt();
-    knobParams[27] = ui->knobD_colorValMax->text().toInt();
+    knobParams[22] = ui->knobD_colorHueMin->text().toInt() / 2;
+    knobParams[23] = ui->knobD_colorHueMax->text().toInt() / 2;
+    knobParams[24] = ui->knobD_colorSatMin->text().toInt() * 2.55;
+    knobParams[25] = ui->knobD_colorSatMax->text().toInt() * 2.55;
+    knobParams[26] = ui->knobD_colorValMin->text().toInt() * 2.55;
+    knobParams[27] = ui->knobD_colorValMax->text().toInt() * 2.55;
 
     // Update color labels
     ui->knobA_colorLabel->setStyleSheet(createStylesheetColorString(0));
     ui->knobB_colorLabel->setStyleSheet(createStylesheetColorString(1));
     ui->knobC_colorLabel->setStyleSheet(createStylesheetColorString(2));
     ui->knobD_colorLabel->setStyleSheet(createStylesheetColorString(3));
-
-    // Convert 360 degree hue values to 180 degree hue values for openCV
-    for (int i = 0; i < 4; i++) {
-        knobParams[i*7+1] /= 2;
-        knobParams[i*7+2] /= 2;
-    }
-
-    // Convert 0-100 saturation and value values to 8bit-values for openCV
-    for (int i = 0; i < 4; i++) {
-        knobParams[i*7+3] *= 2.55;
-        knobParams[i*7+4] *= 2.55;
-        knobParams[i*7+5] *= 2.55;
-        knobParams[i*7+6] *= 2.55;
-    }
 
     // Call tracker to update its parameters using this data
     tracker->updateKnobParams(knobParams);
@@ -253,15 +241,15 @@ QString MainWindow::createStylesheetColorString(ushort knobIndex) {
     // May god forgive me for this
     if (knobParams[knobIndex*7+1] < knobParams[knobIndex*7+2]) {
         return QString::fromStdString("QLabel {background-color: hsv(" +
-                                  to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2]) / 2) + "," +
-                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2 * 2.55) + "," +
-                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2 * 2.55) + "); }"
+                                  to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2])) + "," +
+                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +
+                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2) + "); }"
                 );
     } else {
         return QString::fromStdString("QLabel {background-color: hsv(" +
-                                  to_string(((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2] + 360) / 2) - 360) + "," +
-                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2 * 2.55) + "," +
-                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2 * 2.55) + "); }"
+                                  to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2] + 180) % 360) + "," +
+                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +
+                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2) + "); }"
                 );
     }
 }

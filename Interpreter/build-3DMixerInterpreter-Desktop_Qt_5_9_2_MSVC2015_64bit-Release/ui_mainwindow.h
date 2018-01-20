@@ -112,6 +112,13 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1440, 900);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
+        MainWindow->setSizePolicy(sizePolicy);
+        MainWindow->setMinimumSize(QSize(1440, 900));
+        MainWindow->setMaximumSize(QSize(1440, 900));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         inputFrame = new VideoWidget(centralWidget);
@@ -138,9 +145,6 @@ public:
         knobA_colorHueMin = new QLineEdit(knobABox);
         knobA_colorHueMin->setObjectName(QStringLiteral("knobA_colorHueMin"));
         knobA_colorHueMin->setGeometry(QRect(180, 20, 30, 20));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(knobA_colorHueMin->sizePolicy().hasHeightForWidth());
         knobA_colorHueMin->setSizePolicy(sizePolicy);
         knobA_colorHueMin->setMinimumSize(QSize(0, 0));
@@ -492,7 +496,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "3DMixer Tracker", Q_NULLPTR));
         inputFrame->setText(QString());
         outputFrame->setText(QString());
         knobABox->setTitle(QApplication::translate("MainWindow", "Knob A", Q_NULLPTR));
