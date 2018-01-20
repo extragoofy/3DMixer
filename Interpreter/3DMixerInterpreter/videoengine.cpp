@@ -5,22 +5,26 @@
 #include <QDebug>
 #include <string>
 #include "videoengine.h"
+#include <stdio.h>     /* for printf() function */
 
 // http://stackoverflow.com/questions/7801522/integrating-opencv-with-larger-programs
 
-VideoEngine::VideoEngine()
-    : stopped(false)
-    , processor(0)
-    , usingCamera(false)
+VideoEngine::VideoEngine(Tracker *trackerInstance)
+    : tracker(trackerInstance)
+    , stopped(false)
 {
+
 }
 VideoEngine::~VideoEngine(){
     stop();
     wait();
 }
+
 const VideoFormat& VideoEngine::videoFormat() const{
     return _videoFormat;
 }
+
+/*
 void VideoEngine::setProcessor(VideoProcessor *processor){
     this->processor = processor;
 }
@@ -39,6 +43,7 @@ void VideoEngine::openFile(const QString& file){
         qDebug() << e.err.c_str();
     }
 }
+*/
 
 void VideoEngine::openCamera(int device){
     try {
@@ -84,8 +89,8 @@ void VideoEngine::run()
             frameNumber++;
             if (frameNumber == 1){
                 _videoFormat.setType(cvFrame.type());
-                if (processor != 0){
-                    processor->startProcessing(_videoFormat);
+                if (tracker != 0){
+                    //tracker->startProcessing(_videoFormat);
                 }
             }
 
@@ -93,8 +98,8 @@ void VideoEngine::run()
             emit sendInputImage(cvMatToQImage(cvFrame));
 
             // Process Video Frame
-            if (processor != 0){
-                cvFrame = processor->process(cvFrame);
+            if (tracker != 0){
+                cvFrame = tracker->process(cvFrame);
             }
 
             emit sendProcessedImage(cvMatToQImage(cvFrame));
@@ -105,13 +110,15 @@ void VideoEngine::run()
                 break;
             }
 
-            if (usingCamera == false){
-                msleep(milliSeconds);
-            }
+            //if (usingCamera == false){
+            //    msleep(milliSeconds);
+            //}
         }
     }
 }
 
+/*
 int VideoEngine::framePosition(){
     return videoCapture.get(CV_CAP_PROP_POS_FRAMES);
 }
+*/

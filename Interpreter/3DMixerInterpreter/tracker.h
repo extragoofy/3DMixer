@@ -4,10 +4,13 @@
 #include <QLabel>
 #include <QVector>
 #include <stdio.h>     /* for printf() function */
-#include "videoprocessor.h"
+//#include "videoprocessor.h"
+#include <QObject>
+#include <opencv2/opencv.hpp>
 
-class Tracker : public VideoProcessor
+class Tracker : public QObject
 {
+    Q_OBJECT
 
     struct knob {
         bool active;
@@ -26,7 +29,7 @@ public:
     // SETTINGS
     int maxDistance;    // Maximum distance the tracker should track on the z axis
     Tracker();
-    void startProcessing(const VideoFormat& format){}
+    //void startProcessing(const VideoFormat& format){}
     cv::Mat process(const cv::Mat& source);
     void updateKnobParameters(const QVector<int> &paramData);
     void updateCoordData(QVector<int>& target);

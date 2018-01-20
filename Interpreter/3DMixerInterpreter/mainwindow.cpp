@@ -14,8 +14,8 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    videoEngine(new VideoEngine),
     tracker(new Tracker),
+    videoEngine(new VideoEngine(tracker)),
     output(new Output(tracker)),
     updateTimer(new QTimer(this))
 {
@@ -39,7 +39,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::setUpVideo() {
-    videoEngine->setProcessor(tracker);
+    //videoEngine->setProcessor(tracker);
     connect(videoEngine, &VideoEngine::sendInputImage, ui->inputFrame, &VideoWidget::setImage);
     connect(videoEngine, &VideoEngine::sendProcessedImage, ui->outputFrame, &VideoWidget::setImage);
     videoEngine->openCamera(0);
