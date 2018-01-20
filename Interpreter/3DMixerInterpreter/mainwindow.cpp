@@ -140,31 +140,31 @@ void MainWindow::updateParameters() {
     knobParams[0] = ui->knobA_isActive->isChecked();
     knobParams[1] = ui->knobA_colorHueMin->text().toInt() / 2;
     knobParams[2] = ui->knobA_colorHueMax->text().toInt() / 2;
-    knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 2.55;
-    knobParams[4] = ui->knobA_colorSatMax->text().toInt() * 2.55;
-    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 2.55;
-    knobParams[6] = ui->knobA_colorValMax->text().toInt() * 2.55;
+    knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 255 / 100;      // Just multiplying by 2.55 results in an rounding error
+    knobParams[4] = ui->knobA_colorSatMax->text().toInt() * 255 / 100;      // making 255 unreachable
+    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 255 / 100;
+    knobParams[6] = ui->knobA_colorValMax->text().toInt() * 255 / 100;
     knobParams[7] = ui->knobB_isActive->isChecked();
     knobParams[8] = ui->knobB_colorHueMin->text().toInt() / 2;
     knobParams[9] = ui->knobB_colorHueMax->text().toInt() / 2;
-    knobParams[10] = ui->knobB_colorSatMin->text().toInt() * 2.55;
-    knobParams[11] = ui->knobB_colorSatMax->text().toInt() * 2.55;
-    knobParams[12] = ui->knobB_colorValMin->text().toInt() * 2.55;
-    knobParams[13] = ui->knobB_colorValMax->text().toInt() * 2.55;
+    knobParams[10] = ui->knobB_colorSatMin->text().toInt() * 255 / 100;
+    knobParams[11] = ui->knobB_colorSatMax->text().toInt() * 255 / 100;
+    knobParams[12] = ui->knobB_colorValMin->text().toInt() * 255 / 100;
+    knobParams[13] = ui->knobB_colorValMax->text().toInt() * 255 / 100;
     knobParams[14] = ui->knobC_isActive->isChecked();
     knobParams[15] = ui->knobC_colorHueMin->text().toInt() / 2;
     knobParams[16] = ui->knobC_colorHueMax->text().toInt() / 2;
-    knobParams[17] = ui->knobC_colorSatMin->text().toInt() * 2.55;
-    knobParams[18] = ui->knobC_colorSatMax->text().toInt() * 2.55;
-    knobParams[19] = ui->knobC_colorValMin->text().toInt() * 2.55;
-    knobParams[20] = ui->knobC_colorValMax->text().toInt() * 2.55;
+    knobParams[17] = ui->knobC_colorSatMin->text().toInt() * 255 / 100;
+    knobParams[18] = ui->knobC_colorSatMax->text().toInt() * 255 / 100;
+    knobParams[19] = ui->knobC_colorValMin->text().toInt() * 255 / 100;
+    knobParams[20] = ui->knobC_colorValMax->text().toInt() * 255 / 100;
     knobParams[21] = ui->knobD_isActive->isChecked();
     knobParams[22] = ui->knobD_colorHueMin->text().toInt() / 2;
     knobParams[23] = ui->knobD_colorHueMax->text().toInt() / 2;
-    knobParams[24] = ui->knobD_colorSatMin->text().toInt() * 2.55;
-    knobParams[25] = ui->knobD_colorSatMax->text().toInt() * 2.55;
-    knobParams[26] = ui->knobD_colorValMin->text().toInt() * 2.55;
-    knobParams[27] = ui->knobD_colorValMax->text().toInt() * 2.55;
+    knobParams[24] = ui->knobD_colorSatMin->text().toInt() * 255 / 100;
+    knobParams[25] = ui->knobD_colorSatMax->text().toInt() * 255 / 100;
+    knobParams[26] = ui->knobD_colorValMin->text().toInt() * 255 / 100;
+    knobParams[27] = ui->knobD_colorValMax->text().toInt() * 255 / 100;
 
     // Update color labels
     ui->knobA_colorLabel->setStyleSheet(createStylesheetColorString(0));
@@ -174,7 +174,6 @@ void MainWindow::updateParameters() {
 
     // Call tracker to update its parameters using this data
     tracker->updateKnobParams(knobParams);
-    printf("Setting useBlur to: %d\n", ui->options_blur->isChecked());
     tracker->useBlur = ui->options_blur->isChecked();
     tracker->useErode = ui->options_erode->isChecked();
     tracker->useDilate = ui->options_dilate->isChecked();
@@ -182,22 +181,23 @@ void MainWindow::updateParameters() {
 }
 
 void MainWindow::updateCoordLabels() {
-    /*
-    tracker->updateCoordData(knobCoords);
-    ui->knobA_xCoordsLabel->setText(QString::number(knobCoords[0]));
-    ui->knobA_yCoordsLabel->setText(QString::number(knobCoords[1]));
-    ui->knobA_zCoordsLabel->setText(QString::number(knobCoords[2]));
-    ui->knobB_xCoordsLabel->setText(QString::number(knobCoords[3]));
-    ui->knobB_yCoordsLabel->setText(QString::number(knobCoords[4]));
-    ui->knobB_zCoordsLabel->setText(QString::number(knobCoords[5]));
-    ui->knobC_xCoordsLabel->setText(QString::number(knobCoords[6]));
-    ui->knobC_yCoordsLabel->setText(QString::number(knobCoords[7]));
-    ui->knobC_zCoordsLabel->setText(QString::number(knobCoords[8]));
-    ui->knobD_xCoordsLabel->setText(QString::number(knobCoords[9]));
-    ui->knobD_yCoordsLabel->setText(QString::number(knobCoords[10]));
-    ui->knobD_zCoordsLabel->setText(QString::number(knobCoords[11]));
+
+    QVector<Tracker::KnobCoords> coordData = tracker->getKnobCoords();
+
+    ui->knobA_xCoordsLabel->setText(QString::number(coordData[0].x));
+    ui->knobA_yCoordsLabel->setText(QString::number(coordData[0].y));
+    ui->knobA_zCoordsLabel->setText(QString::number(coordData[0].z));
+    ui->knobB_xCoordsLabel->setText(QString::number(coordData[1].x));
+    ui->knobB_yCoordsLabel->setText(QString::number(coordData[1].y));
+    ui->knobB_zCoordsLabel->setText(QString::number(coordData[1].z));
+    ui->knobC_xCoordsLabel->setText(QString::number(coordData[2].x));
+    ui->knobC_yCoordsLabel->setText(QString::number(coordData[2].y));
+    ui->knobC_zCoordsLabel->setText(QString::number(coordData[2].z));
+    ui->knobD_xCoordsLabel->setText(QString::number(coordData[3].x));
+    ui->knobD_yCoordsLabel->setText(QString::number(coordData[3].y));
+    ui->knobD_zCoordsLabel->setText(QString::number(coordData[3].z));
     updateTimer->start(500);
-    */
+
 }
 
 void MainWindow::updateMidiOutputDeviceID() {
@@ -242,7 +242,7 @@ void MainWindow::on_knobD_isView_clicked()
 
 QString MainWindow::createStylesheetColorString(ushort knobIndex) {
     // May god forgive me for this
-    if (knobParams[knobIndex*7+1] < knobParams[knobIndex*7+2]) {
+    if (knobParams[knobIndex*7+1] <= knobParams[knobIndex*7+2]) {
         return QString::fromStdString("QLabel {background-color: hsv(" +
                                   to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2])) + "," +
                                   to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +

@@ -16,8 +16,6 @@ Tracker::Tracker()
 
 Mat Tracker::process(const Mat& input) {
 
-    //printf("useBlur: %d\n", useBlur);
-
     // convert BGR -> HSV
     Mat hsvFrame;
     cvtColor(input, hsvFrame, CV_BGR2HSV);
@@ -30,6 +28,7 @@ Mat Tracker::process(const Mat& input) {
             if (useDilate) dilate(knobData[i].frame, knobData[i].frame, Mat());
             centerOfMass(i, knobData[i].frame);
             radius(i, knobData[i].frame);
+            calculateCoords(i);
             // convert binary Image to 3 channel image
             cvtColor(knobData[activeView].frame, knobData[activeView].frame, CV_GRAY2BGR);
             drawCross(knobData[activeView].frame, knobData[i].center, 5, knobData[i].bgrColor);
@@ -61,7 +60,7 @@ void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
         knobParams[i].maxVal = paramData[i*7+6];
 
         uchar averageHue = 0;
-        if (knobParams[i].minHue < knobParams[i].maxHue) {
+        if (knobParams[i].minHue <= knobParams[i].maxHue) {
             averageHue = (knobParams[i].minHue + knobParams[i].maxHue) / 2;
         } else {
             averageHue = (knobParams[i].minHue + knobParams[i].maxHue + 180) / 2 - 180;
@@ -95,7 +94,7 @@ Mat Tracker::colorKeying(const int& knobID, const Mat& hsvFrame) {
             drawWhite = false;
             if (knobParams[knobID].minVal <= val && val <= knobParams[knobID].maxVal) {
                 if (knobParams[knobID].minSat <= sat && sat <= knobParams[knobID].maxSat) {
-                    if (knobParams[knobID].minHue < knobParams[knobID].maxHue) {
+                    if (knobParams[knobID].minHue <= knobParams[knobID].maxHue) {
                         if (knobParams[knobID].minHue <= hue && hue <= knobParams[knobID].maxHue){
                             drawWhite = true;
                         }
@@ -193,10 +192,10 @@ void Tracker::radius(const int& knobID, const Mat& image) {
 
 // Convert data to knob coords and break down to fit a 7-bit-value (up to 127)
 void Tracker::calculateCoords(const int& knobID) {
-    knobCoords[knobID].x = knobData[knobID].center.x / knobData[knobID].frame.cols * 127;
-    knobCoords[knobID].y = knobData[knobID].center.y / knobData[knobID].frame.rows * 127;
-    knobCoords[knobID].z = knobData[knobID].radius;           // #TODO: DYNAMISCH!?
-    if (knobCoords[knobID].z > 127) knobCoords[knobID].z = 127;     // Catch rare case where radius might be too big
+    knobCoords[knobID].x = 127 * knobData[knobID].center.x / knobData[knobID].frame.cols;
+    knobCoords[knobID].y = 127 * knobData[knobID].center.y / knobData[knobID].frame.rows;
+    knobCoords[knobID].z = 127 * knobData[knobID].radius / ((knobData[knobID].frame.rows-1) / 2);
+    if (knobCoords[knobID].z > 127) knobCoords[knobID].z = 127;     // Clip z value to 127
 }
 
 void Tracker::drawCross(Mat& image, const Point& center, const int& length, const Vec3b& color){
@@ -230,8 +229,4 @@ void Tracker::hueToBGR(const uchar& hue, Vec3b& bgr) {
         bgr[1] = 0;                         // 0
         bgr[2] = 255;                       // 255
     }
-    printf("\nHue: %d\n", hue);
-    printf("Blue: %d\n", bgr[0]);
-    printf("Green: %d\n", bgr[1]);
-    printf("Red: %d\n", bgr[2]);
 }
