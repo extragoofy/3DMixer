@@ -77,7 +77,7 @@ void MainWindow::setUpValidators() {
     ui->knobD_colorValMin->setValidator(new QIntValidator(0, 100, this));
     ui->knobD_colorValMax->setValidator(new QIntValidator(0, 100, this));
 
-    ui->midiDeviceID->setValidator(new QIntValidator(0, midiOutGetNumDevs(), this));
+    ui->midiDeviceID->setValidator(new QIntValidator(0, midiOutGetNumDevs()-1, this));
     ui->midiSendRate->setValidator(new QIntValidator(10, 9999, this));
 
 }
@@ -228,7 +228,6 @@ void MainWindow::updateCoordLabels() {
     ui->knobD_xCoordsLabel->setText(QString::number(coordData[3].x));
     ui->knobD_yCoordsLabel->setText(QString::number(coordData[3].y));
     ui->knobD_zCoordsLabel->setText(QString::number(coordData[3].z));
-    updateTimer->start(500);
 
 }
 

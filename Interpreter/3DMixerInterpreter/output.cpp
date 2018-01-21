@@ -11,7 +11,7 @@ Output::Output(Tracker * trackerInstance):
     message.data[0] = 0x90;
     message.data[3] = 0x01;
     midiDeviceID = 0;
-    printf("Number of devices: %d \n", midiOutGetNumDevs());
+    printf("Number of midi devices: %d\n", midiOutGetNumDevs());
 }
 
 Output::~Output() {
@@ -22,24 +22,22 @@ Output::~Output() {
 void Output::sendTrackerData() {
     int flag = midiOutOpen(&device, midiDeviceID, 0, 0, CALLBACK_NULL);
     if (flag != MMSYSERR_NOERROR) {
-        printf("Error opening MIDI Output: %d \n", flag);
+        printf("Error opening MIDI Output, Error: %d \n", flag);
         printf("Number of devices: %d \n", midiOutGetNumDevs());
     }
 
+    QVector<Tracker::KnobCoords> trackerData = tracker->getKnobCoords();
+
     for (int i = 0; i < 4; i++) {
-        trackData[0] = i;
-        tracker->getKnobCoords();
-        //printf("Knob: %d, x: %d, y: %d, z: %d \n", trackData[0], trackData[1], trackData[2], trackData[3]);
         message.data[0] = 0x90;
-        message.data[1] = trackData[0];
-        message.data[2] = trackData[1];
+        message.data[1] = i;
+        message.data[2] = trackerData[i].x;
         midiOutShortMsg(device, message.word);
         message.data[0] = 0x80;
-        message.data[1] = trackData[2];
-        message.data[2] = trackData[3];
+        message.data[1] = trackerData[i].y;
+        message.data[2] = trackerData[i].z;
         midiOutShortMsg(device, message.word);
     }
-    //printf("\n");
     midiOutClose(device);
 }
 

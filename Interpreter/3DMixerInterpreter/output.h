@@ -33,7 +33,6 @@ private:
         unsigned long word;
         unsigned char data[4];
     } message;
-    unsigned char trackData[4];
 };
 
 #endif // OUTPUT_H
