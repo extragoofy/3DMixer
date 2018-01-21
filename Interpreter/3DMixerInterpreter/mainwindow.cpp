@@ -90,6 +90,7 @@ void MainWindow::setUpUiEvents() {
     connect(ui->knobA_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobA_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobA_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
+    connect(ui->knobA_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
     connect(ui->knobB_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->knobB_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
@@ -98,6 +99,7 @@ void MainWindow::setUpUiEvents() {
     connect(ui->knobB_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobB_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobB_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
+    connect(ui->knobB_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
     connect(ui->knobC_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->knobC_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
@@ -106,6 +108,7 @@ void MainWindow::setUpUiEvents() {
     connect(ui->knobC_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobC_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobC_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
+    connect(ui->knobC_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
     connect(ui->knobD_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->knobD_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
@@ -114,20 +117,14 @@ void MainWindow::setUpUiEvents() {
     connect(ui->knobD_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobD_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobD_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
+    connect(ui->knobD_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
     connect(ui->options_blur, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->options_erode, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
-    connect(ui->midiDeviceID, SIGNAL(editingFinished()), this, SLOT(updateMidiOutputDeviceID()));
+    connect(ui->midiDeviceID, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
 
-}
-
-void MainWindow::resetRadioButtons() {
-    ui->knobA_isView->setChecked(false);
-    ui->knobB_isView->setChecked(false);
-    ui->knobC_isView->setChecked(false);
-    ui->knobD_isView->setChecked(false);
 }
 
 // SIGNALS/SLOTS
@@ -172,11 +169,37 @@ void MainWindow::updateParameters() {
     ui->knobC_colorLabel->setStyleSheet(createStylesheetColorString(2));
     ui->knobD_colorLabel->setStyleSheet(createStylesheetColorString(3));
 
+    // Enable/Disable view radio buttons dependent on active state of knob
+    ui->knobA_isView->setEnabled(knobParams[0]);
+    ui->knobB_isView->setEnabled(knobParams[7]);
+    ui->knobC_isView->setEnabled(knobParams[14]);
+    ui->knobD_isView->setEnabled(knobParams[21]);
+
+    // Assign new view if button is disabled and view is still checked
+    if (
+            (ui->knobA_isView->isChecked() && !ui->knobA_isView->isEnabled()) ||
+            (ui->knobB_isView->isChecked() && !ui->knobB_isView->isEnabled()) ||
+            (ui->knobC_isView->isChecked() && !ui->knobC_isView->isEnabled()) ||
+            (ui->knobD_isView->isChecked() && !ui->knobD_isView->isEnabled())
+            ) {
+        if (ui->knobA_isView->isEnabled()) ui->knobA_isView->click();
+        else if (ui->knobB_isView->isEnabled()) ui->knobB_isView->click();
+        else if (ui->knobC_isView->isEnabled()) ui->knobC_isView->click();
+        else if (ui->knobD_isView->isEnabled()) ui->knobD_isView->click();
+    }
+
+    // Set activeView
+    if (ui->knobA_isView->isChecked()) tracker->activeView = 0;
+    if (ui->knobB_isView->isChecked()) tracker->activeView = 1;
+    if (ui->knobC_isView->isChecked()) tracker->activeView = 2;
+    if (ui->knobD_isView->isChecked()) tracker->activeView = 3;
+
     // Call tracker to update its parameters using this data
     tracker->updateKnobParams(knobParams);
     tracker->useBlur = ui->options_blur->isChecked();
     tracker->useErode = ui->options_erode->isChecked();
     tracker->useDilate = ui->options_dilate->isChecked();
+    output->setMidiDeviceID(ui->midiDeviceID->text().toInt());
 
 }
 
@@ -198,46 +221,6 @@ void MainWindow::updateCoordLabels() {
     ui->knobD_zCoordsLabel->setText(QString::number(coordData[3].z));
     updateTimer->start(500);
 
-}
-
-void MainWindow::updateMidiOutputDeviceID() {
-    output->setMidiDeviceID(ui->midiDeviceID->text().toInt());
-}
-
-void MainWindow::on_knobA_isView_clicked()
-{
-    if (ui->knobA_isView->isCheckable()) {
-        resetRadioButtons();
-        ui->knobA_isView->setChecked(true);
-        tracker->activeView = 0;
-    }
-}
-
-void MainWindow::on_knobB_isView_clicked()
-{
-    if (ui->knobB_isView->isCheckable()) {
-        resetRadioButtons();
-        ui->knobB_isView->setChecked(true);
-        tracker->activeView = 1;
-    }
-}
-
-void MainWindow::on_knobC_isView_clicked()
-{
-    if (ui->knobC_isView->isCheckable()) {
-        resetRadioButtons();
-        ui->knobC_isView->setChecked(true);
-        tracker->activeView = 2;
-    }
-}
-
-void MainWindow::on_knobD_isView_clicked()
-{
-    if (ui->knobD_isView->isCheckable()) {
-        resetRadioButtons();
-        ui->knobD_isView->setChecked(true);
-        tracker->activeView = 3;
-    }
 }
 
 QString MainWindow::createStylesheetColorString(ushort knobIndex) {

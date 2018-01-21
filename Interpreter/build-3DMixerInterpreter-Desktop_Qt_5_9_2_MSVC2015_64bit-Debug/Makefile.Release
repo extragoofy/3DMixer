@@ -306,6 +306,7 @@ release\moc_mainwindow.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QM
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		..\3DMixerInterpreter\videoengine.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qthread.h \
@@ -369,7 +370,6 @@ release\moc_mainwindow.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QM
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		..\3DMixerInterpreter\output.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		..\3DMixerInterpreter\mainwindow.h \
@@ -811,6 +811,7 @@ release\moc_output.cpp: C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
+		..\3DMixerInterpreter\videoformat.h \
 		..\3DMixerInterpreter\output.h \
 		release\moc_predefs.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\bin\moc.exe
@@ -1049,6 +1050,7 @@ release\main.obj: ..\3DMixerInterpreter\main.cpp ../3DMixerInterpreter/mainwindo
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		../3DMixerInterpreter/videoengine.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qthread.h \
@@ -1112,7 +1114,6 @@ release\main.obj: ..\3DMixerInterpreter\main.cpp ../3DMixerInterpreter/mainwindo
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		../3DMixerInterpreter/output.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QApplication \
@@ -1231,6 +1232,7 @@ release\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpret
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QTimer \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qtimer.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qbasictimer.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		../3DMixerInterpreter/videoengine.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QThread \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qthread.h \
@@ -1294,16 +1296,64 @@ release\mainwindow.obj: ..\3DMixerInterpreter\mainwindow.cpp ../3DMixerInterpret
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLabel \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlabel.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qframe.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
 		../3DMixerInterpreter/output.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
 		ui_mainwindow.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVariant \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QAction \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qaction.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qactiongroup.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QApplication \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qapplication.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qeventloop.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qguiapplication.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qinputmethod.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QButtonGroup \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qbuttongroup.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QCheckBox \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qcheckbox.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractbutton.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QGroupBox \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qgroupbox.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QHeaderView \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qheaderview.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvalidator.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qregularexpression.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qslider.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qstyle.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QLineEdit \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qlineedit.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtextcursor.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtextformat.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qpen.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtextoption.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QMenuBar \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qmenubar.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qmenu.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QRadioButton \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qradiobutton.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QStatusBar \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qstatusbar.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QToolBar \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\qtoolbar.h \
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtWidgets\QWidget \
+		../3DMixerInterpreter/videowidget.h \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\core\core.hpp \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\highgui\highgui.hpp \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\imgproc\imgproc.hpp \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QIntValidator \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvalidator.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qregularexpression.h
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\QIntValidator
 
 release\videoengine.obj: ..\3DMixerInterpreter\videoengine.cpp C:\opencv\opencv-3.1.0\build\include\opencv2\opencv.hpp \
 		C:\opencv\opencv-3.1.0\build\include\opencv2\core.hpp \
@@ -1785,7 +1835,8 @@ release\tracker.obj: ..\3DMixerInterpreter\tracker.cpp ../3DMixerInterpreter/tra
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfiledevice.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
+		../3DMixerInterpreter/videoformat.h
 
 release\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/output.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QObject \
@@ -1945,7 +1996,8 @@ release\output.obj: ..\3DMixerInterpreter\output.cpp ../3DMixerInterpreter/outpu
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\qfiledevice.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qvector2d.h \
 		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtGui\qtouchdevice.h \
-		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector
+		C:\Qt\Qt5.9.2\5.9.2\msvc2015_64\include\QtCore\QVector \
+		../3DMixerInterpreter/videoformat.h
 
 release\moc_mainwindow.obj: release\moc_mainwindow.cpp 
 

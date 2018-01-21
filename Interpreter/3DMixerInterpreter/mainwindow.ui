@@ -330,6 +330,9 @@
      <property name="autoExclusive">
       <bool>false</bool>
      </property>
+     <attribute name="buttonGroup">
+      <string notr="true">viewButtonGroup</string>
+     </attribute>
     </widget>
    </widget>
    <widget class="QLabel" name="label_hueMax">
@@ -843,6 +846,9 @@
      <property name="autoExclusive">
       <bool>false</bool>
      </property>
+     <attribute name="buttonGroup">
+      <string notr="true">viewButtonGroup</string>
+     </attribute>
     </widget>
    </widget>
    <widget class="QGroupBox" name="knobCBox">
@@ -1114,6 +1120,9 @@
      <property name="autoExclusive">
       <bool>false</bool>
      </property>
+     <attribute name="buttonGroup">
+      <string notr="true">viewButtonGroup</string>
+     </attribute>
     </widget>
    </widget>
    <widget class="QGroupBox" name="knobDBox">
@@ -1385,6 +1394,9 @@
      <property name="autoExclusive">
       <bool>false</bool>
      </property>
+     <attribute name="buttonGroup">
+      <string notr="true">viewButtonGroup</string>
+     </attribute>
     </widget>
    </widget>
    <widget class="QLabel" name="label_zCoords_2">
@@ -1597,4 +1609,7 @@
  </tabstops>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="viewButtonGroup"/>
+ </buttongroups>
 </ui>

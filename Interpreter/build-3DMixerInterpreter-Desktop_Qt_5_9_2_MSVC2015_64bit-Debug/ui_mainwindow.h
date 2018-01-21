@@ -106,6 +106,7 @@ public:
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
+    QButtonGroup *viewButtonGroup;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -194,6 +195,9 @@ public:
         sizePolicy.setHeightForWidth(knobA_colorValMax->sizePolicy().hasHeightForWidth());
         knobA_colorValMax->setSizePolicy(sizePolicy);
         knobA_isView = new QRadioButton(knobABox);
+        viewButtonGroup = new QButtonGroup(MainWindow);
+        viewButtonGroup->setObjectName(QStringLiteral("viewButtonGroup"));
+        viewButtonGroup->addButton(knobA_isView);
         knobA_isView->setObjectName(QStringLiteral("knobA_isView"));
         knobA_isView->setGeometry(QRect(1250, 20, 17, 17));
         knobA_isView->setChecked(true);
@@ -314,6 +318,7 @@ public:
         sizePolicy.setHeightForWidth(knobB_colorValMax->sizePolicy().hasHeightForWidth());
         knobB_colorValMax->setSizePolicy(sizePolicy);
         knobB_isView = new QRadioButton(knobBBox);
+        viewButtonGroup->addButton(knobB_isView);
         knobB_isView->setObjectName(QStringLiteral("knobB_isView"));
         knobB_isView->setGeometry(QRect(1250, 20, 17, 17));
         knobB_isView->setAutoExclusive(false);
@@ -378,6 +383,7 @@ public:
         sizePolicy.setHeightForWidth(knobC_colorValMax->sizePolicy().hasHeightForWidth());
         knobC_colorValMax->setSizePolicy(sizePolicy);
         knobC_isView = new QRadioButton(knobCBox);
+        viewButtonGroup->addButton(knobC_isView);
         knobC_isView->setObjectName(QStringLiteral("knobC_isView"));
         knobC_isView->setGeometry(QRect(1250, 20, 17, 17));
         knobC_isView->setAutoExclusive(false);
@@ -442,6 +448,7 @@ public:
         sizePolicy.setHeightForWidth(knobD_colorValMax->sizePolicy().hasHeightForWidth());
         knobD_colorValMax->setSizePolicy(sizePolicy);
         knobD_isView = new QRadioButton(knobDBox);
+        viewButtonGroup->addButton(knobD_isView);
         knobD_isView->setObjectName(QStringLiteral("knobD_isView"));
         knobD_isView->setGeometry(QRect(1250, 20, 17, 17));
         knobD_isView->setAutoExclusive(false);
