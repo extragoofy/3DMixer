@@ -17,9 +17,6 @@ class Tracker
 
 public:
 
-    // Constructor
-    Tracker();
-
     // Struct that holds parameters for knob detection - basically everything that is settable in the UI
     struct KnobParams {
         KnobParams()
@@ -44,9 +41,8 @@ public:
     struct KnobData {
         KnobData()
             : bgrColor(cv::Vec3b(255,255,255))
-            //, binaryFrame(0)        // Größe setzen?
             , center(cv::Point())
-            , radius(0)
+            , radius(10)
         {}
         cv::Vec3b bgrColor;    // Average hue of knob
         cv::Mat frame;          // Latest frame of knob
@@ -66,6 +62,9 @@ public:
         uchar z;
     };
 
+    // Constructor
+    Tracker();
+
     // Main processing function
     cv::Mat process(const cv::Mat& source);
 
@@ -75,8 +74,8 @@ public:
 
     // Options
     bool useBlur;       // Shall median blur be used to improve tracking? (Expensive!)
-    bool useErode;      // Shall the binary frames be eroded to improve tracking?
-    bool useDilate;     // Shall the binary frames be dilated to improve tracking?
+    bool useErode;      // Shall binary frames be eroded to improve tracking?
+    bool useDilate;     // Shall binary frames be dilated to improve tracking?
     uchar activeView;   // Which knob is currently visible in the UI
 
 private:
@@ -93,10 +92,11 @@ private:
     // Helper functions
     void hueToBGR(const uchar& hue, cv::Vec3b& bgr);
 
-    // Data storage for each knob
+    // Data storage
     QVector<KnobParams> knobParams;
     QVector<KnobData> knobData;
     QVector<KnobCoords> knobCoords;
+    cv::Mat output;
 
 };
 

@@ -17,12 +17,11 @@ Tracker::Tracker()
 Mat Tracker::process(const Mat& input) {
 
     // convert BGR -> HSV
-    Mat hsvFrame;
-    cvtColor(input, hsvFrame, CV_BGR2HSV);
+    cvtColor(input, output, CV_BGR2HSV);
 
     for (int i = 0; i < 4; i++) {
         if (knobParams[i].active) {
-            knobData[i].frame = colorKeying(i, hsvFrame);
+            knobData[i].frame = colorKeying(i, output);
             if (useBlur) medianBlur(knobData[i].frame, knobData[i].frame, 5);
             if (useErode) erode(knobData[i].frame, knobData[i].frame, Mat());
             if (useDilate) dilate(knobData[i].frame, knobData[i].frame, Mat());
@@ -40,11 +39,29 @@ Mat Tracker::process(const Mat& input) {
         }
     }
 
-    // convert binary Image to 3 channel image
-    cvtColor(knobData[activeView].frame, knobData[activeView].frame, CV_GRAY2BGR);
-    drawCross(knobData[activeView].frame, knobData[activeView].center, 5, knobData[activeView].bgrColor);
-    circle(knobData[activeView].frame, knobData[activeView].center, knobData[activeView].radius, knobData[activeView].bgrColor);
-    return knobData[activeView].frame;
+    printf("activeView: %d\n", activeView);
+
+    if (activeView == 4) {
+        cvtColor(output, output, CV_HSV2BGR);
+        // PAINT IT BLACK
+        for(int x = 0; x < output.cols; x++){
+            for(int y = 0; y < output.rows; y++){
+                output.at<Vec3b>(y,x) = 0;
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            if (knobParams[i].active) {
+                drawCross(output, knobData[i].center, 5, knobData[i].bgrColor);
+                circle(output, knobData[i].center, knobData[i].radius, knobData[i].bgrColor);
+            }
+        }
+    } else {
+        // convert binary Image to 3 channel image
+        cvtColor(knobData[activeView].frame, output, CV_GRAY2BGR);
+        drawCross(output, knobData[activeView].center, 5, knobData[activeView].bgrColor);
+        circle(output, knobData[activeView].center, knobData[activeView].radius, knobData[activeView].bgrColor);
+    }
+    return output;
 
 }
 
@@ -77,7 +94,7 @@ const QVector<Tracker::KnobCoords>& Tracker::getKnobCoords() {
 Mat Tracker::colorKeying(const int& knobID, const Mat& hsvFrame) {
 
     // Initialize Mat object for output
-    Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
+    Mat outputMat(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
 
     Vec3b hsvPixel;
     int hue;
@@ -107,16 +124,15 @@ Mat Tracker::colorKeying(const int& knobID, const Mat& hsvFrame) {
                 }
             }
             if (drawWhite){
-                output.at<uchar>(y,x) = 255;
+                outputMat.at<uchar>(y,x) = 255;
             }
-            // NÖTIG?
             else{
-                output.at<uchar>(y,x) = 0;
+                outputMat.at<uchar>(y,x) = 0;
             }
         }
     }
 
-    return output;
+    return outputMat;
 
 }
 
@@ -138,8 +154,6 @@ void Tracker::centerOfMass(const int& knobID, const Mat& image) {
 
     if (count > 0){
         knobData[knobID].center = Point(sumx/count, sumy/count);
-    } else {
-        knobData[knobID].center = Point(0,0);
     }
 }
 
@@ -185,8 +199,11 @@ void Tracker::radius(const int& knobID, const Mat& image) {
         }
     }
 
-    // Divide by 4 to get average radius in all directions
-    knobData[knobID].radius = sum / 4;
+    // Only allow radii of atleast 10
+    if (sum > 40) {
+        // Divide by 4 to get average radius in all directions
+        knobData[knobID].radius = sum / 4;
+    }
 
 }
 

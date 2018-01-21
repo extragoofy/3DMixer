@@ -103,6 +103,7 @@ public:
     QCheckBox *options_dilate;
     QLineEdit *midiDeviceID;
     QLabel *label_midiDevID;
+    QRadioButton *isView_all;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -474,16 +475,22 @@ public:
         options_dilate->setChecked(true);
         midiDeviceID = new QLineEdit(centralWidget);
         midiDeviceID->setObjectName(QStringLiteral("midiDeviceID"));
-        midiDeviceID->setGeometry(QRect(1250, 820, 30, 20));
+        midiDeviceID->setGeometry(QRect(1150, 820, 30, 20));
         sizePolicy.setHeightForWidth(midiDeviceID->sizePolicy().hasHeightForWidth());
         midiDeviceID->setSizePolicy(sizePolicy);
         midiDeviceID->setMinimumSize(QSize(0, 0));
         midiDeviceID->setBaseSize(QSize(0, 0));
         label_midiDevID = new QLabel(centralWidget);
         label_midiDevID->setObjectName(QStringLiteral("label_midiDevID"));
-        label_midiDevID->setGeometry(QRect(1100, 820, 141, 20));
+        label_midiDevID->setGeometry(QRect(1000, 820, 141, 20));
         label_midiDevID->setFont(font);
         label_midiDevID->setAlignment(Qt::AlignCenter);
+        isView_all = new QRadioButton(centralWidget);
+        viewButtonGroup->addButton(isView_all);
+        isView_all->setObjectName(QStringLiteral("isView_all"));
+        isView_all->setGeometry(QRect(1300, 820, 71, 17));
+        isView_all->setFont(font);
+        isView_all->setAutoExclusive(false);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -610,6 +617,7 @@ public:
         options_dilate->setText(QApplication::translate("MainWindow", "Dilate", Q_NULLPTR));
         midiDeviceID->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
         label_midiDevID->setText(QApplication::translate("MainWindow", "MIDI Output Device ID:", Q_NULLPTR));
+        isView_all->setText(QApplication::translate("MainWindow", "View All", Q_NULLPTR));
     } // retranslateUi
 
 };

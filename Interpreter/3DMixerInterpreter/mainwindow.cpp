@@ -119,6 +119,8 @@ void MainWindow::setUpUiEvents() {
     connect(ui->knobD_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
     connect(ui->knobD_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
+    connect(ui->isView_all, SIGNAL(clicked()), this, SLOT(updateParameters()));
+
     connect(ui->options_blur, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->options_erode, SIGNAL(clicked()), this, SLOT(updateParameters()));
     connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateParameters()));
@@ -186,13 +188,20 @@ void MainWindow::updateParameters() {
         else if (ui->knobB_isView->isEnabled()) ui->knobB_isView->click();
         else if (ui->knobC_isView->isEnabled()) ui->knobC_isView->click();
         else if (ui->knobD_isView->isEnabled()) ui->knobD_isView->click();
+        else ui->isView_all->click();
     }
 
     // Set activeView
     if (ui->knobA_isView->isChecked()) tracker->activeView = 0;
-    if (ui->knobB_isView->isChecked()) tracker->activeView = 1;
-    if (ui->knobC_isView->isChecked()) tracker->activeView = 2;
-    if (ui->knobD_isView->isChecked()) tracker->activeView = 3;
+    else if (ui->knobB_isView->isChecked()) tracker->activeView = 1;
+    else if (ui->knobC_isView->isChecked()) tracker->activeView = 2;
+    else if (ui->knobD_isView->isChecked()) tracker->activeView = 3;
+    else tracker->activeView = 4;
+
+    printf("%d\n", ui->knobA_isView->isChecked());
+    printf("%d\n", ui->knobB_isView->isChecked());
+    printf("%d\n", ui->knobC_isView->isChecked());
+    printf("%d\n", ui->knobD_isView->isChecked());
 
     // Call tracker to update its parameters using this data
     tracker->updateKnobParams(knobParams);

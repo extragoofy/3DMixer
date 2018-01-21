@@ -1490,7 +1490,7 @@
    <widget class="QLineEdit" name="midiDeviceID">
     <property name="geometry">
      <rect>
-      <x>1250</x>
+      <x>1150</x>
       <y>820</y>
       <width>30</width>
       <height>20</height>
@@ -1521,7 +1521,7 @@
    <widget class="QLabel" name="label_midiDevID">
     <property name="geometry">
      <rect>
-      <x>1100</x>
+      <x>1000</x>
       <y>820</y>
       <width>141</width>
       <height>20</height>
@@ -1539,6 +1539,31 @@
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
+   </widget>
+   <widget class="QRadioButton" name="isView_all">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>820</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>View All</string>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">viewButtonGroup</string>
+    </attribute>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
