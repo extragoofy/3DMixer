@@ -1557,6 +1557,44 @@
    <header>videowidget.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>knobA_isActive</tabstop>
+  <tabstop>knobA_colorHueMin</tabstop>
+  <tabstop>knobA_colorHueMax</tabstop>
+  <tabstop>knobA_colorSatMin</tabstop>
+  <tabstop>knobA_colorSatMax</tabstop>
+  <tabstop>knobA_colorValMin</tabstop>
+  <tabstop>knobA_colorValMax</tabstop>
+  <tabstop>knobA_isView</tabstop>
+  <tabstop>knobB_isActive</tabstop>
+  <tabstop>knobB_colorHueMin</tabstop>
+  <tabstop>knobB_colorHueMax</tabstop>
+  <tabstop>knobB_colorSatMin</tabstop>
+  <tabstop>knobB_colorSatMax</tabstop>
+  <tabstop>knobB_colorValMin</tabstop>
+  <tabstop>knobB_colorValMax</tabstop>
+  <tabstop>knobB_isView</tabstop>
+  <tabstop>knobC_isActive</tabstop>
+  <tabstop>knobC_colorHueMin</tabstop>
+  <tabstop>knobC_colorHueMax</tabstop>
+  <tabstop>knobC_colorSatMin</tabstop>
+  <tabstop>knobC_colorSatMax</tabstop>
+  <tabstop>knobC_colorValMin</tabstop>
+  <tabstop>knobC_colorValMax</tabstop>
+  <tabstop>knobC_isView</tabstop>
+  <tabstop>knobD_isActive</tabstop>
+  <tabstop>knobD_colorHueMin</tabstop>
+  <tabstop>knobD_colorHueMax</tabstop>
+  <tabstop>knobD_colorSatMin</tabstop>
+  <tabstop>knobD_colorSatMax</tabstop>
+  <tabstop>knobD_colorValMin</tabstop>
+  <tabstop>knobD_colorValMax</tabstop>
+  <tabstop>knobD_isView</tabstop>
+  <tabstop>options_blur</tabstop>
+  <tabstop>options_erode</tabstop>
+  <tabstop>options_dilate</tabstop>
+  <tabstop>midiDeviceID</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
