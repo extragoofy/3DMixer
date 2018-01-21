@@ -29,10 +29,6 @@ Mat Tracker::process(const Mat& input) {
             centerOfMass(i, knobData[i].frame);
             radius(i, knobData[i].frame);
             calculateCoords(i);
-            // convert binary Image to 3 channel image
-            cvtColor(knobData[activeView].frame, knobData[activeView].frame, CV_GRAY2BGR);
-            drawCross(knobData[activeView].frame, knobData[i].center, 5, knobData[i].bgrColor);
-            circle(knobData[activeView].frame, knobData[i].center, knobData[i].radius, knobData[i].bgrColor);
         }
         // Reset knob data if knob is turned off.
         // This is done here since blur, erode and dilate may take up to a second to calculate
@@ -44,6 +40,10 @@ Mat Tracker::process(const Mat& input) {
         }
     }
 
+    // convert binary Image to 3 channel image
+    cvtColor(knobData[activeView].frame, knobData[activeView].frame, CV_GRAY2BGR);
+    drawCross(knobData[activeView].frame, knobData[activeView].center, 5, knobData[activeView].bgrColor);
+    circle(knobData[activeView].frame, knobData[activeView].center, knobData[activeView].radius, knobData[activeView].bgrColor);
     return knobData[activeView].frame;
 
 }
