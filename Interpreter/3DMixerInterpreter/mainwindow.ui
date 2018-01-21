@@ -1490,7 +1490,7 @@
    <widget class="QLineEdit" name="midiDeviceID">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>950</x>
       <y>820</y>
       <width>30</width>
       <height>20</height>
@@ -1515,13 +1515,13 @@
      </size>
     </property>
     <property name="text">
-     <string>2</string>
+     <string>0</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_midiDevID">
     <property name="geometry">
      <rect>
-      <x>1000</x>
+      <x>800</x>
       <y>820</y>
       <width>141</width>
       <height>20</height>
@@ -1534,10 +1534,10 @@
      </font>
     </property>
     <property name="text">
-     <string>MIDI Output Device ID:</string>
+     <string>MIDI Device ID:</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QRadioButton" name="isView_all">
@@ -1564,6 +1564,59 @@
     <attribute name="buttonGroup">
      <string notr="true">viewButtonGroup</string>
     </attribute>
+   </widget>
+   <widget class="QLabel" name="label_midiSendRate">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>820</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>MIDI Send Rate (ms):</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="midiSendRate">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>820</y>
+      <width>30</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>100</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

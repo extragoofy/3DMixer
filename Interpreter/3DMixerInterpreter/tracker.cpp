@@ -39,8 +39,6 @@ Mat Tracker::process(const Mat& input) {
         }
     }
 
-    printf("activeView: %d\n", activeView);
-
     if (activeView == 4) {
         cvtColor(output, output, CV_HSV2BGR);
         // PAINT IT BLACK

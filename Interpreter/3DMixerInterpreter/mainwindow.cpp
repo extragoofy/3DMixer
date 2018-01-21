@@ -77,7 +77,8 @@ void MainWindow::setUpValidators() {
     ui->knobD_colorValMin->setValidator(new QIntValidator(0, 100, this));
     ui->knobD_colorValMax->setValidator(new QIntValidator(0, 100, this));
 
-    ui->midiDeviceID->setValidator(new QIntValidator(0, 10, this));
+    ui->midiDeviceID->setValidator(new QIntValidator(0, midiOutGetNumDevs(), this));
+    ui->midiSendRate->setValidator(new QIntValidator(10, 9999, this));
 
 }
 
@@ -126,6 +127,7 @@ void MainWindow::setUpUiEvents() {
     connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateParameters()));
 
     connect(ui->midiDeviceID, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
+    connect(ui->midiSendRate, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
 
 }
 
@@ -198,17 +200,15 @@ void MainWindow::updateParameters() {
     else if (ui->knobD_isView->isChecked()) tracker->activeView = 3;
     else tracker->activeView = 4;
 
-    printf("%d\n", ui->knobA_isView->isChecked());
-    printf("%d\n", ui->knobB_isView->isChecked());
-    printf("%d\n", ui->knobC_isView->isChecked());
-    printf("%d\n", ui->knobD_isView->isChecked());
-
     // Call tracker to update its parameters using this data
     tracker->updateKnobParams(knobParams);
     tracker->useBlur = ui->options_blur->isChecked();
     tracker->useErode = ui->options_erode->isChecked();
     tracker->useDilate = ui->options_dilate->isChecked();
-    output->setMidiDeviceID(ui->midiDeviceID->text().toInt());
+
+    // Call output to update its parameters using this data
+    output->midiDeviceID = ui->midiDeviceID->text().toInt();
+    output->setMidiSendInterval(ui->midiSendRate->text().toInt());
 
 }
 

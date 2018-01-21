@@ -6,12 +6,12 @@ Output::Output(Tracker * trackerInstance):
     tracker(trackerInstance),
     outputTimer(new QTimer(this))
 {
-    interval = 100;
     connect(outputTimer, SIGNAL(timeout()), this, SLOT(sendTrackerData()));
-    outputTimer->start(interval);
+    outputTimer->start(100);
     message.data[0] = 0x90;
     message.data[3] = 0x01;
-    midiDeviceID = 2;
+    midiDeviceID = 0;
+    printf("Number of devices: %d \n", midiOutGetNumDevs());
 }
 
 Output::~Output() {
@@ -43,7 +43,7 @@ void Output::sendTrackerData() {
     midiOutClose(device);
 }
 
-void Output::setMidiDeviceID(int id) {
-    midiDeviceID = id;
+void Output::setMidiSendInterval(int value) {
+    outputTimer->stop();
+    outputTimer->start(value);
 }
-

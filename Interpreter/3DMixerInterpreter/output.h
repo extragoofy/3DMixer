@@ -18,8 +18,8 @@ class Output : public QObject
 public:
     Output(Tracker* trackerInstance);
     ~Output();
-    int interval;
-    void setMidiDeviceID(int id);
+    void setMidiSendInterval(int value);
+    int midiDeviceID;
 
 private slots:
     void sendTrackerData();
@@ -27,8 +27,8 @@ private slots:
 private:
     Tracker* tracker;
     QTimer* outputTimer;
+    int sendInterval;
     HMIDIOUT device;    // MIDI device interface for sending MIDI output
-    int midiDeviceID;
     union {
         unsigned long word;
         unsigned char data[4];
