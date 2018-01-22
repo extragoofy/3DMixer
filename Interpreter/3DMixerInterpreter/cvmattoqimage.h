@@ -1,12 +1,6 @@
 #ifndef CVMATTOQIMAGE_H
 #define CVMATTOQIMAGE_H
 
-// inline QImage  cvMatToQImage( const cv::Mat &inMat )
-// inline QPixmap cvMatToQPixmap( const cv::Mat &inMat )
-// inline cv::Mat QImageToCvMat( const QImage &inImage, bool inCloneImageData = true )
-// inline cv::Mat QPixmapToCvMat( const QPixmap &inPixmap, bool inCloneImageData = true )
-
-
 /*
    Functions to convert between OpenCV's cv::Mat and Qt's QImage and QPixmap.
 
@@ -22,9 +16,6 @@
 #include <QDebug>
 
 #include "opencv2/opencv.hpp"
-
-
-
 
 inline QImage  cvMatToQImage( const cv::Mat &inMat )
 {

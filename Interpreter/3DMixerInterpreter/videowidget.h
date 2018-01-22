@@ -3,6 +3,8 @@
  * HAW Hamburg
  */
 
+// Widget to display camera frames in the gui
+
 #ifndef VIDEOWIDGET_H
 #define VIDEOWIDGET_H
 #include <QLabel>

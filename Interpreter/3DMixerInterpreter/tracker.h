@@ -4,7 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <QLabel>
 #include <QVector>
-#include <stdio.h>     /* for printf() function */
+#include <stdio.h>     // For printf() // Delete?
 #include "videoformat.h"
 
 /*

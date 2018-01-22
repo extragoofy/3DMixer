@@ -1,11 +1,12 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <QIntValidator>
+// RÜBER ZU H?
+
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 using namespace cv;
 using namespace std;
@@ -18,13 +19,15 @@ MainWindow::MainWindow(QWidget *parent)
     , output(new Output(tracker))
     , updateTimer(new QTimer(this))
     , knobParams(QVector<uchar>(28))
-
+    , knobCoords(QVector<Tracker::KnobCoords>(12))
 {
+    // Set up program parts
     ui->setupUi(this);
-    setUpVideo();
     setUpValidators();
     setUpUiEvents();
+    setUpVideo();
     updateParameters();
+    // Start update timer
     connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCoordLabels()));
     updateTimer->start(500);
 }
@@ -39,6 +42,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Setups the video engine
 void MainWindow::setUpVideo() {
     videoEngine->setTracker(tracker);
     connect(videoEngine, &VideoEngine::sendInputImage, ui->inputFrame, &VideoWidget::setImage);
@@ -47,6 +51,7 @@ void MainWindow::setUpVideo() {
     videoEngine->start();
 }
 
+// Creates validators for all input fields to guarantee valid user input
 void MainWindow::setUpValidators() {
 
     ui->knobA_colorHueMin->setValidator(new QIntValidator(0, 360, this));
@@ -82,6 +87,7 @@ void MainWindow::setUpValidators() {
 
 }
 
+// Connects signals and slots - on user input, the UI shall updateParameters()
 void MainWindow::setUpUiEvents() {
 
     connect(ui->knobA_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
@@ -133,7 +139,7 @@ void MainWindow::setUpUiEvents() {
 
 // SIGNALS/SLOTS
 
-void MainWindow::updateParameters() {
+void MainWindow::updateKnobParameters() {
 
     // Update knobParams vector containing all parameter data
     // Convert 360 degree hue values to 180 degrees for opencv
@@ -143,7 +149,7 @@ void MainWindow::updateParameters() {
     knobParams[2] = ui->knobA_colorHueMax->text().toInt() / 2;
     knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 255 / 100;      // Just multiplying by 2.55 results in an rounding error
     knobParams[4] = ui->knobA_colorSatMax->text().toInt() * 255 / 100;      // making 255 unreachable
-    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 255 / 100;
+    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 255 / 100;      // so we are trying to avoid floating point numbers
     knobParams[6] = ui->knobA_colorValMax->text().toInt() * 255 / 100;
     knobParams[7] = ui->knobB_isActive->isChecked();
     knobParams[8] = ui->knobB_colorHueMin->text().toInt() / 2;
@@ -174,12 +180,13 @@ void MainWindow::updateParameters() {
     ui->knobD_colorLabel->setStyleSheet(createStylesheetColorString(3));
 
     // Enable/Disable view radio buttons dependent on active state of knob
+    // (if tracking for a knob is disabled it cannot be viewed)
     ui->knobA_isView->setEnabled(knobParams[0]);
     ui->knobB_isView->setEnabled(knobParams[7]);
     ui->knobC_isView->setEnabled(knobParams[14]);
     ui->knobD_isView->setEnabled(knobParams[21]);
 
-    // Assign new view if button is disabled and view is still checked
+    // In case a knob gets disabled that is currently being viewed, click next possible view knob
     if (
             (ui->knobA_isView->isChecked() && !ui->knobA_isView->isEnabled()) ||
             (ui->knobB_isView->isChecked() && !ui->knobB_isView->isEnabled()) ||
@@ -212,38 +219,47 @@ void MainWindow::updateParameters() {
 
 }
 
+// Get latest tracked coordinates of all knobs and display them in the UI
 void MainWindow::updateCoordLabels() {
 
-    QVector<Tracker::KnobCoords> coordData = tracker->getKnobCoords();
+    trackerData = tracker->getKnobCoords();
 
-    ui->knobA_xCoordsLabel->setText(QString::number(coordData[0].x));
-    ui->knobA_yCoordsLabel->setText(QString::number(coordData[0].y));
-    ui->knobA_zCoordsLabel->setText(QString::number(coordData[0].z));
-    ui->knobB_xCoordsLabel->setText(QString::number(coordData[1].x));
-    ui->knobB_yCoordsLabel->setText(QString::number(coordData[1].y));
-    ui->knobB_zCoordsLabel->setText(QString::number(coordData[1].z));
-    ui->knobC_xCoordsLabel->setText(QString::number(coordData[2].x));
-    ui->knobC_yCoordsLabel->setText(QString::number(coordData[2].y));
-    ui->knobC_zCoordsLabel->setText(QString::number(coordData[2].z));
-    ui->knobD_xCoordsLabel->setText(QString::number(coordData[3].x));
-    ui->knobD_yCoordsLabel->setText(QString::number(coordData[3].y));
-    ui->knobD_zCoordsLabel->setText(QString::number(coordData[3].z));
+    ui->knobA_xCoordsLabel->setText(QString::number(trackerData[0].x));
+    ui->knobA_yCoordsLabel->setText(QString::number(trackerData[0].y));
+    ui->knobA_zCoordsLabel->setText(QString::number(trackerData[0].z));
+    ui->knobB_xCoordsLabel->setText(QString::number(trackerData[1].x));
+    ui->knobB_yCoordsLabel->setText(QString::number(trackerData[1].y));
+    ui->knobB_zCoordsLabel->setText(QString::number(trackerData[1].z));
+    ui->knobC_xCoordsLabel->setText(QString::number(trackerData[2].x));
+    ui->knobC_yCoordsLabel->setText(QString::number(trackerData[2].y));
+    ui->knobC_zCoordsLabel->setText(QString::number(trackerData[2].z));
+    ui->knobD_xCoordsLabel->setText(QString::number(trackerData[3].x));
+    ui->knobD_yCoordsLabel->setText(QString::number(trackerData[3].y));
+    ui->knobD_zCoordsLabel->setText(QString::number(trackerData[3].z));
 
 }
 
+// QLabels can be colored by setting their stylesheet (which is a string)
+// This method compiles said string from the average hue/sat/val of the settings for each knob
 QString MainWindow::createStylesheetColorString(ushort knobIndex) {
-    // May god forgive me for this
+    string styleSheet = "";
+    // Each knob has 7 parameters to be set - so we multiple the knobIndex by 7 in order to access the right values
     if (knobParams[knobIndex*7+1] <= knobParams[knobIndex*7+2]) {
-        return QString::fromStdString("QLabel {background-color: hsv(" +
-                                  to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2])) + "," +
-                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +
-                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2) + "); }"
+        styleSheet = (
+            "QLabel {background-color: hsv(" +
+            // As the values in knobParams already have been scaled down to [0..180] we just need to add them to get the average
+            to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2])) + "," +
+            to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +
+            to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2) + "); }"
                 );
     } else {
-        return QString::fromStdString("QLabel {background-color: hsv(" +
-                                  to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2] + 180) % 360) + "," +
-                                  to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +
-                                  to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2) + "); }"
+        styleSheet = (
+            // Case where minHue > maxHue
+            "QLabel {background-color: hsv(" +
+            to_string((knobParams[knobIndex*7+1] + knobParams[knobIndex*7+2] + 180) % 360) + "," +
+            to_string((knobParams[knobIndex*7+3] + knobParams[knobIndex*7+4]) / 2) + "," +
+            to_string((knobParams[knobIndex*7+5] + knobParams[knobIndex*7+6]) / 2) + "); }"
                 );
     }
+    return QString::fromStdString(styleSheet);
 }

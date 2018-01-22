@@ -5,6 +5,7 @@
 
 #include "videowidget.h"
 #include <QPalette>
+
 VideoWidget::VideoWidget(QWidget *parent)
     : QLabel(parent)
 {
@@ -14,9 +15,8 @@ VideoWidget::VideoWidget(QWidget *parent)
     setPalette(palette);
 }
 
-
 void VideoWidget::setImage(const QImage& qImage){
-    // scale pixmap to label size
+    // Scale pixmap to label size
     QPixmap pixmap = QPixmap::fromImage(qImage);
     pixmap = pixmap.scaled(this->size(), Qt::KeepAspectRatio);
     setPixmap(pixmap);

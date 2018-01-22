@@ -5,6 +5,7 @@
 
 #include "videoformat.h"
 #include <sstream>
+
 VideoFormat::VideoFormat()
     : _frameWidth(0)
     , _frameHeight(0)
@@ -13,7 +14,6 @@ VideoFormat::VideoFormat()
     , _type(0)
 {
 }
-
 
 void VideoFormat::setFormat(cv::VideoCapture & videoCapture){
     _frameWidth =  videoCapture.get(CV_CAP_PROP_FRAME_WIDTH);

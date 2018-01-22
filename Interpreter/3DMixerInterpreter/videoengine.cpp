@@ -19,6 +19,8 @@ VideoEngine::~VideoEngine(){
     wait();
 }
 
+// Set tracker engine
+// This cannot be done in the constructor as this runs in a different thread
 void VideoEngine::setTracker(Tracker* trackerInstance) {
     tracker = trackerInstance;
 }
@@ -44,6 +46,8 @@ void VideoEngine::stop()
     stopped = true;
 }
 
+// Main function of image processing
+// Includes the core loop of the whole application
 void VideoEngine::run()
 {
     if (videoCapture.isOpened()){
@@ -55,6 +59,7 @@ void VideoEngine::run()
                 qDebug() << "grab() failed";
                 break;
             }
+
             if (!videoCapture.retrieve(cvFrame, 0)){
                 qDebug() << "retrieve() failed (1)";
                 if (!videoCapture.retrieve(cvFrame, 0)){
@@ -62,21 +67,23 @@ void VideoEngine::run()
                     break;
                 }
             }
-            // retrieve Mat::type()
+
+            // Retrieve Mat::type()
             frameNumber++;
             if (frameNumber == 1){
                 _videoFormat.setType(cvFrame.type());
             }
 
-            // queue the image to the gui
+            // Queue original image to the gui
             emit sendInputImage(cvMatToQImage(cvFrame));
 
             // Process Video Frame
             cvFrame = tracker->process(cvFrame);
 
+            // Queue processed image to the gui
             emit sendProcessedImage(cvMatToQImage(cvFrame));
 
-            // check if stopped
+            // Check if stopped
             QMutexLocker locker(&mutex);
             if (stopped) {
                 break;
