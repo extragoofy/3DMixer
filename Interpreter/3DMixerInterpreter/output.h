@@ -1,3 +1,8 @@
+/*
+ * by Eric Goofers
+ * 2017, HAW Hamburg
+ */
+
 #ifndef OUTPUT_H
 #define OUTPUT_H
 

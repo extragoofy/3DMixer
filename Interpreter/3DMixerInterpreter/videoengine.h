@@ -10,9 +10,9 @@
 
 /*
 * http://stackoverflow.com/questions/7801522/integrating-opencv-with-larger-programs
-* Video engine that runs in a different thread than the UI
+* Video engine that runs in a different thread than the GUI
 * Gets frames from webcam and calls tracker to process frame
-* Emits latest original and processed frame to the UI for display
+* Emits latest original and processed frame to the GUI for display
 * Original class by Prof. Andreas Plaß of HAW Hamburg
 * Took out some stuff that is not being used by this application
 */

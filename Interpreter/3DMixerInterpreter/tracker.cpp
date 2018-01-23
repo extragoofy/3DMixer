@@ -13,6 +13,7 @@ Tracker::Tracker()
 {
 }
 
+// Main frame processing function
 Mat Tracker::process(const Mat& input) {
 
     // convert BGR -> HSV
@@ -62,6 +63,7 @@ Mat Tracker::process(const Mat& input) {
 
 }
 
+// Gets called by MainWindow to update the tracking parameters set in the GUI
 void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
 
     for (int i = 0; i < 4; i++) {
@@ -84,10 +86,12 @@ void Tracker::updateKnobParams(const QVector<uchar>& paramData) {
 
 }
 
+// Return latest Knob Coords (used by MainWindow and Output to get data)
 const QVector<Tracker::KnobCoords>& Tracker::getKnobCoords() {
     return knobCoords;
 }
 
+// Color keying function, returns a binary frame
 Mat Tracker::colorKeying(const int& knobID, const Mat& hsvFrame) {
 
     // Initialize Mat object for output
@@ -154,6 +158,7 @@ void Tracker::centerOfMass(const int& knobID, const Mat& image) {
     }
 }
 
+// Calculates the radius of a knob by counting the number of uninterrupted white pixels in four directions
 void Tracker::radius(const int& knobID, const Mat& image) {
 
     int sum = 0;
@@ -212,11 +217,13 @@ void Tracker::calculateCoords(const int& knobID) {
     if (knobCoords[knobID].z > 127) knobCoords[knobID].z = 127;     // Clip z value to 127
 }
 
+// Draws a cross on a Mat
 void Tracker::drawCross(Mat& image, const Point& center, const int& length, const Vec3b& color){
     line(image, center-Point(0, length), center+Point(0,length), color, 1);
     line(image, center-Point(length, 0), center+Point(length, 0), color, 1);
 }
 
+// Calculates RGB values from HSV hue value only, assuming sat and val as maxed
 void Tracker::hueToBGR(const uchar& hue, Vec3b& bgr) {
     if (hue <= 30) {
         bgr[0] = 0;                         // 0

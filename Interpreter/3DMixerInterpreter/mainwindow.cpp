@@ -17,10 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
     , videoEngine(new VideoEngine)
     , output(new Output(tracker))
     , updateTimer(new QTimer(this))
-    , knobParams(QVector<uchar>(28))
-    , trackerData(QVector<Tracker::KnobCoords>(12))
+    , knobParams(QVector<uchar>(28))                    // 7 parameters for 4 knobs
+    , trackerData(QVector<Tracker::KnobCoords>(12))     // Will hold 3 coordinates (x,y,z) for up to 4 knobs
 {
-    // Set up program parts
+    // Set up objects and program parts
     ui->setupUi(this);
     setUpValidators();
     setUpUiEvents();
@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     updateKnobParameters();
     // Start update timer
     connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCoordLabels()));
-    updateTimer->start(500);
+    updateTimer->start(500);        // GUI shall be updated twice a second
 }
 
 MainWindow::~MainWindow()
@@ -41,7 +41,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// Setups the video engine
+// Sets up the video engine
 void MainWindow::setUpVideo() {
     videoEngine->setTracker(tracker);
     connect(videoEngine, &VideoEngine::sendInputImage, ui->inputFrame, &VideoWidget::setImage);
@@ -86,7 +86,7 @@ void MainWindow::setUpValidators() {
 
 }
 
-// Connects signals and slots - on user input, the UI shall updateParameters()
+// Connects signals and slots - on user input, the GUI shall updateParameters()
 void MainWindow::setUpUiEvents() {
 
     connect(ui->knobA_isActive, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
@@ -138,17 +138,18 @@ void MainWindow::setUpUiEvents() {
 
 // SIGNALS/SLOTS
 
+// Update knobParams vector containing all parameter data
+// Called after every GUI interaction of the user and on startup
 void MainWindow::updateKnobParameters() {
-
-    // Update knobParams vector containing all parameter data
+    
     // Convert 360 degree hue values to 180 degrees for opencv
     // Convert 0-100 hue values to 0-255 8bit values for opencv
     knobParams[0] = ui->knobA_isActive->isChecked();
     knobParams[1] = ui->knobA_colorHueMin->text().toInt() / 2;
     knobParams[2] = ui->knobA_colorHueMax->text().toInt() / 2;
-    knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 255 / 100;      // Just multiplying by 2.55 results in an rounding error
+    knobParams[3] = ui->knobA_colorSatMin->text().toInt() * 255 / 100;      // Just multiplying by 2.55 results in 254 (rounding error)
     knobParams[4] = ui->knobA_colorSatMax->text().toInt() * 255 / 100;      // making 255 unreachable
-    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 255 / 100;      // so we are trying to avoid floating point numbers
+    knobParams[5] = ui->knobA_colorValMin->text().toInt() * 255 / 100;      // Workaround: avoid floating point numbers (2.55 = 255 / 100)
     knobParams[6] = ui->knobA_colorValMax->text().toInt() * 255 / 100;
     knobParams[7] = ui->knobB_isActive->isChecked();
     knobParams[8] = ui->knobB_colorHueMin->text().toInt() / 2;

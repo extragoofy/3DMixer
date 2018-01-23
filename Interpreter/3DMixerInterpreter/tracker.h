@@ -1,3 +1,8 @@
+/*
+ * by Eric Goofers
+ * 2017, HAW Hamburg
+ */
+
 #ifndef TRACKER_H
 #define TRACKER_H
 
@@ -9,6 +14,7 @@
 /*
  * This is the core class of the interepreter.
  * It does all image tracking, calculation of knob positions and so on.
+ * - Eric Goofers, 
  */
 
 class Tracker
@@ -16,7 +22,7 @@ class Tracker
 
 public:
 
-    // Struct that holds parameters for knob detection - basically everything that is settable in the UI
+    // Struct that holds parameters for knob detection - basically everything that is settable in the GUI
     struct KnobParams {
         KnobParams()
             : active(false)
@@ -75,7 +81,7 @@ public:
     bool useBlur;       // Shall median blur be used to improve tracking? (Expensive!)
     bool useErode;      // Shall binary frames be eroded to improve tracking?
     bool useDilate;     // Shall binary frames be dilated to improve tracking?
-    uchar activeView;   // Which knob is currently visible in the UI
+    uchar activeView;   // Which knob is currently visible in the GUI
 
 private:
 

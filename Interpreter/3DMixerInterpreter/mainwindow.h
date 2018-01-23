@@ -1,6 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+/*
+ * by Eric Goofers
+ * 2017, HAW Hamburg
+ */
+
 #include <QMainWindow>
 #include <QImage>
 #include <QTimer>
@@ -14,8 +19,8 @@ namespace Ui {
 }
 
 /*
- * Main UI class.
- * Updates UI values and passes user input to tracker class.
+ * Main GUI class.
+ * Updates GUI values and passes user input to tracker class.
  * Also initializes tracker and output.
  */
 
@@ -41,9 +46,9 @@ private:
     Output* output;
     QTimer* updateTimer;
     QVector<uchar> knobParams;                  // Stores all knob parameters in a vector for easy passing to tracker
-    QVector<Tracker::KnobCoords> trackerData;   // Holds tracker data - used to display updated values in UI
+    QVector<Tracker::KnobCoords> trackerData;   // Holds tracker data - used to display updated values in GUI
 
-    // Set up functions
+    // Setup functions
     void setUpValidators();
     void setUpUiEvents();
     void setUpVideo();

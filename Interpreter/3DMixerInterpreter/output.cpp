@@ -20,6 +20,7 @@ Output::~Output() {
     delete outputTimer;
 }
 
+// Sends latest tracker data via MIDI
 void Output::sendTrackerData() {
 
     // Open MIDI out
@@ -49,7 +50,7 @@ void Output::sendTrackerData() {
     }
 }
 
-// Change midi send interval
+// Change MIDI send interval
 void Output::setMidiSendInterval(int value) {
     outputTimer->stop();
     outputTimer->start(value);
