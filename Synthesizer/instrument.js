@@ -133,9 +133,6 @@ class Instrument{
         this.filters[this.configs['X-Axis']] = x;
         this.filters[this.configs['Y-Axis']] = y;
         this.filters[this.configs['Z-Axis']] = z;
-//        this.filters[this.configs['X-Axis']] = (24000 / 127) * x;
-//        this.filters[this.configs['Y-Axis']] = (1 / 127) * y;
-//        this.filters[this.configs['Z-Axis']] = (1 / 127) * z;
     }
     
     stopInstrument(){

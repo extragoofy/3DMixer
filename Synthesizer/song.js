@@ -69,7 +69,6 @@ class Song {
             console.log(instrument);
             instrument.playInstrument();
         });
-        //this.instruments[1].playInstrument();
     }
     
     stopSong(){
@@ -78,10 +77,6 @@ class Song {
             instrument.stopInstrument();
         });
     }
-    
-//    stopSong(){
-//        this.context.close();
-//    }
     
     get getInstruments(){
         return this.instruments;
