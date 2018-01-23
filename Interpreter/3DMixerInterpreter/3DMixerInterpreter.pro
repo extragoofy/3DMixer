@@ -37,7 +37,6 @@ HEADERS += \
     videoengine.h \
     videoformat.h \
     cvmattoqimage.h \
-    videoprocessor.h \
     videowidget.h \
     tracker.h \
     output.h

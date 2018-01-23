@@ -1,7 +1,5 @@
 #include "output.h"
 
-using namespace std;
-
 Output::Output(Tracker * trackerInstance)
     : tracker(trackerInstance)
     , outputTimer(new QTimer(this))

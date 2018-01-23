@@ -3,7 +3,6 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <QIntValidator>
-// RÜBER ZU H?
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -19,14 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     , output(new Output(tracker))
     , updateTimer(new QTimer(this))
     , knobParams(QVector<uchar>(28))
-    , knobCoords(QVector<Tracker::KnobCoords>(12))
+    , trackerData(QVector<Tracker::KnobCoords>(12))
 {
     // Set up program parts
     ui->setupUi(this);
     setUpValidators();
     setUpUiEvents();
     setUpVideo();
-    updateParameters();
+    updateKnobParameters();
     // Start update timer
     connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCoordLabels()));
     updateTimer->start(500);
@@ -90,50 +89,50 @@ void MainWindow::setUpValidators() {
 // Connects signals and slots - on user input, the UI shall updateParameters()
 void MainWindow::setUpUiEvents() {
 
-    connect(ui->knobA_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
-    connect(ui->knobA_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobA_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobA_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobA_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobA_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobA_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobA_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->knobA_isActive, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobA_isView, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
 
-    connect(ui->knobB_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
-    connect(ui->knobB_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobB_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobB_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobB_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobB_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobB_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobB_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->knobB_isActive, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobB_isView, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
 
-    connect(ui->knobC_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
-    connect(ui->knobC_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobC_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobC_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobC_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobC_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobC_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobC_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->knobC_isActive, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobC_isView, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
 
-    connect(ui->knobD_isActive, SIGNAL(clicked()), this, SLOT(updateParameters()));
-    connect(ui->knobD_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobD_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobD_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobD_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobD_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobD_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->knobD_isView, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->knobD_isActive, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_colorHueMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_colorHueMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_colorSatMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_colorSatMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_colorValMin, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_colorValMax, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->knobD_isView, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
 
-    connect(ui->isView_all, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->isView_all, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
 
-    connect(ui->options_blur, SIGNAL(clicked()), this, SLOT(updateParameters()));
-    connect(ui->options_erode, SIGNAL(clicked()), this, SLOT(updateParameters()));
-    connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateParameters()));
+    connect(ui->options_blur, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
+    connect(ui->options_erode, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
+    connect(ui->options_dilate, SIGNAL(clicked()), this, SLOT(updateKnobParameters()));
 
-    connect(ui->midiDeviceID, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
-    connect(ui->midiSendRate, SIGNAL(editingFinished()), this, SLOT(updateParameters()));
+    connect(ui->midiDeviceID, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
+    connect(ui->midiSendRate, SIGNAL(editingFinished()), this, SLOT(updateKnobParameters()));
 
 }
 

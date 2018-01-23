@@ -4,7 +4,6 @@
 #include <opencv2/opencv.hpp>
 #include <QLabel>
 #include <QVector>
-#include <stdio.h>     // For printf() // Delete?
 #include "videoformat.h"
 
 /*
@@ -42,7 +41,7 @@ public:
         KnobData()
             : bgrColor(cv::Vec3b(255,255,255))
             , center(cv::Point())
-            , radius(10)
+            , radius(0)
         {}
         cv::Vec3b bgrColor;    // Average hue of knob
         cv::Mat frame;          // Latest frame of knob

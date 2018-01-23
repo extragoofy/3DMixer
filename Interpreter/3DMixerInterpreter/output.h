@@ -5,8 +5,6 @@
 
 #include <QObject>     // Since this is using a QTimer, it needs to be a QObject
 #include <QTimer>      // Update timer
-#include <conio.h>     /* include for kbhit() and getch() functions */ // DELETE?
-#include <stdio.h>     /* for printf() function */  // DELETE?
 #include <windows.h>   // required before including mmsystem.h
 #include <mmsystem.h>  // multimedia functions (such as MIDI) for Windows
 #include "tracker.h"

@@ -4,7 +4,6 @@
 #include <QThread>
 #include <QImage>
 #include <QMutex>
-#include "videoprocessor.h"
 #include "cvmattoqimage.h"
 #include "videoformat.h"
 #include "tracker.h"
