@@ -26,6 +26,7 @@ class Instrument{
         return Math.pow(2, ((note - 69) / 12)) * 440;
     }
     
+    // get the start values for the instrument and start the scheduler
     playInstrument(){
         this.filters = {
             lowpassFilter: this.configs.filter.cutoff,
@@ -58,6 +59,7 @@ class Instrument{
         this.scheduler();
     }
     
+    // schedules the notes a short time before they will be played
     scheduler() {
         var secondsPerBeat = 60.0 / this.bpm;
 
@@ -68,6 +70,7 @@ class Instrument{
         this.timerID = window.setTimeout(() => this.scheduler(), 25.0);
     }
     
+    // initialize oscialltors and define filters and gainNode
     playSound(time){
         this.filter1.type = this.configs.filter.type;
         this.filter1.Q.value = (20 / 127) * this.filters.filterQ;

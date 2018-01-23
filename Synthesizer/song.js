@@ -14,6 +14,7 @@ class Song {
         this.context = new AudioContext();
     }
     
+    // loads the selected song midi file and the json file with all the instrument effect informations
     loadSong(){
         return new Promise((resolve, reject) => {
             
@@ -55,6 +56,7 @@ class Song {
         });
     }
     
+    // initialize an instrument for each instrument in the midi file
     initializeInstruments(notes, configs, name){
         if(!this.drums.includes(name)){
             this.instruments.push(
